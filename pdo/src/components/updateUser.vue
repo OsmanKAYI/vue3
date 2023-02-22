@@ -1,28 +1,20 @@
 <script setup>
-
 defineProps({
   title: {
     type: String,
-    required: true
-	},
-	updateUser: {
-		type: Boolean,
-		value: false
-	}
-})
-
+    required: true,
+  },
+  updateUser: {
+    type: Boolean,
+    value: false,
+  },
+});
 </script>
 
-
 <template>
-
   <div>
     <h1>{{ title }}</h1>
-</div>
-
+  </div>
 </template>
 
-
-<style scoped>
-
-</style>
+<style scoped></style>

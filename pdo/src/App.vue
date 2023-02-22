@@ -91,7 +91,7 @@ const addUser = () => {
   const formData = new FormData();
   formData.append("VERI", JSON.stringify(newUser));
 
-  fetch("http://localhost/vue3/vue3.pdo.php/insert.php", {
+  fetch("http://localhost/vue3/pdo.php/insert.php", {
     method: "post",
     body: formData,
   })
@@ -107,7 +107,7 @@ const updateUser = () => {
   const formData = new FormData();
   formData.append("VERI", JSON.stringify(EDITUser));
 
-  fetch("http://localhost/vue3/vue3.pdo.php/update.php", {
+  fetch("http://localhost/vue3/pdo.php/update.php", {
     method: "post",
     body: formData,
   })
@@ -122,7 +122,7 @@ const deleteUser = () => {
   const formData = new FormData();
   formData.append("VERI", JSON.stringify(EDITUser));
 
-  fetch("http://localhost/vue3/vue3.pdo.php/delete.php", {
+  fetch("http://localhost/vue3/pdo.php/delete.php", {
     method: "post",
     body: formData,
   })
@@ -135,7 +135,7 @@ const deleteUser = () => {
 };
 
 const fetchUsers = () => {
-  fetch("http://localhost/vue3/vue3.pdo.php/list.php")
+  fetch("http://localhost/vue3/pdo.php/list.php")
     .then((result) => result.json())
     .then((json) => {
       users.value = json;

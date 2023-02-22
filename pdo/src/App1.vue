@@ -55,7 +55,7 @@ const addUser = () => {
   formData.append("name", newName.value);
   formData.append("email", newEmail.value);
 
-  fetch("http://localhost/vue3/vue3.pdo.php/insert.php", {
+  fetch("http://localhost/vue3/pdo.php/insert.php", {
     method: "post",
     body: formData,
   })
@@ -69,7 +69,7 @@ const addUser = () => {
 };
 
 const fetchUsers = () => {
-  fetch("http://localhost/vue3/vue3.pdo.php/list.php")
+  fetch("http://localhost/vue3/pdo.php/list.php")
     .then((result) => result.json())
     .then((json) => {
       users.value = json;
