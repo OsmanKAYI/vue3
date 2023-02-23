@@ -33,3 +33,27 @@ npm run build
 ```sh
 npm run lint
 ```
+
+# Eğitim
+
+- VUE: https://www.koderhq.com/tutorial/vue/
+- VUE ROUTER: https://vueschool.io/courses/vue-router-4-for-everyone?friend=vuerouter
+
+# route-guard
+
+https://www.koderhq.com/tutorial/vue/route-guard/
+
+- Lesson Video
+- Lesson Project
+- What is a Route Guard?
+- Global route guards
+  - The beforeEach route guard
+  - The beforeResolve route guard
+  - The afterEach route guard
+- Local beforeEnter route definition guard
+- Local component guards
+  - The beforeRouteEnter in-component guard
+  - The beforeRouteUpdate in-component guard
+  - The beforeRouteLeave in-component guard
+- The next guard method argument
+- Further Reading
