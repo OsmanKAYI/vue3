@@ -34,14 +34,14 @@ npm run build
 npm run lint
 ```
 
-# Eğitim
+## Eğitim
 
-- VUE: https://www.koderhq.com/tutorial/vue/
-- VUE ROUTER: https://vueschool.io/courses/vue-router-4-for-everyone?friend=vuerouter
+- VUE: [koderhq.com](https://www.koderhq.com/tutorial/vue/)
+- VUE ROUTER: [vueschool.io](https://vueschool.io/courses/vue-router-4-for-everyone?friend=vuerouter)
 
-# route-guard
+## route-guard Fire Sequence
 
-https://www.koderhq.com/tutorial/vue/route-guard/
+[Kaynak: koderhq.com](https://www.koderhq.com/tutorial/vue/route-guard/)
 
 - Lesson Video
 - Lesson Project
@@ -57,3 +57,52 @@ https://www.koderhq.com/tutorial/vue/route-guard/
   - The beforeRouteLeave in-component guard
 - The next guard method argument
 - Further Reading
+
+## Router URL'e Parametre ekleme
+
+[Kaynak: stackoverflow.com](https://stackoverflow.com/a/62631184/134739)
+
+**router/index.js:**
+
+```JS
+import VueRouter from 'vue-router'
+import List from '../views/List.vue'
+import Item from '../views/Item.vue'
+
+Vue.use(VueRouter)
+
+  const routes = [
+  {
+    path: '/',
+    name: 'List',
+    component: List
+  },
+  {
+    path: '/item/:id',
+    name: 'Item',
+    component: Item
+  }
+]
+```
+
+**List.vue:**
+
+```JS
+// Yöntem 1:
+<router-link :to="{ name: 'Item', params: { id: data.item.id }}">{{ data.item.id }}</router-link>
+
+// Yöntem 2:
+<router-link :to="`Item/$(data.item.id)`">{{ data.item.id }}</router-link>
+```
+
+**Item.vue:**
+
+```JS
+<template>
+    id: {{ $route.params.id }}
+</template>
+
+<script>
+    return this.$route.params.id
+</script>
+```
