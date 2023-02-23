@@ -8,12 +8,15 @@
         <th>EMail</th>
         <th>İşlem</th>
       </tr>
-      <tr v-for="user in users">
+      <tr v-for="user in users" :key="user.id">
         <td>{{ user.id }}</td>
         <td nowrap>{{ user.name }}</td>
         <td nowrap>{{ user.email }}</td>
         <td>
-          <input type="button" @click="btnEditUser(user)" value="Edit" />
+          <RouterLink :to="`/update/${user.id}`">Edit1</RouterLink> &nbsp;
+          <RouterLink :to="{ name: 'update', params: { id: user.id } }"
+            >Edit2</RouterLink
+          >
         </td>
       </tr>
     </table>
@@ -22,20 +25,15 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import editUser from "./updateUser.vue";
 
 const users = ref([]);
-
-const btnEditUser = (user) => {
-  Object.assign(editUser, user);
-};
 
 const fetchUsers = () => {
   fetch("http://localhost/vue3/pdo.php/list.php")
     .then((result) => result.json())
     .then((json) => {
       users.value = json;
-      console.log(json);
+      //console.log(json);
     });
 };
 onMounted(() => {

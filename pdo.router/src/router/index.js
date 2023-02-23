@@ -14,7 +14,7 @@ const router = createRouter({
       component: () => import("../views/registerView.vue"),
     },
     {
-      path: "/update",
+      path: "/update/:id",
       name: "update",
       component: () => import("../views/updateView.vue"),
     },
