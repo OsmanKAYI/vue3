@@ -1,5 +1,5 @@
 <script setup>
-import updateUser from "../components/updateUser.vue"
+import updateUser from "../components/updateUser.vue";
 </script>
 
 <template>

@@ -30,7 +30,7 @@ const deleteUser = () => {
     .then((response) => response.json())
     .then((json) => {
       console.log(json);
-      clearForm();
+      //clearForm();
       fetchUsers();
     });
 };
