@@ -3,7 +3,7 @@
     <div>
       <nav>
         <RouterLink to="/"><b>Users</b></RouterLink>
-        <RouterLink to="/register"><b>Register</b></RouterLink>
+        <RouterLink to="/help"><b>Help</b></RouterLink> &nbsp;
         <RouterLink to="/update"><b>Update User Informations</b></RouterLink>
         <RouterLink to="/delete"><b>Delete User</b></RouterLink>
       </nav>
