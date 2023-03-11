@@ -1,0 +1,30 @@
+<template>
+  <v-container>
+    <v-autocomplete
+      clearable
+      label="Nereden"
+      :items="[
+        'California',
+        'Colorado',
+        'Florida',
+        'Georgia',
+        'Texas',
+        'Wyoming',
+      ]"
+      variant="underlined"
+    ></v-autocomplete>
+    <v-autocomplete
+      clearable
+      label="Nereye"
+      :items="[
+        'California',
+        'Colorado',
+        'Florida',
+        'Georgia',
+        'Texas',
+        'Wyoming',
+      ]"
+      variant="underlined"
+    ></v-autocomplete>
+  </v-container>
+</template>
