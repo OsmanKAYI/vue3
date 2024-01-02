@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Laracasts</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./favicon_io/site.webmanifest">
+</head>
+
+<body>
+  <div id="app">
+
+
+    <input type="text" :value="hello">
+    <p>Girilen Değer: {{hello}}, toplam {{hello.length}} karakterdir.</p>
+
+    <input type="text" v-model="hello1">
+    <p>
+      Girilen Değer: <b>{{hello1}}</b><br>
+      Toplam: <b>{{hello1.length}}</b> karakter<br>
+      Büyük harf karşılığı: <b>{{hello1.toUpperCase()}}</b>
+    </p>
+
+    <h1 @click="appearance = !appearance">Tıklanabilir Başlık</h1>
+
+    <p v-if="appearance">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates ut obcaecati, nemo illum natus, recusandae
+      officia saepe modi doloremque omnis, cum dolorem. Sit quasi debitis consequuntur velit, itaque quibusdam beatae.
+    </p>
+
+    <p :class="{colorful: appearance}">Lorem ipsum</p>
+
+  </div>
+
+</body>
+
+</html>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        hello: "Hi",
+        hello1: "Merhaba",
+        appearance: true,
+      };
+    },
+  }).mount('#app');
+
+</script>
+
+<style>
+  .colorful {
+    color: rgb(29, 29, 27);
+    background-color: rgb(10, 156, 29);
+  }
+</style>
