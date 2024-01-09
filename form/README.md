@@ -173,14 +173,24 @@ npm run dev
 
 ```BASH
 cd src/components/
-rm -rf
+rm -rf *
+touch aboutComponent.vue
+vi aboutComponent.vue
+```
+
+```vue
+<template>
+  <div>
+    <p>Hello from About Component</p>
+  </div>
+</template>
 ```
 
 ### Delete All the Files Under src/assets
 
 ```BASH
 cd ../assets/
-rm -rf \_
+rm -rf *
 touch base.css
 ```
 
@@ -198,6 +208,9 @@ vi index.js
 ```JS
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
+import PiniaView from '../views/PiniaView.vue'
+import VuetifyView from '../views/VuetifyView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -206,6 +219,21 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutView
+    },
+    {
+      path: '/pinia',
+      name: 'pinia',
+      component: PiniaView
+    },
+    {
+      path: '/vuetify',
+      name: 'vuetify',
+      component: VuetifyView
     }
   ]
 })
@@ -214,6 +242,28 @@ export default router
 ```
 
 - :wq to save and exit
+
+### Delete All the Files Under src/stores
+
+```BASH
+cd ../stores/
+rm -rf *
+touch global.js
+vi global.js
+```
+
+```JS
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+
+export const useGlobalStore = defineStore('counter', () => {
+  const userName = ref('Osman Kayı')
+  const count = ref(0)
+
+  return { userName, count }
+})
+
+```
 
 ### Delete All the Files Under src/views
 
@@ -225,12 +275,68 @@ vi HomeView.vue
 ```
 
 ```vue
-<script setup></script>
+<script setup>
+import { useGlobalStore } from '@/stores/global'
+const global = useGlobalStore()
+</script>
 
 <template>
   <main>
-    <h1>Merhaba</h1>
+    <h1>Welcome to HelloView</h1>
+    <p>Username: {{ global.userName }}</p>
+    <p>Counter: {{ global.count }}</p>
   </main>
+</template>
+```
+
+```BASH
+touch AboutView.vue
+vi AboutView.vue
+```
+
+```vue
+<script setup>
+import About from '@/components/aboutComponent.vue'
+</script>
+
+<template>
+  <main>
+    <h1>Welcome to AboutView</h1>
+    <About />
+  </main>
+</template>
+```
+
+```BASH
+touch PiniaView.vue
+vi PiniaView.vue
+```
+
+```vue
+<script setup>
+import { useGlobalStore } from '@/stores/global'
+const global = useGlobalStore()
+</script>
+
+<template>
+  <main>
+    <h1>Welcome to PiniaView</h1>
+    <button @click="global.count++">Artır</button>
+    <h3>global.counter adedi:</h3>
+    {{ global.count }}
+  </main>
+</template>
+```
+
+```BASH
+touch VuetifyView.vue
+vi VuetifyView.vue
+```
+
+```vue
+<template>
+  <h1>Welcome to VuetifyView</h1>
+  <v-btn prepend-icon="$vuetify" variant="outlined">Test</v-btn>
 </template>
 ```
 
@@ -253,7 +359,10 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <header>
     <nav>
-      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/" style="margin-right: 15px">Home</RouterLink>
+      <RouterLink to="/about" style="margin-right: 15px">About</RouterLink>
+      <RouterLink to="/pinia" style="margin-right: 15px">Pinia</RouterLink>
+      <RouterLink to="/vuetify" style="margin-right: 15px">Vuetify</RouterLink>
     </nav>
   </header>
 
@@ -279,15 +388,28 @@ vi main.js
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives
+})
+
 import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
 
 app.use(createPinia())
+app.use(vuetify)
 app.use(router)
 
 app.mount('#app')
+
 ```
 
 ## Build the Project

@@ -5,7 +5,10 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <header>
     <nav>
-      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/" style="margin-right: 15px">Home</RouterLink>
+      <RouterLink to="/about" style="margin-right: 15px">About</RouterLink>
+      <RouterLink to="/pinia" style="margin-right: 15px">Pinia</RouterLink>
+      <RouterLink to="/vuetify" style="margin-right: 15px">Vuetify</RouterLink>
     </nav>
   </header>
 
