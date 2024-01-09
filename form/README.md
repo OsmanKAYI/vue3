@@ -163,6 +163,8 @@ npm install
 npm run format
 # add vuetify to project
 npm install vuetify
+# start developing
+npm run dev
 ```
 
 ## Prepare the Project
@@ -288,56 +290,8 @@ app.use(router)
 app.mount('#app')
 ```
 
-## Start Developing
-
-```BASH
-npm run dev
-```
-
 ## Build the Project
 
 ```BASH
 npm run build
-```
-
----
-
-# form (Default Layout)
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
-
-```
-
 ```
