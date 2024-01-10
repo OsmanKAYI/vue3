@@ -1,0 +1,40 @@
+<script setup>
+
+const props = defineProps({
+  gender: {
+    type: String,
+  },
+  seatNumber: String
+})
+
+let localGender = props.gender || "B"
+
+const strokeColors = {
+  M: '#aac',
+  F: '#caa',
+  B: '#aaa'
+}
+
+const fillColors = {
+  M: '#c7e2fb',
+  F: '#ead8de',
+  B: '#fff'
+}
+</script>
+
+<template>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full"
+    width="48" height="48" viewBox="0 0 48 48">
+    <g :style="{ stroke: strokeColors[localGender], fill: fillColors[localGender] }">
+      <rect x="1" y="4" width="45" height="40" rx="10" ry="10" />
+      <rect x="15" y="2" width="25" height="7" rx="5" ry="5" />
+      <rect x="15" y="39" width="25" height="7" rx="5" ry="5" />
+      <rect x="36" y="1" width="12" height="46" rx="6" ry="6" />
+      <text x="20" y="30" class="s-seat-n" text-anchor="middle" alignment-baseline="middle"
+        style="stroke: none; fill: #666; font-family: Tahoma, Geneva, Verdana, sans-serif; font-size: 20px;">
+        {{ props.seatNumber }}
+      </text>
+    </g>
+  </svg>
+</template>
+
