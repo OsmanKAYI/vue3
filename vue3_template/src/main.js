@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import axios from 'axios'
 
 // Vuetify
 import 'vuetify/styles'
@@ -21,5 +22,7 @@ app.use(createPinia())
 app.use(vuetify)
 app.use(router)
 
-app.mount('#app')
+// Add Axios to Vue
+app.config.globalProperties.$axios = axios
 
+app.mount('#app')

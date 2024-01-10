@@ -1,5 +1,7 @@
 <script setup>
 import { useGlobalStore } from '@/stores/global'
+// import axios from 'axios'
+
 const global = useGlobalStore()
 </script>
 
