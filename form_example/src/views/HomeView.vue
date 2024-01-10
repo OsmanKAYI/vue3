@@ -1,5 +1,5 @@
 <script setup>
-import { useGlobalUserStore } from '@/stores/global'
+import { useGlobalUserStore } from '@/stores/user'
 import axios from 'axios'
 const global = useGlobalUserStore()
 

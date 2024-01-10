@@ -1,5 +1,5 @@
 <script setup>
-import { useGlobalUserStore } from '@/stores/global'
+import { useGlobalUserStore } from '@/stores/user'
 const global = useGlobalUserStore()
 </script>
 
