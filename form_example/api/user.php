@@ -24,16 +24,18 @@ $tc = htmlspecialchars($data['tc']);
 $email = htmlspecialchars($data['email']);
 $city_id = (int)$data['city']; // Convert the value to an integer to allow only numeric values.
 $courses = htmlspecialchars($data['courses']);
+$password = htmlspecialchars($data['password']);
 
 // If necessary, decode HTML entities when displaying the data
 $name = htmlspecialchars_decode($name);
 $tc = htmlspecialchars_decode($tc);
 $email = htmlspecialchars_decode($email);
 $courses = htmlspecialchars_decode($courses);
+$password = htmlspecialchars_decode($password);
 
 // Function to handle database insertion
-function insertFormData($DB, $name, $tc, $email, $city_id, $courses) {
-    $sql = "INSERT INTO formlar (adsoyad, tc, email, sehir_id, dersler) VALUES (:name, :tc, :email, :city_id, :courses)";
+function insertFormData($DB, $name, $tc, $email, $city_id, $courses, $password) {
+    $sql = "INSERT INTO formlar (adsoyad, tc, email, sehir_id, dersler, parola) VALUES (:name, :tc, :email, :city_id, :courses, :password)";
     $stmt = $DB->prepare($sql);
 
     $stmt->bindParam(':name', $name);
@@ -41,6 +43,7 @@ function insertFormData($DB, $name, $tc, $email, $city_id, $courses) {
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':city_id', $city_id);
     $stmt->bindParam(':courses', $courses);
+    $stmt->bindParam(':password', $password);
 
     try {
         $stmt->execute();
@@ -51,14 +54,14 @@ function insertFormData($DB, $name, $tc, $email, $city_id, $courses) {
 }
 
 // Check if the initial data processing was successful before proceeding with database insertion
-if (!isset($data['name']) || !isset($data['tc']) || !isset($data['age']) || !isset($data['email']) || !isset($data['city']) || !isset($data['courses'])) {
+if (!isset($data['name']) || !isset($data['tc']) || !isset($data['age']) || !isset($data['email']) || !isset($data['city']) || !isset($data['courses']) || !isset($data['password'])) {
     // Additional validation checks can be added as needed
     $response['success'] = false;
     exit(); // Stop execution if required data is missing
 }
 
 // Perform database insertion only if the initial processing was successful
-if (insertFormData($DB, $name, $tc, $email, $city_id, $courses)) {
+if (insertFormData($DB, $name, $tc, $email, $city_id, $courses, $password)) {
     $response['success'] = true;
     $response['message'] = "Form data added successfully.";
 } else {

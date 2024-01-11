@@ -5,7 +5,7 @@ import SignUpComponent from '@/components/signUpComponent.vue'
 
 <template>
   <main>
-    <h1>SignUp</h1>
+    <h1>Sign Up</h1>
     <SignUpComponent />
   </main>
 </template>
