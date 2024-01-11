@@ -20,7 +20,7 @@ async function signUpForm() {
 
   try {
     // Access to this.user provides access to the user object within the store
-    const response = await axios.post('http://localhost/vue3/form_example/api/user.php', global.User);
+    const response = await axios.post('http://localhost/vue3/form_example/api/signUp.php', global.User);
     done.value = 'Form submitted successfully!';
     console.log('Successfully sent:', response.data);
   } catch (err) {
