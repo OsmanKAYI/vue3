@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
-import PiniaView from '../views/PiniaView.vue'
+import SignUpView from '../views/SignUpView.vue'
 import VuetifyView from '../views/VuetifyView.vue'
 
 const router = createRouter({
@@ -18,9 +18,9 @@ const router = createRouter({
       component: AboutView
     },
     {
-      path: '/pinia',
-      name: 'pinia',
-      component: PiniaView
+      path: '/signup',
+      name: 'signup',
+      component: SignUpView
     },
     {
       path: '/vuetify',

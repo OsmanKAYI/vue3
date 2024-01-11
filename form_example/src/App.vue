@@ -1,5 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { useGlobalUserStore } from '@/stores/user'
+
+const global = useGlobalUserStore()
+
 </script>
 
 <template>
@@ -7,7 +11,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <nav>
       <RouterLink to="/" style="margin-right: 15px">Home</RouterLink>
       <RouterLink to="/about" style="margin-right: 15px">About</RouterLink>
-      <RouterLink to="/pinia" style="margin-right: 15px">Pinia</RouterLink>
+      <RouterLink to="/signup" style="margin-right: 15px" v-if="global.User.loggedIn == 0">Sign Up</RouterLink>
       <RouterLink to="/vuetify" style="margin-right: 15px">Vuetify</RouterLink>
     </nav>
   </header>

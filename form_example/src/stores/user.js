@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 
 export const useGlobalUserStore = defineStore('user', () => {
-  const User = {}
+  const User = {
+    loggedIn: 0
+  }
 
   return { User }
 })
