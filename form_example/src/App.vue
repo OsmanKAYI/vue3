@@ -22,12 +22,12 @@ const global = useGlobalUserStore()
         </ul>
         <ul>
           <li>
-            <RouterLink to="/login" style="margin-right: 15px" v-if="global.User.loggedIn == 0">Log In</RouterLink>
+            <RouterLink to="/login" style="margin-right: 15px" v-if="global.isLoggedIn == 0">Log In</RouterLink>
           </li>
         </ul>
         <ul>
           <li>
-            <RouterLink to="/signup" style="margin-right: 15px" v-if="global.User.loggedIn == 0">Sign Up</RouterLink>
+            <RouterLink to="/signup" style="margin-right: 15px" v-if="global.isLoggedIn == 0">Sign Up</RouterLink>
           </li>
         </ul>
       </nav>
