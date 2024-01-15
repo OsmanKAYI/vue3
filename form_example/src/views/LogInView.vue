@@ -4,8 +4,9 @@ import LogInComponent from '@/components/logInComponent.vue'
 </script>
 
 <template>
-  <main>
-    <h1>Log In</h1>
-    <LogInComponent />
-  </main>
+  <div class="container">
+    <main>
+      <LogInComponent> Log In </LogInComponent>
+    </main>
+  </div>
 </template>

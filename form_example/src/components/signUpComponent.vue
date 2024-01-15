@@ -32,58 +32,58 @@ async function signUpForm() {
 </script>
 
 <template>
-  <main>
-
-    <div>
-      <form @submit.prevent="signUpForm">
-        <p class="error" v-if="error">{{ error }}</p>
-        Username:<input type="text" v-model="global.User.name" id="username" placeholder="username" /> <br>
-        TC :<input type="text" v-model="global.User.tc" name="tc" id="tc" placeholder="tc" /> <br>
-        Age :<input type="number" v-model="global.User.age" name="age" id="age" placeholder="age" min="0" /> <br>
-        EMail :<input type="email" v-model="global.User.email" name="email" id="email" placeholder="email" /> <br>
-        City :<input type="combo" v-model="global.User.city" name="city" id="city" placeholder="city" /> <br>
-        Courses :<input type="multiple" v-model="global.User.courses" name="courses" id="courses" placeholder="courses" />
-        <br>
-        Password :<input type="password" v-model="global.User.password" name="password" id="password"
-          placeholder="password" /> <br>
-        <button class="submit" type="submit">Submit</button>
-        <p class="done" v-if="done">{{ done }}</p>
-      </form>
-    </div>
-
+  <main class="container">
+    <hgroup>
+      <h1>
+        <slot />
+      </h1>
+      <p style="color: green">{{ done }}</p>
+      <!-- <alert v-if="done">{{ done }}</alert> -->
+      <p style="color: red">{{ error }}</p>
+      <!-- <alert v-if="error">{{ error }}</alert> -->
+    </hgroup>
+    <form @submit.prevent="signUpForm" autocomplete="off">
+      <div class="grid">
+        <label for="username">
+          Name
+          <input type="text" v-model="global.User.name" id="username" placeholder="username" required />
+        </label>
+        <div class="grid">
+          <label for="tc">
+            TC
+            <input type="text" v-model="global.User.tc" name="tc" id="tc" placeholder="identity number" required />
+          </label>
+          <label for="age">
+            Age
+            <input type="number" v-model="global.User.age" name="age" id="age" placeholder="age" min="0" required />
+          </label>
+        </div>
+      </div>
+      <div class="grid">
+        <label for="email">
+          Email
+          <input type="email" v-model="global.User.email" name="email" id="email" placeholder="email" required />
+          <small>We'll never share your email with anyone else.</small>
+        </label>
+        <label for="password">
+          Password
+          <input type="password" v-model="global.User.password" name="password" id="password" placeholder="password"
+            required />
+        </label>
+      </div>
+      <div class="grid">
+        <label for="city">
+          City
+          <input type="combo" v-model="global.User.city" name="city" id="city" placeholder="city" required />
+        </label>
+        <label for="courses">
+          Courses
+          <input type="multiple" v-model="global.User.courses" name="courses" id="courses" placeholder="courses"
+            required />
+        </label>
+      </div>
+      <!-- Button -->
+      <button class="submit" type="submit">Sign Up</button>
+    </form>
   </main>
 </template>
-
-
-<style scoped>
-form {
-  background-color: rgb(147, 153, 151);
-  margin: 30px;
-  border: 3px solid black;
-  place-content: center;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-input {
-  margin: 5px;
-  background-color: rgb(229, 230, 241);
-  border: 1px solid black;
-  align-content: center;
-  border-radius: 5px;
-}
-
-.submit {
-  background-color: rgb(212, 16, 16);
-  color: white;
-  border: 1px solid black;
-}
-
-.error {
-  color: red;
-}
-
-.done {
-  color: green;
-}
-</style>
