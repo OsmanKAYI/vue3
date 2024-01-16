@@ -1,36 +1,38 @@
 <script setup>
+import router from '@/router';
 import { useGlobalUserStore } from '@/stores/user';
 import axios from 'axios';
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
 const global = useGlobalUserStore();
-const error = ref('');
-const done = ref('');
-
+const message = reactive({
+  hasError: false,
+  text: ''
+});
 async function logInForm() {
   // Reset messages
-  error.value = '';
-  done.value = '';
+  message.text = '';
 
   // Check if any of the required fields is empty
   if (!global.User.name || !global.User.password) {
-    error.value = 'Please fill out all required fields.';
+    message.text = 'Please fill out all required fields.';
     return;
   }
 
   try {
-    const response = await axios.post('http://localhost/vue3/form_example/api/login.php', global.User, { headers: { 'Content-Type': 'application/json' } });
-
+    const response = await axios.post('http://localhost/vue3/form_example/api/logIn.php', global.User, { headers: { 'Content-Type': 'application/json' } });
+    console.log('response', response.data);
+    global.isLoggedIn = 0;
     if (response.data.success) {
-      done.value = 'Login successful!';
       // Set the user as logged in
-      global.User.loggedIn = 1;
+      global.isLoggedIn = 1;
+      router.push({ name: 'about' });
     } else {
-      error.value = 'Invalid credentials.';
+      message.text = 'Invalid credentials.';
     }
   } catch (err) {
-    error.value = 'An error occurred.';
-    console.error(error, err);
+    message.text = 'An error occurred.';
+    console.error(message, err);
   }
 }
 </script>
@@ -41,9 +43,10 @@ async function logInForm() {
       <h1>
         <slot />
       </h1>
-      <p style="color: red">{{ error }}</p>
+      <p v-if="message.text" style="color: red">{{ message.text }}</p>
       <!-- <alert v-if="error">{{ error }}</alert> -->
     </hgroup>
+
     <div>
       <form @submit.prevent="logInForm">
         Username:<input type="text" v-model="global.User.name" id="username" placeholder="username" /> <br>

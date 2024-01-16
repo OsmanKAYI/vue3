@@ -1,4 +1,5 @@
 <script setup>
+import router from '@/router';
 import { useGlobalUserStore } from '@/stores/user'
 import axios from 'axios'
 import { reactive } from 'vue';
@@ -22,8 +23,9 @@ async function signUpForm() {
     // Access to this.user provides access to the user object within the store
     const response = await axios.post('http://localhost/vue3/form_example/api/signUp.php', global.User);
     message.hasError = false;
-    message.text = 'Form submitted successfully!';
+    message.text = 'You have signed up successfully!';
     console.log('Successfully sent:', response.data);
+    router.push({ name: 'login' });
   } catch (err) {
     message.hasError = true;
     message.text = 'An error occurred.';

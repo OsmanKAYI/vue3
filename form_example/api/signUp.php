@@ -57,7 +57,7 @@ function insertFormData($DB, $name, $tc, $email, $city_id, $courses, $password) 
 if (!isset($data['name']) || !isset($data['tc']) || !isset($data['age']) || !isset($data['email']) || !isset($data['city']) || !isset($data['courses']) || !isset($data['password'])) {
     // Additional validation checks can be added as needed
     $response['success'] = false;
-    exit(); // Stop execution if required data is missing
+    die(); // Stop execution if required data is missing
 }
 
 // Perform database insertion only if the initial processing was successful
@@ -74,5 +74,5 @@ header('Content-Type: application/json; charset=utf-8');
 echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 // Stop execution after sending the response
-exit();
+die();
 ?>
