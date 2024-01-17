@@ -49,9 +49,10 @@ async function logInForm() {
 
     <div>
       <form @submit.prevent="logInForm">
-        Username:<input type="text" v-model="global.User.name" id="username" placeholder="username" /> <br>
+        Username:<input type="text" v-model="global.User.name" id="username" placeholder="username" autocomplete="off" />
+        <br>
         Password :<input type="password" v-model="global.User.password" name="password" id="password"
-          placeholder="password" /> <br>
+          placeholder="password" autocomplete="off" /> <br>
         <button class="submit" type="submit">Log In</button>
       </form>
     </div>
