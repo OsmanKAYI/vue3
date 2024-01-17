@@ -1,34 +1,41 @@
 <script setup>
-import router from '@/router';
+//import router from '@/router';
 import { useGlobalUserStore } from '@/stores/user'
 import axios from 'axios'
-import { reactive } from 'vue';
+import { ref, reactive } from 'vue';
+
+import globalMessage from './globalMessage.vue';
 
 const global = useGlobalUserStore()
 const message = reactive({
   hasError: false,
   text: ''
 });
+const registered = ref(false);
 
-async function signUpForm() {
-
-  // Check if any of the fields is empty
-  if (!global.User.name || !global.User.tc || !global.User.age || !global.User.email || !global.User.city || !global.User.courses || !global.User.password) {
-    message.hasError = true;
-    message.text = 'Please fill out all fields.';
-    return;
-  }
-
+async function registerForm() {
+  /*
+    // Check if any of the fields is empty
+    if (!global.User.name || !global.User.tc || !global.User.age || !global.User.email || !global.User.city || !global.User.courses || !global.User.password) {
+      message.hasError = true;
+      message.text = 'Please fill out all fields.';
+      return;
+    }
+  */
   try {
     // Access to this.user provides access to the user object within the store
-    const response = await axios.post('http://localhost/vue3/form_example/api/signUp.php', global.User);
+    const response = await axios.post('http://localhost/vue3/form_example/api/register.php', global.User);
     message.hasError = false;
     message.text = 'You have signed up successfully!';
+    registered.value = true;
     console.log('Successfully sent:', response.data);
+
+    /*
     // Wait for 2-3 seconds before redirecting to the login page
     setTimeout(() => {
       router.push({ name: 'login' });
     }, 2000); // Adjust the delay as needed (in milliseconds)
+    */
   } catch (err) {
     message.hasError = true;
     message.text = 'An error occurred.';
@@ -40,14 +47,16 @@ async function signUpForm() {
 
 <template>
   <main class="container">
-    <hgroup>
-      <h1>
-        <slot />
-      </h1>
-      <!-- <p v-if="message.text" :class="{ error: message.hasError, success: !message.hasError }">{{ message.text }}</p> -->
-      <p v-if="message.text" :class="(message.hasError ? 'error' : 'success')">{{ message.text }}</p>
-    </hgroup>
-    <form form @submit.prevent="signUpForm" autocomplete="off">
+
+    <h1>
+      <slot />
+    </h1>
+
+    <globalMessage v-if="registered" toPage="login" btnMessage="Go to Login Page" messageType="success"> Successfully
+      registered !!!
+    </globalMessage>
+
+    <form v-if="!registered" form @submit.prevent="registerForm" autocomplete="off">
       <div class="grid">
         <label for="username">
           Name

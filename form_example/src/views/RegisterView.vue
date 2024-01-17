@@ -1,12 +1,12 @@
 <script setup>
-import SignUp from '@/components/signUp.vue'
+import Register from '@/components/register.vue'
 
 </script>
 
 <template>
   <div class="container">
     <main>
-      <SignUp> Sign Up </SignUp>
+      <Register> Sign Up Page </Register>
     </main>
   </div>
 </template>

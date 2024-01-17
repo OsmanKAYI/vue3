@@ -4,7 +4,7 @@ import { useGlobalUserStore } from '@/stores/user'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import LogInView from '../views/LogInView.vue'
-import SignUpView from '../views/SignUpView.vue'
+import RegisterView from '../views/RegisterView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 
 const router = createRouter({
@@ -41,9 +41,9 @@ const router = createRouter({
       }
     },
     {
-      path: '/signup',
-      name: 'signup',
-      component: SignUpView,
+      path: '/register',
+      name: 'register',
+      component: RegisterView,
       meta: {
         requiresAuth: false,
         showLoggedIn: false,
