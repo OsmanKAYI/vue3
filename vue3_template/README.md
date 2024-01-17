@@ -29,8 +29,8 @@ INSERT INTO `dersler` (`id`, `adi`) VALUES
 (7,	'Redis'),
 (8,	'Python');
 
-DROP TABLE IF EXISTS `formlar`;
-CREATE TABLE `formlar` (
+DROP TABLE IF EXISTS `kullanicilar`;
+CREATE TABLE `kullanicilar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `adsoyad` varchar(50) NOT NULL,
   `tc` varchar(11) NOT NULL,

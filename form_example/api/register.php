@@ -35,7 +35,7 @@ $password = htmlspecialchars_decode($password);
 
 // Function to handle database insertion
 function insertFormData($DB, $name, $tc, $email, $city_id, $courses, $password) {
-    $sql = "INSERT INTO formlar (adsoyad, tc, email, sehir_id, ders_id, parola) VALUES (:name, :tc, :email, :city_id, :courses, :password)";
+    $sql = "INSERT INTO kullanicilar (adsoyad, tc, email, sehir_id, ders_id, parola) VALUES (:name, :tc, :email, :city_id, :courses, :password)";
     $stmt = $DB->prepare($sql);
 
     $stmt->bindParam(':name', $name);
