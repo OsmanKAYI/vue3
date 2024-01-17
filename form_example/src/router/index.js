@@ -15,9 +15,9 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta: {
-        requiresAuth: false, // If session control is required for this page, make it true
-        showLoggedIn: true,
-        showNotLoggedIn: true
+        requiresAuth: false, // TRUE if session control is required for this page
+        showLoggedIn: true, // TRUE if this page is shown when the user is logged in
+        showNotLoggedIn: true // TRUE if this page is shown when the user is NOT logged in
       }
     },
     {
