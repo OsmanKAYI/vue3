@@ -29,6 +29,8 @@ const getTo = (route) => {
             :to="getTo(route)" style="margin-right: 15px">{{ toPascalCase(route.name) }}</RouterLink>
         </li>
       </ul>
+      <button v-if="global.isLoggedIn" @click="global.isLoggedIn = 0 & router.push({ name: 'home' })">Log
+        Out</button>
     </nav>
   </div>
 </template>
