@@ -3,6 +3,7 @@ import router from '@/router';
 import { useGlobalUserStore } from '@/stores/user';
 import axios from 'axios';
 import { reactive } from 'vue';
+import globalMessage from './globalMessage.vue';
 
 const global = useGlobalUserStore();
 const message = reactive({
@@ -39,21 +40,23 @@ async function logInForm() {
 
 <template>
   <main class="container">
-    <hgroup>
-      <h1>
-        <slot />
-      </h1>
-      <p v-if="message.text" style="color: red">{{ message.text }}</p>
-      <!-- <alert v-if="error">{{ error }}</alert> -->
-    </hgroup>
+
+    <h1>
+      <slot />
+    </h1>
+    <globalMessage v-if="message.text" toPage="" messageType="error"> {{ message.text }}
+    </globalMessage>
 
     <div>
       <form @submit.prevent="logInForm">
-        Username:<input type="text" v-model="global.User.name" id="username" placeholder="username" autocomplete="off" />
-        <br>
-        Password :<input type="password" v-model="global.User.password" name="password" id="password"
-          placeholder="password" autocomplete="off" /> <br>
-        <button class="submit" type="submit">Log In</button>
+        <article data-theme="ligth">
+          Username:<input type="text" v-model="global.User.name" id="username" placeholder="username"
+            autocomplete="off" />
+          <br>
+          Password :<input type="password" v-model="global.User.password" name="password" id="password"
+            placeholder="password" autocomplete="off" /> <br>
+          <button class="submit" type="submit">Log In</button>
+        </article>
       </form>
     </div>
 

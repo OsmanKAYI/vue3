@@ -18,21 +18,19 @@ const props = defineProps({
 })
 
 const computedStyle = computed(() => {
-  if (props.messageType == 'success') {
-    return 'success';
-  } if (props.messageType == 'error') {
-    return 'error';
+  if (props.messageType == 'success' || props.messageType == 'error') {
+    return props.messageType;
   }
   return '';
 })
 </script>
 
 <template>
-  <h1 v-if="messageType" :class="computedStyle">
+  <h3 v-if="messageType" :class="computedStyle">
     <slot />
-  </h1>
+  </h3>
 
-  <button @click="router.push({ name: props.toPage });"> {{ btnMessage }} </button>
+  <button v-if="toPage" @click="router.push({ name: props.toPage });"> {{ btnMessage }} </button>
 </template>
 
 <style scoped>
