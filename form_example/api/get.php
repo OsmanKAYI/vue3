@@ -18,6 +18,13 @@ switch ($_GET['method']) {
     $SORGU->execute();
     $result = $SORGU->fetchAll(PDO::FETCH_ASSOC);
     break;
+
+  case 'get.users':
+    $SQL = "SELECT id, adsoyad as username, tc, email, sehir_id as city, ders_id as courses, parola as password FROM kullanicilar ORDER BY id";
+    $SORGU = $DB->prepare($SQL);
+    $SORGU->execute();
+    $result = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+    break;
   
   default:
     $result['error'] = "Given value for method parameter is not correct!!!";
