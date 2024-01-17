@@ -18,10 +18,10 @@ const myCourses = ref([]);
 
 onMounted(async () => {
   try {
-    const citiesResponse = await axios.get('http://localhost/vue3/form_example/api/api.php?method=get.cities');
+    const citiesResponse = await axios.get('http://localhost/vue3/form_example/api/get.php?method=get.cities');
     myCities.value = citiesResponse.data;
 
-    const coursesResponse = await axios.get('http://localhost/vue3/form_example/api/api.php?method=get.courses');
+    const coursesResponse = await axios.get('http://localhost/vue3/form_example/api/get.php?method=get.courses');
     myCourses.value = coursesResponse.data;
   } catch (error) {
     console.error(error);
