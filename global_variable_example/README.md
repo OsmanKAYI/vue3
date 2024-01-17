@@ -174,8 +174,8 @@ npm run dev
 ```BASH
 cd src/components/
 rm -rf *
-touch about.vue
-vi about.vue
+touch aboutPage.vue
+vi aboutPage.vue
 ```
 
 ```vue
@@ -296,7 +296,7 @@ vi AboutView.vue
 
 ```vue
 <script setup>
-import About from '@/components/about.vue'
+import About from '@/components/aboutPage.vue'
 </script>
 
 <template>
