@@ -36,7 +36,7 @@ CREATE TABLE `formlar` (
   `tc` varchar(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `sehir_id` int(11) NOT NULL,
-  `dersler` varchar(100) NOT NULL,
+  `ders_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_turkish_ci;
 
