@@ -1,12 +1,12 @@
 <script setup>
-import LogInComponent from '@/components/logInComponent.vue'
+import LogIn from '@/components/logIn.vue'
 
 </script>
 
 <template>
   <div class="container">
     <main>
-      <LogInComponent> Log In </LogInComponent>
+      <LogIn> Log In </LogIn>
     </main>
   </div>
 </template>
