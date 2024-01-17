@@ -25,7 +25,10 @@ async function signUpForm() {
     message.hasError = false;
     message.text = 'You have signed up successfully!';
     console.log('Successfully sent:', response.data);
-    router.push({ name: 'login' });
+    // Wait for 2-3 seconds before redirecting to the login page
+    setTimeout(() => {
+      router.push({ name: 'login' });
+    }, 2000); // Adjust the delay as needed (in milliseconds)
   } catch (err) {
     message.hasError = true;
     message.text = 'An error occurred.';
