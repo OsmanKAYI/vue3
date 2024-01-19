@@ -52,8 +52,11 @@ function updateUser() {
       ...updateUserForm.user
     });
 
-    if (updateUserForm.user.courses) {
+    if (updateUserForm.user.courses && updateUserForm.user.courses.length > 1) {
       updateUserForm.user.courses = updateUserForm.user.courses.join(',');
+    }
+    else if (updateUserForm.user.courses && updateUserForm.user.courses.length == 1) {
+      updateUserForm.user.courses = updateUserForm.user.courses[0];
     }
     console.log('Updated User Response:', response.data);
     // Optionally, update the local user data based on the server response
