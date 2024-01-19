@@ -56,11 +56,13 @@ async function registerForm() {
 
     <form v-if="!registered" form @submit.prevent="registerForm" autocomplete="off">
       <article data-theme="ligth">
+
         <div class="grid">
           <label>
             Name
             <input type="text" v-model="global.User.name" placeholder="username" />
           </label>
+
           <div class="grid">
             <label>
               TC
@@ -71,7 +73,9 @@ async function registerForm() {
               <input type="number" v-model="global.User.age" placeholder="age" min="0" />
             </label>
           </div>
+
         </div>
+
         <div class="grid">
           <label>
             Email
@@ -83,6 +87,7 @@ async function registerForm() {
             <input type="password" v-model="global.User.password" placeholder="password" />
           </label>
         </div>
+
         <div class="grid">
           <label>
             City
@@ -93,16 +98,14 @@ async function registerForm() {
               <option v-for="city in myCities" :key="city" :value="city.id"> {{ city.name }} </option>
             </select>
           </label>
-          <details class="dropdown">
+
+          <label>
             Courses
-            <summary>
-              Select your courses ...
-            </summary>
-            <select v-model="global.User.courses">
+            <select v-model="global.User.courses" multiple>
               <option v-for="course in myCourses" :key="course" :value="course.id">{{ course.name }}</option>
             </select>
             <small>Select max of 3 courses</small>
-          </details>
+          </label>
         </div>
       </article>
       <!-- Button -->
