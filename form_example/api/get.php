@@ -20,7 +20,7 @@ switch ($_GET['method']) {
     break;
 
   case 'get.users':
-    $SQL = "SELECT id, adsoyad as username, tc, email, sehir_id as city, ders_id as courses, parola as password, isActive FROM kullanicilar ORDER BY id";
+    $SQL = "SELECT id, adsoyad as username, tc, yas as age, email, sehir_id as city, ders_id as courses, parola as password, isActive FROM kullanicilar ORDER BY id";
     $QUERY = $DB->prepare($SQL);
     $QUERY->execute();
     $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
@@ -35,6 +35,25 @@ switch ($_GET['method']) {
         $result = ['success' => true];
     } catch (PDOException $e) {
         $result = ['error' => 'Error deleting user: ' . $e->getMessage()];
+    }
+    break;
+
+  case 'update.user':
+    try {
+        $SQL = "UPDATE kullanicilar SET adsoyad = :username, tc = :tc, age = :age, email = :email, sehir_id = :city, ders_id = :courses, parola = :password WHERE id = :id";
+        $QUERY = $DB->prepare($SQL);
+        $QUERY->bindParam(':username', $_GET['username']);
+        $QUERY->bindParam(':tc', $_GET['tc']);
+        $QUERY->bindParam(':age', $_GET['age']);
+        $QUERY->bindParam(':email', $_GET['email']);
+        $QUERY->bindParam(':city', $_GET['city']);
+        $QUERY->bindParam(':courses', $_GET['courses']);
+        $QUERY->bindParam(':password', $_GET['password']);
+        $QUERY->bindParam(':id', $_GET['id']);
+        $QUERY->execute();
+        $result = ['success' => true];
+    } catch (PDOException $e) {
+        $result = ['error' => 'Error updating user: ' . $e->getMessage()];
     }
     break;
   

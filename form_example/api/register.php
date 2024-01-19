@@ -21,25 +21,27 @@ require_once 'db.php';
 // Protection against SQL injections
 $name = htmlspecialchars($data['name']);
 $tc = htmlspecialchars($data['tc']);
+$age = htmlspecialchars($data['age']);
 $email = htmlspecialchars($data['email']);
 $city_id = (int)$data['city']; // Convert the value to an integer to allow only numeric values.
-$courses = htmlspecialchars($data['courses']);
+$courses = (int)($data['courses']);
 $password = htmlspecialchars($data['password']);
 
 // If necessary, decode HTML entities when displaying the data
 $name = htmlspecialchars_decode($name);
 $tc = htmlspecialchars_decode($tc);
+$age = htmlspecialchars_decode($age);
 $email = htmlspecialchars_decode($email);
-$courses = htmlspecialchars_decode($courses);
 $password = htmlspecialchars_decode($password);
 
 // Function to handle database insertion
-function insertFormData($DB, $name, $tc, $email, $city_id, $courses, $password) {
-    $sql = "INSERT INTO kullanicilar (adsoyad, tc, email, sehir_id, ders_id, parola) VALUES (:name, :tc, :email, :city_id, :courses, :password)";
+function insertFormData($DB, $name, $tc, $age, $email, $city_id, $courses, $password) {
+    $sql = "INSERT INTO kullanicilar (adsoyad, tc, yas, email, sehir_id, ders_id, parola) VALUES (:name, :tc, :age, :email, :city_id, :courses, :password)";
     $stmt = $DB->prepare($sql);
 
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':tc', $tc);
+    $stmt->bindParam(':age', $age);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':city_id', $city_id);
     $stmt->bindParam(':courses', $courses);
@@ -61,7 +63,7 @@ if (!isset($data['name']) || !isset($data['tc']) || !isset($data['age']) || !iss
 }
 
 // Perform database insertion only if the initial processing was successful
-if (insertFormData($DB, $name, $tc, $email, $city_id, $courses, $password)) {
+if (insertFormData($DB, $name, $tc, $age, $email, $city_id, $courses, $password)) {
     $response['success'] = true;
     $response['message'] = "Form data added successfully.";
 } else {
