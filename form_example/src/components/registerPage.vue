@@ -54,7 +54,6 @@ async function registerForm() {
       Successfully registered !!!
     </globalMessage>
 
-    {{ global.User }}
     <form v-if="!registered" form @submit.prevent="registerForm" autocomplete="off">
       <article data-theme="ligth">
 
