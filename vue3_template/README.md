@@ -12,14 +12,14 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP TABLE IF EXISTS `dersler`;
-CREATE TABLE `dersler` (
+DROP TABLE IF EXISTS `courses`;
+CREATE TABLE `courses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `adi` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_turkish_ci;
 
-INSERT INTO `dersler` (`id`, `adi`) VALUES
+INSERT INTO `courses` (`id`, `course_name`) VALUES
 (1,	'PHP'),
 (2,	'VUE'),
 (3,	'MySQL'),
@@ -29,26 +29,26 @@ INSERT INTO `dersler` (`id`, `adi`) VALUES
 (7,	'Redis'),
 (8,	'Python');
 
-DROP TABLE IF EXISTS `kullanicilar`;
-CREATE TABLE `kullanicilar` (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `adsoyad` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `tc` varchar(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `sehir_id` int(11) NOT NULL,
-  `ders_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_turkish_ci;
 
 
-DROP TABLE IF EXISTS `iller`;
-CREATE TABLE `iller` (
+DROP TABLE IF EXISTS `cities`;
+CREATE TABLE `cities` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `il_adi` varchar(20) NOT NULL,
+  `city_name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
-INSERT INTO `iller` (`id`, `il_adi`) VALUES
+INSERT INTO `cities` (`id`, `city_name`) VALUES
 (1,	'Adana'),
 (2,	'Adıyaman'),
 (3,	'Afyonkarahisar'),
