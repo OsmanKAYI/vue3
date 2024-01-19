@@ -87,7 +87,7 @@ async function registerForm() {
           <label>
             City
             <select v-model="global.User.city">
-              <option value="0">
+              <option value="0" selected>
                 ** Select **
               </option>
               <option v-for="city in myCities" :key="city" :value="city.id"> {{ city.name }} </option>
