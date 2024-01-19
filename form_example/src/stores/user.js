@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useGlobalUserStore = defineStore('user', () => {
   const User = {
-    city: '0' // Set the default value to '0'
+    city: '0', // Set the default value to '0'
+    courses: []
   }
   const isLoggedIn = 0
 
