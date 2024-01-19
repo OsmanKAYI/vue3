@@ -30,7 +30,7 @@ onMounted(async () => {
 
 async function registerForm() {
   try {
-    const response = await axios.post('http://localhost/vue3/form_example/api/register.php', global.User);
+    const response = await axios.post('http://localhost/vue3/form_example/api/get.php?method=insert.user', global.User);
     message.hasError = false;
     message.text = 'You have signed up successfully!';
     registered.value = true;

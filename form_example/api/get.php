@@ -1,7 +1,15 @@
 <?php
 
+// Set necessary headers to prevent CORS errors (if required for security reasons)
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
+
 require_once 'db.php';
 
+// Retrieve data from POST request
+$data = json_decode(file_get_contents("php://input"), true); // Convert to array with `true`. If `true` is not sent, it remains as an object.
+    
 $result = [];
 
 switch ($_GET['method']) {
@@ -15,6 +23,26 @@ switch ($_GET['method']) {
   case 'get.courses':
     $SQL = "SELECT id, ders_adi as name FROM dersler ORDER BY id";
     $QUERY = $DB->prepare($SQL);
+    $QUERY->execute();
+    $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
+    break;
+
+  case 'insert.user':
+    $SQL = "INSERT INTO kullanicilar (adsoyad, tc, yas, email, sehir_id, ders_id, parola) 
+        VALUES (:name, :tc, :age, :email, :city, :courses, :password)";
+    $QUERY = $DB->prepare($SQL);
+
+    // Convert courses array to comma-separated string
+    $courses = implode(',', $data['courses']);
+    
+    $QUERY->bindParam(':name', $data['name']);
+    $QUERY->bindParam(':tc', $data['tc']);
+    $QUERY->bindParam(':age', $data['age']);
+    $QUERY->bindParam(':email', $data['email']);
+    $QUERY->bindParam(':city', $data['city']);
+    $QUERY->bindParam(':courses', $courses);
+    $QUERY->bindParam(':password', $data['password']);
+    
     $QUERY->execute();
     $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
     break;
