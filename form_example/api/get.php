@@ -7,23 +7,35 @@ $result = [];
 switch ($_GET['method']) {
   case 'get.cities':
     $SQL = "SELECT id, il_adi as name FROM iller ORDER BY name";
-    $SORGU = $DB->prepare($SQL);
-    $SORGU->execute();
-    $result = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+    $QUERY = $DB->prepare($SQL);
+    $QUERY->execute();
+    $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
     break;
 
   case 'get.courses':
     $SQL = "SELECT id, ders_adi as name FROM dersler ORDER BY id";
-    $SORGU = $DB->prepare($SQL);
-    $SORGU->execute();
-    $result = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+    $QUERY = $DB->prepare($SQL);
+    $QUERY->execute();
+    $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
     break;
 
   case 'get.users':
-    $SQL = "SELECT id, adsoyad as username, tc, email, sehir_id as city, ders_id as courses, parola as password FROM kullanicilar ORDER BY id";
-    $SORGU = $DB->prepare($SQL);
-    $SORGU->execute();
-    $result = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+    $SQL = "SELECT id, adsoyad as username, tc, email, sehir_id as city, ders_id as courses, parola as password, isActive FROM kullanicilar ORDER BY id";
+    $QUERY = $DB->prepare($SQL);
+    $QUERY->execute();
+    $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
+    break;
+    
+  case 'delete.user':
+    try {
+        $SQL = "UPDATE kullanicilar SET isActive = 0 WHERE id = :id";
+        $QUERY = $DB->prepare($SQL);
+        $QUERY->bindParam(':id', $_GET['id']);  // Updated this line
+        $QUERY->execute();
+        $result = ['success' => true];
+    } catch (PDOException $e) {
+        $result = ['error' => 'Error deleting user: ' . $e->getMessage()];
+    }
     break;
   
   default:
