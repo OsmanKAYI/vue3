@@ -20,7 +20,7 @@ switch ($_GET['method']) {
     break;
 
   case 'get.users':
-    $SQL = "SELECT id, adsoyad as username, tc, yas as age, email, sehir_id as city, ders_id as courses, parola as password, isActive FROM kullanicilar ORDER BY id";
+    $SQL = "SELECT id, adsoyad as name, tc, yas as age, email, sehir_id as city, ders_id as courses, parola as password, isActive FROM kullanicilar ORDER BY id";
     $QUERY = $DB->prepare($SQL);
     $QUERY->execute();
     $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
@@ -40,9 +40,9 @@ switch ($_GET['method']) {
 
   case 'update.user':
     try {
-        $SQL = "UPDATE kullanicilar SET adsoyad = :username, tc = :tc, age = :age, email = :email, sehir_id = :city, ders_id = :courses, parola = :password WHERE id = :id";
+        $SQL = "UPDATE kullanicilar SET adsoyad = :name, tc = :tc, age = :age, email = :email, sehir_id = :city, ders_id = :courses, parola = :password WHERE id = :id";
         $QUERY = $DB->prepare($SQL);
-        $QUERY->bindParam(':username', $_GET['username']);
+        $QUERY->bindParam(':name', $_GET['name']);
         $QUERY->bindParam(':tc', $_GET['tc']);
         $QUERY->bindParam(':age', $_GET['age']);
         $QUERY->bindParam(':email', $_GET['email']);
