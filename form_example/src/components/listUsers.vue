@@ -72,6 +72,7 @@ function updateUser() {
     <form v-if="update" method="post">
       Username: <input type="text" v-model="updateUserForm.name" />
       TC: <input type="text" v-model="updateUserForm.tc" />
+      Age: <input type="text" v-model="updateUserForm.age" />
       Email: <input type="email" v-model="updateUserForm.email" />
 
       City:

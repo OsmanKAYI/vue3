@@ -28,7 +28,7 @@ switch ($_GET['method']) {
     break;
 
   case 'insert.user':
-    $SQL = "INSERT INTO users (name, tc, age, email, sehir_id, course_id, password) 
+    $SQL = "INSERT INTO users (name, tc, age, email, city_id, course_id, password) 
         VALUES (:name, :tc, :age, :email, :city, :courses, :password)";
     $QUERY = $DB->prepare($SQL);
 
@@ -48,7 +48,7 @@ switch ($_GET['method']) {
     break;
 
   case 'get.users':
-    $SQL = "SELECT id, name as name, tc, age as age, email, sehir_id as city, course_id as courses, password as password, is_active FROM users ORDER BY id";
+    $SQL = "SELECT id, name, tc, age, email, city_id as city, course_id as courses, password, is_active FROM users ORDER BY id";
     $QUERY = $DB->prepare($SQL);
     $QUERY->execute();
     $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
@@ -68,7 +68,7 @@ switch ($_GET['method']) {
 
   case 'update.user':
     try {
-        $SQL = "UPDATE users SET name = :name, tc = :tc, age = :age, email = :email, sehir_id = :city, course_id = :courses, password = :password WHERE id = :id";
+        $SQL = "UPDATE users SET name = :name, tc = :tc, age = :age, email = :email, city_id = :city, course_id = :courses, password = :password WHERE id = :id";
         $QUERY = $DB->prepare($SQL);
         $QUERY->bindParam(':name', $_GET['name']);
         $QUERY->bindParam(':tc', $_GET['tc']);

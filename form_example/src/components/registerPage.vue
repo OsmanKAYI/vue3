@@ -46,6 +46,7 @@ async function registerForm() {
 <template>
   <main class="container">
 
+    {{ global.User }}
     <h1>
       <slot />
     </h1>
