@@ -18,7 +18,7 @@ require_once 'db.php';
 $response = [];
 // $response['data'] = $data;
 
-$sql = "SELECT id, adsoyad FROM kullanicilar WHERE adsoyad = :name AND parola = :password";
+$sql = "SELECT id, name FROM users WHERE name = :name AND password = :password";
 $stmt = $DB->prepare($sql);
 
 $stmt->bindParam(':name', $data['name']);

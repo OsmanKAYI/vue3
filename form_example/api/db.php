@@ -2,7 +2,7 @@
 $host = "localhost";
 $username   = "root";
 $password   = "root";
-$dbname     = "il_ilce_mahalle";
+$dbname     = "form_example";
 
 try {
   $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

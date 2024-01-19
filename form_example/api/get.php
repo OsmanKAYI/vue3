@@ -14,21 +14,21 @@ $result = [];
 
 switch ($_GET['method']) {
   case 'get.cities':
-    $SQL = "SELECT id, il_adi as name FROM iller ORDER BY name";
+    $SQL = "SELECT id, city_name as name FROM cities ORDER BY name";
     $QUERY = $DB->prepare($SQL);
     $QUERY->execute();
     $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
     break;
 
   case 'get.courses':
-    $SQL = "SELECT id, ders_adi as name FROM dersler ORDER BY id";
+    $SQL = "SELECT id, course_name as name FROM courses ORDER BY id";
     $QUERY = $DB->prepare($SQL);
     $QUERY->execute();
     $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
     break;
 
   case 'insert.user':
-    $SQL = "INSERT INTO kullanicilar (adsoyad, tc, yas, email, sehir_id, ders_id, parola) 
+    $SQL = "INSERT INTO users (name, tc, age, email, sehir_id, course_id, password) 
         VALUES (:name, :tc, :age, :email, :city, :courses, :password)";
     $QUERY = $DB->prepare($SQL);
 
@@ -48,7 +48,7 @@ switch ($_GET['method']) {
     break;
 
   case 'get.users':
-    $SQL = "SELECT id, adsoyad as name, tc, yas as age, email, sehir_id as city, ders_id as courses, parola as password, isActive FROM kullanicilar ORDER BY id";
+    $SQL = "SELECT id, name as name, tc, age as age, email, sehir_id as city, course_id as courses, password as password, is_active FROM users ORDER BY id";
     $QUERY = $DB->prepare($SQL);
     $QUERY->execute();
     $result = $QUERY->fetchAll(PDO::FETCH_ASSOC);
@@ -56,7 +56,7 @@ switch ($_GET['method']) {
     
   case 'delete.user':
     try {
-        $SQL = "UPDATE kullanicilar SET isActive = 0 WHERE id = :id";
+        $SQL = "UPDATE users SET is_active = 0 WHERE id = :id";
         $QUERY = $DB->prepare($SQL);
         $QUERY->bindParam(':id', $_GET['id']);  // Updated this line
         $QUERY->execute();
@@ -68,7 +68,7 @@ switch ($_GET['method']) {
 
   case 'update.user':
     try {
-        $SQL = "UPDATE kullanicilar SET adsoyad = :name, tc = :tc, age = :age, email = :email, sehir_id = :city, ders_id = :courses, parola = :password WHERE id = :id";
+        $SQL = "UPDATE users SET name = :name, tc = :tc, age = :age, email = :email, sehir_id = :city, course_id = :courses, password = :password WHERE id = :id";
         $QUERY = $DB->prepare($SQL);
         $QUERY->bindParam(':name', $_GET['name']);
         $QUERY->bindParam(':tc', $_GET['tc']);

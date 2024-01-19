@@ -10,7 +10,7 @@ const fields = ['ID', 'Name', 'TC', 'Age', 'Email', 'City', 'Courses', 'Password
 const myCities = ref([]);
 const myCourses = ref([]);
 
-const activeUsers = computed(() => users.value.filter(user => user.isActive == 1));
+const activeUsers = computed(() => users.value.filter(user => user.is_active == 1));
 
 const update = ref(false);
 const updateUserForm = ref(null);
@@ -34,7 +34,7 @@ function deleteUser(user) {
   try {
     const response = axios.get(`http://localhost/vue3/form_example/api/get.php?method=delete.user&id=${user.id}`);
     console.log('Deleted User Response:', response.data);
-    user.isActive = 0;
+    user.is_active = 0;
   } catch (error) {
     console.error(error);
   }
