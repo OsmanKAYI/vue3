@@ -70,13 +70,14 @@ switch ($_GET['method']) {
     try {
         $SQL = "UPDATE users SET name = :name, tc = :tc, age = :age, email = :email, city_id = :city, course_id = :courses, password = :password WHERE id = :id";
         $QUERY = $DB->prepare($SQL);
-        $QUERY->bindParam(':name', $_GET['name']);
-        $QUERY->bindParam(':tc', $_GET['tc']);
-        $QUERY->bindParam(':age', $_GET['age']);
-        $QUERY->bindParam(':email', $_GET['email']);
-        $QUERY->bindParam(':city', $_GET['city']);
-        $QUERY->bindParam(':courses', $_GET['courses']);
-        $QUERY->bindParam(':password', $_GET['password']);
+        $data['courses'] = implode(',', $data['courses']);
+        $QUERY->bindParam(':name', $data['name']);
+        $QUERY->bindParam(':tc', $data['tc']);
+        $QUERY->bindParam(':age', $data['age']);
+        $QUERY->bindParam(':email', $data['email']);
+        $QUERY->bindParam(':city', $data['city']);
+        $QUERY->bindParam(':courses', $data['courses']);
+        $QUERY->bindParam(':password', $data['password']);
         $QUERY->bindParam(':id', $_GET['id']);
         $QUERY->execute();
         $result = ['success' => true];
