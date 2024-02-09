@@ -8,31 +8,11 @@
 import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
 import { ref } from 'vue';
-import { useQuasar, useMeta } from 'quasar';
-const $q = useQuasar();
+import { useQuasar } from 'quasar';
 
-const metaData = {
-  // sets document title
-  title: 'Price Offer',
-  // optional; sets final title as "Index Page - My Website", useful for multiple level meta
-
-  // meta tags
-  meta: {
-    description: { name: 'description', content: 'Page 1' },
-    keywords: { name: 'keywords', content: 'Quasar website' },
-    equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' },
-    // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
-    ogTitle: {
-      property: 'og:title',
-      // optional; similar to titleTemplate, but allows templating with other meta properties
-      template(ogTitle: string) {
-        return `${ogTitle} - My Website`
-      }
-    }
-  }
-};
-useMeta(metaData);
-
+const $q = useQuasar()
+$q.cookies.set('cookie_name', 'osman', { expires: '2025-01-01', sameSite: 'Strict' });
+$q.cookies.get('cookie_name');
 
 const todos = ref<Todo[]>([
   {
