@@ -1,12 +1,6 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
-    <q-btn label="Custom Buttons" color="primary" @click="customBtn" />
+    <example-component title="Example component" active :todos="todos" :meta="meta"></example-component>
   </q-page>
 </template>
 
@@ -17,29 +11,14 @@ import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 const $q = useQuasar();
 
-function customBtn() {
-  $q.dialog({
-    title: 'Confirm',
-    message: 'Would you like to turn on the wifi?',
-    ok: {
-      push: true,
-    },
-    cancel: {
-      push: true,
-      color: 'negative',
-    },
-    persistent: true,
-  })
-    .onOk(() => {
-      alert('Wifi turned on!!!');
-    })
-    .onCancel(() => {
-      alert('Wifi is not turned on!!!');
-    })
-    .onDismiss(() => {
-      // console.log('I am triggered on both OK and Cancel')
-    });
-}
+$q.localStorage.set('myLocalStorage', 'Local Storage')
+const valueLocal = $q.localStorage.getItem('myLocalStorage')
+console.log(valueLocal)
+
+$q.sessionStorage.set('mySessionStorage', 'Session Storage')
+const valueSession = $q.sessionStorage.getItem('mySessionStorage')
+console.log(valueSession)
+
 const todos = ref<Todo[]>([
   {
     id: 1,
