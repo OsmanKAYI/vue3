@@ -59,7 +59,7 @@ Y88b.Y8b88P Y88b 888 888  888      X88 888  888 888
 
 ? Pick your CSS preprocessor: › - Use arrow-keys. Return to submit.
 
-- ❯   [Sass with SCSS syntax]
+- ❯ [Sass with SCSS syntax]
 -     Sass with indented syntax
 -     None (the others will still be available)
 
