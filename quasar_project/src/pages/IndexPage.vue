@@ -1,7 +1,7 @@
 <template>
   <q-page class="row items-center justify-evenly">
     <example-component title="Example component" active :todos="todos" :meta="meta"></example-component>
-    <q-btn color="purple" @click="$q.notify('Button Clicked!!!')" label="Show Notification" />
+    <q-btn label="Custom Buttons" color="primary" @click="customBtn" />
   </q-page>
 </template>
 
@@ -12,9 +12,26 @@ import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 const $q = useQuasar()
 
-$q.notify('Hello World!')
-
-
+function customBtn() {
+  $q.dialog({
+    title: 'Confirm',
+    message: 'Would you like to turn on the wifi?',
+    ok: {
+      push: true
+    },
+    cancel: {
+      push: true,
+      color: 'negative'
+    },
+    persistent: true
+  }).onOk(() => {
+    alert('Wifi turned on!!!')
+  }).onCancel(() => {
+    alert('Wifi is not turned on!!!')
+  }).onDismiss(() => {
+    // console.log('I am triggered on both OK and Cancel')
+  })
+}
 const todos = ref<Todo[]>([
   {
     id: 1,
