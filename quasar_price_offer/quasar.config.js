@@ -199,7 +199,7 @@ module.exports = configure(function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'quasar_project',
+        appId: 'quasar_price_offer',
       },
     },
 

@@ -1,4 +1,4 @@
-# Quasar App (quasar_project)
+# Quasar App (quasar_price_offer)
 
 First quasar project
 
@@ -25,7 +25,7 @@ Y88b.Y8b88P Y88b 888 888  888      X88 888  888 888
 -     AppExtension (AE) for Quasar CLI
 -     Quasar UI kit
 
-? Project folder: › quasar_project
+? Project folder: › quasar_price_offer
 
 ? Pick Quasar version: › - Use arrow-keys. Return to submit.
 
@@ -42,7 +42,7 @@ Y88b.Y8b88P Y88b 888 888  888      X88 888  888 888
 - ❯ [Quasar App CLI with Vite] - recommended
 -     Quasar App CLI with Webpack
 
-? Package name: › quasar_project
+? Package name: › quasar_price_offer
 
 ? Project product name: (must start with letter if building mobile apps) › Quasar App
 
@@ -115,7 +115,7 @@ found 0 vulnerabilities
 ### To get started:
 
 ```bash
-cd quasar_project
+cd quasar_price_offer
 quasar dev # or: yarn quasar dev # or: npx quasar dev
 ```
 
