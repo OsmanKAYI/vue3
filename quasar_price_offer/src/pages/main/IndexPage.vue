@@ -2,7 +2,7 @@
   <q-page padding>
     <div class="text-h2">MAIN</div>
     <div class="text-h6">Index Page</div>
-    <carousel-main />
+    <CarouselMain />
   </q-page>
 </template>
 
