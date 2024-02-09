@@ -1,11 +1,7 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+    <example-component title="Example component" active :todos="todos" :meta="meta"></example-component>
+    <q-btn color="purple" @click="$q.notify('Button Clicked!!!')" label="Show Notification" />
   </q-page>
 </template>
 
@@ -13,6 +9,11 @@
 import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
 import { ref } from 'vue';
+import { useQuasar } from 'quasar';
+const $q = useQuasar()
+
+$q.notify('Hello World!')
+
 
 const todos = ref<Todo[]>([
   {
