@@ -12,29 +12,29 @@
 
             <q-input filled v-model="fullName" label="Full Name *" hint="name and surname" lazy-rules
               :rules="[val => val && val.length > 0 || 'Please type something']">
-              <template v-slot:prepend><q-icon name="account_circle" color="grey" size="32px" /></template>
+              <template #prepend><q-icon name="account_circle" color="grey" size="32px" /></template>
             </q-input>
 
             <q-input filled v-model="username" label="Username *" hint="will be used in login" lazy-rules
               :rules="[val => val && val.length > 0 || 'Please type something']">
-              <template v-slot:prepend><q-icon name="face" color="grey" size="32px" /></template>
+              <template #prepend><q-icon name="face" color="grey" size="32px" /></template>
             </q-input>
 
             <q-input filled v-model="email" label="Email *" hint="will be used to confim your account" lazy-rules
               :rules="[validateEmail]">
-              <template v-slot:prepend><q-icon name="mail" color="grey" size="32px" /></template>
+              <template #prepend><q-icon name="mail" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled type="number" v-model="age" label="Age" lazy-rules :rules="[
+            <q-input filled type="date" v-model="age" label="Age" lazy-rules :rules="[
               val => val !== null && val !== '' || 'Please type your age',
               val => val > 0 && val < 100 || 'Please type a real age'
             ]">
-              <template v-slot:prepend><q-icon name="cake" color="grey" size="32px" /></template>
+              <template #prepend><q-icon name="cake" color="grey" size="32px" /></template>
             </q-input>
 
             <q-input filled type="password" v-model="password" label="Password *" hint="must be at least 8 characters"
               lazy-rules :rules="[val => val && val.length > 0 || 'Password must be at least 8 characters']">
-              <template v-slot:prepend><q-icon name="vpn_key" color="grey" size="32px" /></template>
+              <template #prepend><q-icon name="vpn_key" color="grey" size="32px" /></template>
             </q-input>
           </div>
 
