@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
-    <div class="text-h2">MAIN</div>
-    <div class="text-h6">Index Page</div>
+    <div class="text-h6">MAIN</div>
+    <div class="text-subtitle1">Index Page</div>
     <CarouselMain />
   </q-page>
 </template>
