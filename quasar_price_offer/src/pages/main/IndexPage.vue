@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import CarouselMain from 'src/components/CarouselMain.vue';
+</script>
+
 <template>
   <q-page padding>
     <div class="text-h6">MAIN</div>
@@ -6,6 +10,3 @@
   </q-page>
 </template>
 
-<script setup lang="ts">
-import CarouselMain from 'src/components/CarouselMain.vue';
-</script>
