@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <q-page padding>
     <div class="text-h6">MAIN</div>
@@ -25,6 +28,3 @@
     </p>
   </q-page>
 </template>
-
-<script setup lang="ts">
-</script>
