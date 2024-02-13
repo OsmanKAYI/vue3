@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
-
 const $q = useQuasar()
 
-const username = ref('')
-const rememberMe = ref(false)
+let person = reactive({
+  username: '',
+  password: '',
+  rememberMe: true,
+})
 
-const password = ref('')
 const isPwd = ref(true)
 
 let myBtnTheme = computed(() => {
@@ -45,12 +46,12 @@ function onSubmit() {
               <div class="text-subtitle1">Login Page</div>
             </q-card-section>
 
-            <q-input filled v-model="username" label="Username *" hint="will be used in login" lazy-rules
+            <q-input filled v-model="person.username" label="Username *" hint="will be used in login" lazy-rules
               :rules="[val => val && val.length > 0 || 'Please type something']">
               <template v-slot:prepend><q-icon name="face" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled v-model="password" :type="isPwd ? 'password' : 'text'" label="Password *"
+            <q-input filled v-model="person.password" :type="isPwd ? 'password' : 'text'" label="Password *"
               hint="must be at least 8 characters" lazy-rules
               :rules="[val => val && val.length > 0 || 'Password must be at least 8 characters']">
               <template v-slot:prepend><q-icon name="vpn_key" color="grey" size="32px" /></template>
@@ -60,7 +61,7 @@ function onSubmit() {
             </q-input>
           </div>
 
-          <q-toggle v-model="rememberMe" label="Remember me!" />
+          <q-toggle v-model="person.rememberMe" label="Remember me!" />
 
           <div class="row q-mt-md">
             <q-btn :class="myBtnTheme" label="Login" type="submit" />
