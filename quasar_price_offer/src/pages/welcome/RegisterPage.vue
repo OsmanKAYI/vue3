@@ -1,20 +1,33 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useQuasar } from 'quasar'
-
 const $q = useQuasar()
+import { date } from 'quasar'
+const currentDate = date.formatDate(Date.now(), 'YYYY-MM-DDTHH:mm:ss.SSSZ')
 
-const fullName = ref('')
-const username = ref('')
-const email = ref('')
-const age = ref('')
-const accept = ref(false)
-const password = ref('')
+let person = reactive({
+  fullName: '',
+  username: '',
+  email: '',
+  birthDate: '',
+  accept: false,
+  password: '',
+})
+
+const tempDate = ref(currentDate)
 const isPwd = ref(true)
 
-let myBtnTheme = computed(() => {
+let btnTheme = computed(() => {
   return $q.dark.isActive ? 'bg-grey-5 text-black' : 'bg-grey-9 text-white';
 })
+
+function updateDate() {
+  tempDate.value = person.birthDate
+}
+
+function save() {
+  person.birthDate = tempDate.value
+}
 
 function onSubmit() {
   if (accept.value !== true) {
@@ -49,7 +62,7 @@ function validateEmail(val: string) {
 </script>
 
 <template>
-  <q-page class="q-pa-lg">
+  <q-page class="q-pa-lg q-mt-xl">
     <div class="q-gutter-md row">
       <q-card class="q-pa-md col-md-6 col-sm-9 col-xs-12">
         <q-form @submit="onSubmit">
@@ -60,29 +73,38 @@ function validateEmail(val: string) {
               <div class="text-subtitle1">Register Page</div>
             </q-card-section>
 
-            <q-input filled v-model="fullName" label="Full Name *" hint="name and surname" lazy-rules
+            <q-input filled v-model="person.fullName" label="Full Name *" hint="name and surname" lazy-rules
               :rules="[val => val && val.length > 0 || 'Please type something']">
               <template #prepend><q-icon name="account_circle" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled v-model="username" label="Username *" hint="will be used in login" lazy-rules
+            <q-input filled v-model="person.username" label="Username *" hint="will be used in login" lazy-rules
               :rules="[val => val && val.length > 0 || 'Please type something']">
               <template #prepend><q-icon name="face" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled v-model="email" label="Email *" hint="will be used to confim your account" lazy-rules
+            <q-input filled v-model="person.email" label="Email *" hint="will be used to confim your account" lazy-rules
               :rules="[validateEmail]">
               <template #prepend><q-icon name="mail" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled type="number" v-model="age" label="Age" lazy-rules :rules="[
-              val => val !== null && val !== '' || 'Please type your age',
-              val => val > 0 && val < 100 || 'Please type a real age'
-            ]">
-              <template #prepend><q-icon name="cake" color="grey" size="32px" /></template>
+            <q-input filled v-model="person.birthDate" label="Birth Date *" mask="date" :rules="['birthDate']">
+              <template #prepend><q-icon name="celebration" color="grey" size="32px" /></template>
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy @before-show="updateDate" cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="tempDate">
+                      <div class="row items-center justify-end q-gutter-sm">
+                        <q-btn :class="btnTheme" label="Cancel" flat v-close-popup />
+                        <q-btn :class="btnTheme" label="OK" flat @click="save" v-close-popup />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
             </q-input>
 
-            <q-input filled v-model="password" :type="isPwd ? 'password' : 'text'" label="Password *"
+            <q-input filled v-model="person.password" :type="isPwd ? 'password' : 'text'" label="Password *"
               hint="must be at least 8 characters" lazy-rules
               :rules="[val => val && val.length > 0 || 'Password must be at least 8 characters']">
               <template v-slot:prepend><q-icon name="vpn_key" color="grey" size="32px" /></template>
@@ -92,10 +114,10 @@ function validateEmail(val: string) {
             </q-input>
           </div>
 
-          <q-toggle v-model="accept" label="I accept the license and terms" />
+          <q-toggle v-model="person.accept" label="I accept the license and terms" />
 
           <div class="row q-mt-md">
-            <q-btn :class="myBtnTheme" label="Register" type="submit" />
+            <q-btn :class="btnTheme" label="Register" type="submit" />
           </div>
         </q-form>
       </q-card>
