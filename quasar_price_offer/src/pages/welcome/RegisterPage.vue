@@ -51,7 +51,7 @@ function validateEmail(val: string) {
           <div class="q-ml-md">
 
             <q-card-section>
-              <div class="text-h6">REGISTER</div>
+              <div class="text-h6">WELCOME</div>
               <div class="text-subtitle1">Register Page</div>
             </q-card-section>
 

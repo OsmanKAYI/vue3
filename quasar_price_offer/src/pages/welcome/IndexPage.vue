@@ -4,7 +4,7 @@ import CarouselMain from 'src/components/CarouselMain.vue';
 
 <template>
   <q-page padding>
-    <div class="text-h6">MAIN</div>
+    <div class="text-h6">WELCOME</div>
     <div class="text-subtitle1">Index Page</div>
     <CarouselMain />
   </q-page>

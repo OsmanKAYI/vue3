@@ -35,7 +35,7 @@ function onSubmit() {
           <div class="q-ml-md">
 
             <q-card-section>
-              <div class="text-h6">LOGIN</div>
+              <div class="text-h6">WELCOME</div>
               <div class="text-subtitle1">Login Page</div>
             </q-card-section>
 

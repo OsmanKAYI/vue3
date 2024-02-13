@@ -11,7 +11,7 @@
         </q-btn>
 
         <div class="q-gutter-md">
-          <q-btn flat icon="home" to="/home" label="Home"></q-btn>
+          <q-btn flat icon="home" to="/" label="Home"></q-btn>
           <q-btn flat icon="info" to="/about" label="About"></q-btn>
           <q-btn flat icon="person" to="/register" label="Register"></q-btn>
           <q-btn flat icon="login" to="/login" label="Login"></q-btn>

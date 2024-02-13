@@ -5,7 +5,7 @@
   <q-page padding class=" justify-evenly">
     <q-card class="q-pa-xl q-ma-md" bordered>
 
-      <div class="text-h6">MAIN</div>
+      <div class="text-h6">WELCOME</div>
       <div class="text-subtitle1">About Page</div>
 
       <p>
