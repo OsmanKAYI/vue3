@@ -21,9 +21,28 @@ let btnTheme = computed(() => {
   return $q.dark.isActive ? 'bg-grey-5 text-black' : 'bg-grey-9 text-white';
 })
 
+function validateEmail(val: string) {
+  // Regular expression for email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Check if the input matches the email format
+  if (emailRegex.test(val)) {
+    return true; // Valid email
+  } else {
+    return 'Please enter a valid email address'; // Invalid email
+  }
+}
+
 function updateDate() {
   tempDate.value = person.birthDate
 }
+
+let passType = computed(() => {
+  return isPwd.value ? 'password' : 'text'
+})
+let passIcon = computed(() => {
+  return isPwd.value ? 'visibility_off' : 'visibility'
+})
 
 function save() {
   person.birthDate = tempDate.value
@@ -45,18 +64,6 @@ function onSubmit() {
       icon: 'cloud_done',
       message: 'Submitted'
     })
-  }
-}
-
-function validateEmail(val: string) {
-  // Regular expression for email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  // Check if the input matches the email format
-  if (emailRegex.test(val)) {
-    return true; // Valid email
-  } else {
-    return 'Please enter a valid email address'; // Invalid email
   }
 }
 </script>
@@ -104,12 +111,12 @@ function validateEmail(val: string) {
               </template>
             </q-input>
 
-            <q-input filled v-model="person.password" :type="isPwd ? 'password' : 'text'" label="Password *"
+            <q-input filled v-model="person.password" :type="passType" label="Password *"
               hint="must be at least 8 characters" lazy-rules
               :rules="[val => val && val.length > 0 || 'Password must be at least 8 characters']">
               <template v-slot:prepend><q-icon name="vpn_key" color="grey" size="32px" /></template>
               <template v-slot:append>
-                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
+                <q-icon :name="passIcon" class="cursor-pointer" @click="isPwd = !isPwd" />
               </template>
             </q-input>
           </div>
