@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
 
 const $q = useQuasar()
@@ -10,6 +10,10 @@ const email = ref('')
 const age = ref('')
 const accept = ref(false)
 const password = ref('')
+
+let myBtnTheme = computed(() => {
+  return $q.dark.isActive ? 'bg-grey-5 text-black' : 'bg-grey-9 text-white';
+})
 
 function onSubmit() {
   if (accept.value !== true) {
@@ -86,7 +90,7 @@ function validateEmail(val: string) {
           <q-toggle v-model="accept" label="I accept the license and terms" />
 
           <div class="row q-mt-md">
-            <q-btn label="Register" type="submit" color="primary" />
+            <q-btn :class="myBtnTheme" label="Register" type="submit" />
           </div>
         </q-form>
       </q-card>

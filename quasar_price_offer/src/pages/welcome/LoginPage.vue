@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
 
 const $q = useQuasar()
@@ -7,6 +7,10 @@ const $q = useQuasar()
 const username = ref('')
 const rememberMe = ref(false)
 const password = ref('')
+
+let myBtnTheme = computed(() => {
+  return $q.dark.isActive ? 'bg-grey-5 text-black' : 'bg-grey-9 text-white';
+})
 
 function onSubmit() {
   if (rememberMe.value == true) {
@@ -53,7 +57,7 @@ function onSubmit() {
           <q-toggle v-model="rememberMe" label="Remember me!" />
 
           <div class="row q-mt-md">
-            <q-btn label="Login" type="submit" color="primary" />
+            <q-btn :class="myBtnTheme" label="Login" type="submit" />
           </div>
         </q-form>
       </q-card>
