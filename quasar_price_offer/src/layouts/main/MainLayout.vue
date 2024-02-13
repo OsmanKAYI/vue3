@@ -1,30 +1,76 @@
-<template>
-  <q-layout view="hHh lpr fff">
-    <q-header elevated>
-      <q-toolbar class="glossy">
+<script setup lang="ts">
+import { ref } from 'vue'
 
-        <q-btn flat to="/">
+const drawer = ref(false)
+const drawerWidth = ref(300);
+const drawerBreakpoint = ref(400);
+
+const menuList = [
+  {
+    icon: 'home',
+    label: 'Home',
+    to: '/home',
+    separator: true
+  },
+  {
+    icon: 'help',
+    label: 'Help',
+    to: '/home/help',
+    separator: false
+  }
+]
+</script>
+
+<template>
+  <q-layout view="hHh lpr fff" class="shadow-2 rounded-borders">
+    <q-header elevated>
+
+      <q-toolbar class="glossy">
+        <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
+        <q-btn flat to="/home">
           <q-avatar size="lg">
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
           </q-avatar>
           <q-toolbar-title> Price Offer </q-toolbar-title>
         </q-btn>
-
-        <div class="q-gutter-md">
-          <q-btn flat icon="home" to="/home" label="Home"></q-btn>
-          <q-btn flat icon="info" to="/about" label="About"></q-btn>
-          <q-btn flat icon="person" to="/register" label="Register"></q-btn>
-          <q-btn flat icon="login" to="/login" label="Login"></q-btn>
-        </div>
-
       </q-toolbar>
+
     </q-header>
+
+    <q-drawer v-model="drawer" :width="drawerWidth" :breakpoint="drawerBreakpoint" overlay bordered
+      :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
+      <q-scroll-area class="fit" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
+        <q-list>
+
+          <template v-for="(menuItem, index) in menuList" :key="index">
+            <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple :to="menuItem.to">
+              <q-item-section avatar>
+                <q-icon :name="menuItem.icon" />
+              </q-item-section>
+              <q-item-section>
+                {{ menuItem.label }}
+              </q-item-section>
+            </q-item>
+            <q-separator :key="'sep' + index" v-if="menuItem.separator" />
+          </template>
+
+        </q-list>
+      </q-scroll-area>
+
+      <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
+        <div class="absolute-bottom bg-transparent">
+          <q-avatar size="56px" class="q-mb-sm">
+            <img
+              src="https://0.gravatar.com/avatar/834de371b1d5dd047e85bb3c7470d703e407cb7b73e2794ad549a6ee2a2e969b?size=256">
+          </q-avatar>
+          <div class="text-weight-bold">Osman KAYI</div>
+          <div>@osmankayi</div>
+        </div>
+      </q-img>
+    </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
-
-<script setup lang="ts">
-</script>
