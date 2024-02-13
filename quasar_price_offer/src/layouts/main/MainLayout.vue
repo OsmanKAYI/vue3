@@ -6,8 +6,11 @@ const $q = useQuasar()
 const drawer = ref(false)
 const drawerWidth = ref(300);
 const drawerBreakpoint = ref(400);
-let myTheme = computed(() => {
+let generalTheme = computed(() => {
   return $q.dark.isActive ? 'glossy bg-grey-7 text-white' : 'glossy bg-grey-5 text-black';
+})
+let modeIcon = computed(() => {
+  return $q.dark.isActive ? 'light_mode' : 'dark_mode';
 })
 
 const menuList = [
@@ -28,7 +31,7 @@ const menuList = [
 
 <template>
   <q-layout view="hHh lpr fff" class="shadow-2 rounded-borders">
-    <q-header elevated :class="myTheme">
+    <q-header elevated :class="generalTheme">
 
       <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
@@ -38,7 +41,7 @@ const menuList = [
           </q-avatar>
           <q-toolbar-title> Price Offer </q-toolbar-title>
         </q-btn>
-        <q-btn flat class="q-ml-auto" @click="$q.dark.toggle()" round dense icon="dark_mode" />
+        <q-btn flat class="q-ml-auto" @click="$q.dark.toggle()" round dense :icon="modeIcon" />
         <q-btn flat to="/" label="Logout" />
 
       </q-toolbar>
@@ -46,7 +49,7 @@ const menuList = [
 
     </q-header>
 
-    <q-drawer v-model="drawer" :width="drawerWidth" :breakpoint="drawerBreakpoint" overlay bordered :class="myTheme">
+    <q-drawer v-model="drawer" :width="drawerWidth" :breakpoint="drawerBreakpoint" overlay bordered :class="generalTheme">
       <q-scroll-area class="fit" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
         <q-list>
 
