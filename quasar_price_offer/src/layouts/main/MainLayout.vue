@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 
 const drawer = ref(false)
 const drawerWidth = ref(300);
 const drawerBreakpoint = ref(400);
+let myTheme = computed(() => {
+  return $q.dark.isActive ? 'glossy bg-grey-7 text-white' : 'glossy bg-grey-5 text-black';
+})
 
 const menuList = [
   {
@@ -23,9 +28,9 @@ const menuList = [
 
 <template>
   <q-layout view="hHh lpr fff" class="shadow-2 rounded-borders">
-    <q-header elevated>
+    <q-header elevated :class="myTheme">
 
-      <q-toolbar class="glossy">
+      <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
         <q-btn flat to="/home">
           <q-avatar size="lg">
@@ -33,12 +38,15 @@ const menuList = [
           </q-avatar>
           <q-toolbar-title> Price Offer </q-toolbar-title>
         </q-btn>
+        <q-btn flat class="q-ml-auto" @click="$q.dark.toggle()" round dense icon="dark_mode" />
+        <q-btn flat to="/" label="Logout" />
+
       </q-toolbar>
+
 
     </q-header>
 
-    <q-drawer v-model="drawer" :width="drawerWidth" :breakpoint="drawerBreakpoint" overlay bordered
-      :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
+    <q-drawer v-model="drawer" :width="drawerWidth" :breakpoint="drawerBreakpoint" overlay bordered :class="myTheme">
       <q-scroll-area class="fit" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
         <q-list>
 
