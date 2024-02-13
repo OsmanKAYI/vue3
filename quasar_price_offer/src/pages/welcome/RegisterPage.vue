@@ -10,6 +10,7 @@ const email = ref('')
 const age = ref('')
 const accept = ref(false)
 const password = ref('')
+const isPwd = ref(true)
 
 let myBtnTheme = computed(() => {
   return $q.dark.isActive ? 'bg-grey-5 text-black' : 'bg-grey-9 text-white';
@@ -81,9 +82,13 @@ function validateEmail(val: string) {
               <template #prepend><q-icon name="cake" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled type="password" v-model="password" label="Password *" hint="must be at least 8 characters"
-              lazy-rules :rules="[val => val && val.length > 0 || 'Password must be at least 8 characters']">
-              <template #prepend><q-icon name="vpn_key" color="grey" size="32px" /></template>
+            <q-input filled v-model="password" :type="isPwd ? 'password' : 'text'" label="Password *"
+              hint="must be at least 8 characters" lazy-rules
+              :rules="[val => val && val.length > 0 || 'Password must be at least 8 characters']">
+              <template v-slot:prepend><q-icon name="vpn_key" color="grey" size="32px" /></template>
+              <template v-slot:append>
+                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
+              </template>
             </q-input>
           </div>
 
