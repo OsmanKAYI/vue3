@@ -10,9 +10,10 @@ let person = reactive({
   userName: '',
   email: '',
   birthDate: '',
-  accept: false,
   password: '',
 })
+
+const accept = ref(false)
 
 const tempDate = ref(currentDate)
 const isPwd = ref(true)
@@ -80,22 +81,23 @@ function onSubmit() {
               <div class="text-subtitle1">Register Page</div>
             </q-card-section>
 
-            <q-input filled v-model="person.fullName" label="Full Name *" hint="name and surname" lazy-rules
-              :rules="[val => val && val.length > 0 || 'Please type something']">
+            <q-input class="q-mt-sm" filled v-model="person.fullName" label="Full Name *" hint="name and surname"
+              lazy-rules :rules="[val => val && val.length > 0 || 'Please type something']">
               <template #prepend><q-icon name="account_circle" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled v-model="person.userName" label="Username *" hint="will be used in login" lazy-rules
-              :rules="[val => val && val.length > 0 || 'Please type something']">
+            <q-input class="q-mt-sm" filled v-model="person.userName" label="Username *" hint="will be used in login"
+              lazy-rules :rules="[val => val && val.length > 0 || 'Please type something']">
               <template #prepend><q-icon name="face" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled v-model="person.email" label="Email *" hint="will be used to confim your account" lazy-rules
-              :rules="[validateEmail]">
+            <q-input class="q-mt-sm" filled v-model="person.email" label="Email *"
+              hint="will be used to confim your account" lazy-rules :rules="[validateEmail]">
               <template #prepend><q-icon name="mail" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled v-model="person.birthDate" label="Birth Date *" mask="date" :rules="['birthDate']">
+            <q-input class="q-mt-sm" filled v-model="person.birthDate" label="Birth Date *" mask="date"
+              :rules="[val => val && val.length > 0 || 'Please type your birth day']">
               <template #prepend><q-icon name="celebration" color="grey" size="32px" /></template>
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
@@ -111,7 +113,7 @@ function onSubmit() {
               </template>
             </q-input>
 
-            <q-input filled v-model="person.password" :type="passType" label="Password *"
+            <q-input class="q-mt-sm" filled v-model="person.password" :type="passType" label="Password *"
               hint="must be at least 8 characters" lazy-rules
               :rules="[val => val && val.length > 0 || 'Password must be at least 8 characters']">
               <template v-slot:prepend><q-icon name="vpn_key" color="grey" size="32px" /></template>
@@ -121,7 +123,7 @@ function onSubmit() {
             </q-input>
           </div>
 
-          <q-toggle v-model="person.accept" label="I accept the license and terms" />
+          <q-toggle v-model="accept" label="I accept the license and terms" />
 
           <div class="row q-mt-md">
             <q-btn :class="btnTheme" label="Register" type="submit" />
