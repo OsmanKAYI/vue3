@@ -37,16 +37,16 @@ function updateDate() {
   tempDate.value = person.birthDate
 }
 
+function saveDate() {
+  person.birthDate = tempDate.value
+}
+
 let passType = computed(() => {
   return isPwd.value ? 'password' : 'text'
 })
 let passIcon = computed(() => {
   return isPwd.value ? 'visibility_off' : 'visibility'
 })
-
-function save() {
-  person.birthDate = tempDate.value
-}
 
 function onSubmit() {
   if (accept.value !== true) {
@@ -103,7 +103,7 @@ function onSubmit() {
                     <q-date v-model="tempDate">
                       <div class="row items-center justify-end q-gutter-sm">
                         <q-btn :class="btnTheme" label="Cancel" flat v-close-popup />
-                        <q-btn :class="btnTheme" label="OK" flat @click="save" v-close-popup />
+                        <q-btn :class="btnTheme" label="OK" flat @click="saveDate" v-close-popup />
                       </div>
                     </q-date>
                   </q-popup-proxy>
