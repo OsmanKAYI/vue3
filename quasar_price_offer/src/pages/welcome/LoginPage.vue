@@ -4,7 +4,7 @@ import { useQuasar } from 'quasar'
 const $q = useQuasar()
 
 let person = reactive({
-  username: '',
+  userName: '',
   password: '',
   rememberMe: true,
 })
@@ -46,7 +46,7 @@ function onSubmit() {
               <div class="text-subtitle1">Login Page</div>
             </q-card-section>
 
-            <q-input filled v-model="person.username" label="Username *" hint="will be used in login" lazy-rules
+            <q-input filled v-model="person.userName" label="Username *" hint="will be used in login" lazy-rules
               :rules="[val => val && val.length > 0 || 'Please type something']">
               <template v-slot:prepend><q-icon name="face" color="grey" size="32px" /></template>
             </q-input>

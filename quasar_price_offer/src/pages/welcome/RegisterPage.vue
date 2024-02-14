@@ -7,7 +7,7 @@ const currentDate = date.formatDate(Date.now(), 'YYYY-MM-DDTHH:mm:ss.SSSZ')
 
 let person = reactive({
   fullName: '',
-  username: '',
+  userName: '',
   email: '',
   birthDate: '',
   accept: false,
@@ -85,7 +85,7 @@ function onSubmit() {
               <template #prepend><q-icon name="account_circle" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled v-model="person.username" label="Username *" hint="will be used in login" lazy-rules
+            <q-input filled v-model="person.userName" label="Username *" hint="will be used in login" lazy-rules
               :rules="[val => val && val.length > 0 || 'Please type something']">
               <template #prepend><q-icon name="face" color="grey" size="32px" /></template>
             </q-input>
