@@ -13,7 +13,6 @@ let modeIcon = computed(() => {
   return $q.dark.isActive ? 'light_mode' : 'dark_mode';
 })
 
-
 const menuList = [
   {
     icon: 'home',
@@ -45,17 +44,32 @@ const menuList = [
 <template>
   <q-layout view="hHh lpr fff" class="shadow-2 rounded-borders">
     <q-header elevated :class="generalTheme">
+
       <q-toolbar bordered>
-        <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        <q-btn flat to="/">
+        <q-btn flat to="/" class="q-mr-auto">
           <q-avatar size="lg">
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
           </q-avatar>
           <q-toolbar-title> Price Offer </q-toolbar-title>
         </q-btn>
 
-        <q-btn flat class="q-ml-auto" @click="$q.dark.toggle()" round dense :icon="modeIcon" />
-
+        <div class="gt-sm">
+          <q-btn flat class="q-ml-xs" v-for="(menuItem, index) in menuList" :key="index">
+            <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple :to="menuItem.to">
+              <q-item-section avatar>
+                <q-icon :name="menuItem.icon" />
+              </q-item-section>
+              <q-item-section>
+                {{ menuItem.label }}
+              </q-item-section>
+            </q-item>
+            <q-separator :key="'sep' + index" v-if="menuItem.separator" />
+          </q-btn>
+        </div>
+        <div class="lt-md">
+          <q-btn flat @click="drawer = !drawer" dense icon="menu" label="Menu" />
+        </div>
+        <q-btn flat class="q-ml-xs" @click="$q.dark.toggle()" round dense :icon="modeIcon" />
       </q-toolbar>
 
     </q-header>
