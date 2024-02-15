@@ -33,7 +33,7 @@ const routes: RouteRecordRaw[] = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/main/ErrorNotFound.vue'),
+    component: () => import('pages/welcome/ErrorNotFound.vue'),
   },
 ];
 
