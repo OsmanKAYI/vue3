@@ -3,7 +3,11 @@ import { ref, reactive, computed } from 'vue'
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
 
-let person = reactive({
+const myBtnTheme = computed(() => {
+  return $q.dark.isActive ? 'bg-grey-5 text-black' : 'bg-grey-9 text-white';
+})
+
+const userForm = reactive({
   userName: '',
   password: '',
   rememberMe: true,
@@ -11,16 +15,12 @@ let person = reactive({
 
 const isPwd = ref(true)
 
-let myBtnTheme = computed(() => {
-  return $q.dark.isActive ? 'bg-grey-5 text-black' : 'bg-grey-9 text-white';
-})
-
 function onSubmit() {
-  if (rememberMe.value == true) {
+  if (userForm.rememberMe == true) {
     $q.notify({
-      color: 'yellow-5',
-      textColor: 'black',
-      icon: 'warning',
+      color: 'green-4',
+      textColor: 'white',
+      icon: 'remember_me',
       message: 'Logged in successfully with remember me!'
     })
   } else {
@@ -46,12 +46,12 @@ function onSubmit() {
               <div class="text-subtitle1">Login Page</div>
             </q-card-section>
 
-            <q-input filled v-model="person.userName" label="Username *" hint="will be used in login" lazy-rules
+            <q-input filled v-model="userForm.userName" label="Username *" hint="will be used in login" lazy-rules
               :rules="[val => val && val.length > 0 || 'Please type something']">
               <template v-slot:prepend><q-icon name="face" color="grey" size="32px" /></template>
             </q-input>
 
-            <q-input filled v-model="person.password" :type="isPwd ? 'password' : 'text'" label="Password *"
+            <q-input filled v-model="userForm.password" :type="isPwd ? 'password' : 'text'" label="Password *"
               hint="must be at least 8 characters" lazy-rules
               :rules="[val => val && val.length > 0 || 'Password must be at least 8 characters']">
               <template v-slot:prepend><q-icon name="vpn_key" color="grey" size="32px" /></template>
@@ -61,7 +61,7 @@ function onSubmit() {
             </q-input>
           </div>
 
-          <q-toggle v-model="person.rememberMe" label="Remember me!" />
+          <q-toggle v-model="userForm.rememberMe" label="Remember me!" />
 
           <div class="row q-mt-md">
             <q-btn :class="myBtnTheme" label="Login" type="submit" />
