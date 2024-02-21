@@ -21,6 +21,18 @@ const menuList = [
     separator: true
   },
   {
+    icon: 'create',
+    label: 'Create Offer',
+    to: '/home/createOffer',
+    separator: false
+  },
+  {
+    icon: 'photo',
+    label: 'Pictures',
+    to: '/home/pictures',
+    separator: true
+  },
+  {
     icon: 'help',
     label: 'Help',
     to: '/home/help',
