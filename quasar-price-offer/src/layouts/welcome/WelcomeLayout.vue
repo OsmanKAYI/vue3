@@ -5,7 +5,7 @@ const $q = useQuasar()
 
 const drawer = ref(false);
 const drawerWidth = ref(300);
-const drawerBreakpoint = ref(400);
+const drawerBreakpoint = ref(500);
 let generalTheme = computed(() => {
   return $q.dark.isActive ? 'glossy bg-grey-7 text-white' : 'glossy bg-grey-5 text-black';
 })
