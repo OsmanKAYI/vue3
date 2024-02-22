@@ -23,7 +23,7 @@ const menuList = [
   {
     icon: 'create',
     label: 'Create Offer',
-    to: '/home/createOffer',
+    to: '/home/offer/create',
     separator: false
   },
   {
