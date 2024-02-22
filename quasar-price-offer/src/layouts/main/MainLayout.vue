@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
 
@@ -33,18 +33,18 @@ const menuList = [
     separator: true
   },
   {
-    icon: 'help',
-    label: 'Help',
-    to: '/home/help',
-    separator: false
-  },
-  {
     icon: 'logout',
     label: 'Logout',
     to: '/',
-    separator: true
+    separator: false
   }
 ]
+
+watchEffect(() => {
+  if ($q.screen.gt.sm) {
+    drawer.value = false
+  }
+})
 </script>
 
 <template>
@@ -60,15 +60,14 @@ const menuList = [
         </q-btn>
 
         <div class="gt-sm">
-          <q-btn flat class="q-ml-xs" v-for="(menuItem, index) in menuList" :key="index">
-            <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple :to="menuItem.to">
-              <q-item-section avatar>
-                <q-icon :name="menuItem.icon" />
-              </q-item-section>
-              <q-item-section>
-                {{ menuItem.label }}
-              </q-item-section>
-            </q-item>
+          <q-btn class="q-mr-xs" v-for="(menuItem, index) in menuList" :key="index" clickable
+            :active="menuItem.label === 'Outbox'" v-ripple :to="menuItem.to" rounded>
+            <q-item-section avatar class="q-pl-md">
+              <q-icon :name="menuItem.icon" />
+            </q-item-section>
+            <q-item-section>
+              {{ menuItem.label }}
+            </q-item-section>
           </q-btn>
         </div>
         <div class="lt-md">
