@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useQuasar, date } from 'quasar'
 const $q = useQuasar()
 
@@ -12,17 +12,20 @@ const onSubmit = () => {
 }
 
 const addItem = () => {
-  rows.value.push({
-    itemId: 0,
+  const newItem = {
+    itemId: rows.value.length + 1,
     sortOrder: rows.value.length * 10 + 10,
     productName: '',
     amount: 0,
     unit: '',
     unitPrice: 0,
-    total: 0,
+    total: 0, // Remove the static value here
     picture: ''
-  });
-}
+  };
+
+  // Push the new item to the rows array
+  rows.value.push(newItem);
+};
 
 const offerDate = ref(date.formatDate(Date.now(), 'YYYY-MM-DD'))
 const title = ref('')
@@ -57,7 +60,7 @@ interface TableColumn {
   required?: boolean;
   label: string;
   align: 'left' | 'center' | 'right';
-  field: (row: RowType) => any;
+  field: (row: RowType) => string | number;
   format?: (val: string) => string;
   sortable?: boolean;
   style?: string;
@@ -86,13 +89,16 @@ interface RowType {
   picture: string;
 }
 
-const amount = ref(0)
-const unitPrice = ref(0)
-const total = computed(() => amount.value * unitPrice.value);
-
 const rows = ref([
-  { itemId: 0, sortOrder: 10, productName: '', amount: amount.value, unit: '', unitPrice: unitPrice.value, total: total.value, picture: '' },
+  { itemId: 1, sortOrder: 10, productName: '', amount: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
+
+watchEffect(() => {
+  rows.value.forEach(item => {
+    item.total = item.amount * item.unitPrice;
+  });
+});
+
 </script>
 
 <template>
@@ -274,13 +280,22 @@ const rows = ref([
                 binary-state-sort>
                 <template #body="props">
                   <q-tr :props="props">
-                    <q-td v-for="column in columns" :key="column.name" :props="props">
-                      <q-input v-if="column.name !== 'total'" v-model="props.row[column.name]" dense outlined />
-                      <span v-else>{{ props.row.total }}</span>
+                    <q-td v-for="column in  columns " :key="column.name" :props="props">
+                      <template v-if="column.name === 'picture' || column.name === 'unit'">
+                        <q-select filled v-model="props.row[column.name]" :options="columns[column.name]" dense
+                          outlined />
+                      </template>
+                      <template v-else-if="column.name === 'total'">
+                        <span style="font-weight: bold;">{{ props.row[column.name] }}</span>
+                      </template>
+                      <template v-else>
+                        <q-input filled v-model="props.row[column.name]" dense outlined />
+                      </template>
                     </q-td>
                   </q-tr>
                 </template>
               </q-table>
+
               <q-btn glossy class=" q-ma-sm" label="Save" type="submit" color="primary" />
               <q-btn glossy class="q-ma-sm" label="Add Item" @click="addItem" color="positive" />
             </div>
