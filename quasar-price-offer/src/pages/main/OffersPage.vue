@@ -31,7 +31,7 @@ interface TableColumn {
   required?: boolean;
   label: string;
   align: 'left' | 'center' | 'right';
-  field: (row: RowType) => any;
+  field: (row: RowType) => string | number;
   format?: (val: string) => string;
   sortable?: boolean;
   style?: string;
