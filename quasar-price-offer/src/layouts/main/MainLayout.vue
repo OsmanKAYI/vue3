@@ -37,6 +37,12 @@ const menuList = [
     label: 'Help',
     to: '/home/help',
     separator: false
+  },
+  {
+    icon: 'logout',
+    label: 'Logout',
+    to: '/',
+    separator: true
   }
 ]
 </script>
