@@ -64,7 +64,7 @@ function onSubmit() {
           <q-toggle v-model="userForm.rememberMe" label="Remember me!" />
 
           <div class="row q-mt-md">
-            <q-btn :class="myBtnTheme" label="Login" type="submit" />
+            <q-btn :class="myBtnTheme" label="Login" type="submit" to="/home" />
           </div>
         </q-form>
       </q-card>
