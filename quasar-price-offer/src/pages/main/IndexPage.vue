@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
 
@@ -15,6 +15,44 @@ const picWidth = computed(() => {
   return $q.platform.is.mobile ? 'width: 100px' : 'width: 150px'
 })
 
+const numItemsToShow = ref(0);
+
+const listItems = (num: number) => {
+  numItemsToShow.value = num;
+}
+
+const filteredItems = computed(() => {
+  if (numItemsToShow.value === 0) {
+    return items; // Show all items
+  } else {
+    return items.slice(0, numItemsToShow.value); // Show selected number of items
+  }
+});
+
+const items = [
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+];
 </script>
 
 <template>
@@ -38,11 +76,11 @@ const picWidth = computed(() => {
                   <div :class="headingTheme" class="row text-h4 q-mb-xl q-ml-md text-weight-bold text-center"> Offers List
                   </div>
                   <div class="row q-ml-md">
-                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders">All</q-btn>
-                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders">10</q-btn>
-                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders">50</q-btn>
-                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders">100</q-btn>
-                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders">200</q-btn>
+                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders" @click="listItems(0)">All</q-btn>
+                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders" @click="listItems(10)">10</q-btn>
+                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders" @click="listItems(50)">50</q-btn>
+                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders" @click="listItems(100)">100</q-btn>
+                    <q-btn :class="btnTheme" class="col-1 q-ml-xs rounded-borders" @click="listItems(200)">200</q-btn>
                   </div>
                 </div>
 
@@ -59,165 +97,13 @@ const picWidth = computed(() => {
           </tr>
         </thead>
         <tbody :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
-          <tr>
-            <td class="text-left">Frozen Yogurt</td>
-            <td class="text-right">159</td>
-            <td class="text-right">6</td>
-            <td class="text-right">24</td>
-            <td class="text-right">24</td>
-            <td class="text-right">4</td>
-          </tr>
-          <tr>
-            <td class="text-left">Ice cream sandwich</td>
-            <td class="text-right">237</td>
-            <td class="text-right">9</td>
-            <td class="text-right">37</td>
-            <td class="text-right">37</td>
-            <td class="text-right">4.3</td>
-          </tr>
-          <tr>
-            <td class="text-left">Eclair</td>
-            <td class="text-right">262</td>
-            <td class="text-right">16</td>
-            <td class="text-right">23</td>
-            <td class="text-right">23</td>
-            <td class="text-right">6</td>
-          </tr>
-          <tr>
-            <td class="text-left">Cupcake</td>
-            <td class="text-right">305</td>
-            <td class="text-right">3.7</td>
-            <td class="text-right">67</td>
-            <td class="text-right">67</td>
-            <td class="text-right">4.3</td>
-          </tr>
-          <tr>
-            <td class="text-left">Gingerbread</td>
-            <td class="text-right">356</td>
-            <td class="text-right">16</td>
-            <td class="text-right">49</td>
-            <td class="text-right">49</td>
-            <td class="text-right">3.9</td>
-          </tr>
-          <tr>
-            <td class="text-left">Frozen Yogurt</td>
-            <td class="text-right">159</td>
-            <td class="text-right">6</td>
-            <td class="text-right">24</td>
-            <td class="text-right">24</td>
-            <td class="text-right">4</td>
-          </tr>
-          <tr>
-            <td class="text-left">Ice cream sandwich</td>
-            <td class="text-right">237</td>
-            <td class="text-right">9</td>
-            <td class="text-right">37</td>
-            <td class="text-right">37</td>
-            <td class="text-right">4.3</td>
-          </tr>
-          <tr>
-            <td class="text-left">Eclair</td>
-            <td class="text-right">262</td>
-            <td class="text-right">16</td>
-            <td class="text-right">23</td>
-            <td class="text-right">23</td>
-            <td class="text-right">6</td>
-          </tr>
-          <tr>
-            <td class="text-left">Cupcake</td>
-            <td class="text-right">305</td>
-            <td class="text-right">3.7</td>
-            <td class="text-right">67</td>
-            <td class="text-right">67</td>
-            <td class="text-right">4.3</td>
-          </tr>
-          <tr>
-            <td class="text-left">Gingerbread</td>
-            <td class="text-right">356</td>
-            <td class="text-right">16</td>
-            <td class="text-right">49</td>
-            <td class="text-right">49</td>
-            <td class="text-right">3.9</td>
-          </tr>
-          <tr>
-            <td class="text-left">Frozen Yogurt</td>
-            <td class="text-right">159</td>
-            <td class="text-right">6</td>
-            <td class="text-right">24</td>
-            <td class="text-right">24</td>
-            <td class="text-right">4</td>
-          </tr>
-          <tr>
-            <td class="text-left">Ice cream sandwich</td>
-            <td class="text-right">237</td>
-            <td class="text-right">9</td>
-            <td class="text-right">37</td>
-            <td class="text-right">37</td>
-            <td class="text-right">4.3</td>
-          </tr>
-          <tr>
-            <td class="text-left">Eclair</td>
-            <td class="text-right">262</td>
-            <td class="text-right">16</td>
-            <td class="text-right">23</td>
-            <td class="text-right">23</td>
-            <td class="text-right">6</td>
-          </tr>
-          <tr>
-            <td class="text-left">Cupcake</td>
-            <td class="text-right">305</td>
-            <td class="text-right">3.7</td>
-            <td class="text-right">67</td>
-            <td class="text-right">67</td>
-            <td class="text-right">4.3</td>
-          </tr>
-          <tr>
-            <td class="text-left">Gingerbread</td>
-            <td class="text-right">356</td>
-            <td class="text-right">16</td>
-            <td class="text-right">49</td>
-            <td class="text-right">49</td>
-            <td class="text-right">3.9</td>
-          </tr>
-          <tr>
-            <td class="text-left">Frozen Yogurt</td>
-            <td class="text-right">159</td>
-            <td class="text-right">6</td>
-            <td class="text-right">24</td>
-            <td class="text-right">24</td>
-            <td class="text-right">4</td>
-          </tr>
-          <tr>
-            <td class="text-left">Ice cream sandwich</td>
-            <td class="text-right">237</td>
-            <td class="text-right">9</td>
-            <td class="text-right">37</td>
-            <td class="text-right">37</td>
-            <td class="text-right">4.3</td>
-          </tr>
-          <tr>
-            <td class="text-left">Eclair</td>
-            <td class="text-right">262</td>
-            <td class="text-right">16</td>
-            <td class="text-right">23</td>
-            <td class="text-right">23</td>
-            <td class="text-right">6</td>
-          </tr>
-          <tr>
-            <td class="text-left">Cupcake</td>
-            <td class="text-right">305</td>
-            <td class="text-right">3.7</td>
-            <td class="text-right">67</td>
-            <td class="text-right">67</td>
-            <td class="text-right">4.3</td>
-          </tr>
-          <tr>
-            <td class="text-left">Gingerbread</td>
-            <td class="text-right">356</td>
-            <td class="text-right">16</td>
-            <td class="text-right">49</td>
-            <td class="text-right">49</td>
-            <td class="text-right">3.9</td>
+          <tr v-for="(item, index) in filteredItems" :key="index">
+            <td class="text-left">{{ item.name }}</td>
+            <td class="text-right">{{ item.number }}</td>
+            <td class="text-right">{{ item.date }}</td>
+            <td class="text-right">{{ item.firm }}</td>
+            <td class="text-right">{{ item.itemCount }}</td>
+            <td class="text-right">{{ item.total }}</td>
           </tr>
         </tbody>
       </q-markup-table>
