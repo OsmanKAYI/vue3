@@ -274,7 +274,7 @@ watchEffect(() => {
               </q-input>
             </div>
 
-            <div class="row q-gutter-sm">
+            <div class="row q-pt-xs">
               <q-table class="col-12" bordered title="Items" :rows="rows" :columns="columns" row-key="name"
                 binary-state-sort>
                 <template #body="props">
