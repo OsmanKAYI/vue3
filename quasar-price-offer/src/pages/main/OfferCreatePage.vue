@@ -37,7 +37,7 @@ const transportation = ref('')
 const transportationOptions = [{ label: 'Transportation', value: '', disable: true }, 'Transportation Included', 'Transportation is NOT Included']
 const assembly = ref('')
 const assemblyOptions = [{ label: 'Assembly', value: '', disable: true }, 'Assembly Included', 'Assembly is NOT Included']
-const extra = ref([''])
+const extra = ref<Array<string>>([]);
 const extraOptions = [{ label: 'Extras', value: '', disable: true }, 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
 const notes = ref('')
 
@@ -273,7 +273,8 @@ const addItem = () => {
                   <q-tr :props="props">
                     <q-td v-for="column in  columns " :key="column.name" :props="props">
                       <template v-if="column.name === 'picture' || column.name === 'unit'">
-                        <q-select filled v-model="props.row[column.name]" :options="column[column.name]" dense outlined />
+                        <q-select filled v-model="props.row[column.name]"
+                          :options="props.row[column.name as keyof TableColumn]" dense outlined />
                       </template>
                       <template v-else-if="column.name === 'total'">
                         <span style="font-weight: bold;">{{ props.row[column.name] }}</span>
