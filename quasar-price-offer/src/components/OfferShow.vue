@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router';
-import type { Router } from 'vue-router'; // Import Router type
-const router = useRouter() as Router; // Cast useRouter to Router
 const offerId = ref<string>('') // Initialize offerId as a string ref
 import type { TableColumn, RowType } from 'src/types/types'
 
@@ -20,7 +17,7 @@ const hasPhoto = ref('')
 const tax = ref('')
 const transportation = ref('')
 const assembly = ref('')
-const extra = ref([''])
+const extra = ref<string[]>(['']);
 const notes = ref('')
 
 const columns: TableColumn[] = [
@@ -185,7 +182,7 @@ const rows = ref<RowType[]>([
               </template>
             </q-input>
 
-            <q-input :disable="true" filled class="col-12 col-md-7" v-model="extra" label="Extra">
+            <q-input :disable="true" filled class="col-12 col-md-7" v-model="extra[0]" label="Extra">
               <template #prepend>
                 <q-icon name="expand_circle_down" />
               </template>
