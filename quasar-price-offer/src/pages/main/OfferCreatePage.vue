@@ -21,7 +21,7 @@ const btnTheme = computed(() => {
 const offerDate = ref(date.formatDate(Date.now(), 'YYYY-MM-DD'))
 const title = ref('')
 const firmName = ref('')
-const firmAdress = ref('')
+const firmAddress = ref('')
 const authName = ref('')
 const authPhone = ref('')
 const authEmail = ref('')
@@ -142,12 +142,12 @@ const addItem = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-12" type="textarea" v-model="firmAdress" label="Firm Adress">
+              <q-input filled class="col-12 col-md-12" type="textarea" v-model="firmAddress" label="Firm Address">
                 <template #prepend>
                   <q-icon name="business" />
                 </template>
                 <template #label>
-                  <div class="text-cyan">Firm Adress</div>
+                  <div class="text-cyan">Firm Address</div>
                 </template>
               </q-input>
 
