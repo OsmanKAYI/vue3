@@ -318,7 +318,7 @@ const addItem = () => {
 
     </q-card>
 
-    <div id="bottom"></div>
+    <div id="bottom" />
   </q-page>
 </template>
 
