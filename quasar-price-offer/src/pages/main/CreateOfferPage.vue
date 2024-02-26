@@ -37,17 +37,17 @@ const authEmail = ref('')
 const situation = ref('')
 const discount = ref('')
 const currency = ref('');
-const currencyOptions = ['TL', 'USD', 'EUR', 'RUB', 'UAH']
+const currencyOptions = [{ label: 'Currency', value: '', disable: true }, 'TL', 'USD', 'EUR', 'RUB', 'UAH']
 const hasPhoto = ref('')
-const hasPhotoOptions = ['YES', 'NO']
+const hasPhotoOptions = [{ label: 'Has Photo', value: '', disable: true }, 'YES', 'NO']
 const tax = ref('')
-const taxOptions = ['VAX Included', 'VAX is NOT Included']
+const taxOptions = [{ label: 'Tax', value: '', disable: true }, 'VAX Included', 'VAX is NOT Included']
 const transportation = ref('')
-const transportationOptions = ['Transportation Included', 'Transportation is NOT Included']
+const transportationOptions = [{ label: 'Transportation', value: '', disable: true }, 'Transportation Included', 'Transportation is NOT Included']
 const assembly = ref('')
-const assemblyOptions = ['Assembly Included', 'Assembly is NOT Included']
+const assemblyOptions = [{ label: 'Assembly', value: '', disable: true }, 'Assembly Included', 'Assembly is NOT Included']
 const extra = ref([''])
-const extraOptions = ['Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
+const extraOptions = [{ label: 'Extras', value: '', disable: true }, 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
 const notes = ref('')
 
 const tempDate = ref()
@@ -280,8 +280,7 @@ watchEffect(() => {
                   <q-tr :props="props">
                     <q-td v-for="column in  columns " :key="column.name" :props="props">
                       <template v-if="column.name === 'picture' || column.name === 'unit'">
-                        <q-select filled v-model="props.row[column.name]" :options="columns[column.name]" dense
-                          outlined />
+                        <q-select filled v-model="props.row[column.name]" :options="column[column.name]" dense outlined />
                       </template>
                       <template v-else-if="column.name === 'total'">
                         <span style="font-weight: bold;">{{ props.row[column.name] }}</span>
