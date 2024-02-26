@@ -2,30 +2,20 @@
 import { ref, computed, watchEffect } from 'vue'
 import { useQuasar, date } from 'quasar'
 const $q = useQuasar()
+import { scroll } from 'quasar'
+const { getScrollTarget, setVerticalScrollPosition } = scroll
+
+// takes an element object
+function scrollToElement(el: any) {
+  const target = getScrollTarget(el)
+  const offset = el.offsetTop
+  const duration = 1000
+  setVerticalScrollPosition(target, offset, duration)
+}
 
 const btnTheme = computed(() => {
   return $q.dark.isActive ? 'bg-grey-5 text-black' : 'bg-grey-9 text-white';
 })
-
-const onSubmit = () => {
-  console.log('submit')
-}
-
-const addItem = () => {
-  const newItem = {
-    itemId: rows.value.length + 1,
-    sortOrder: rows.value.length * 10 + 10,
-    productName: '',
-    amount: 0,
-    unit: '',
-    unitPrice: 0,
-    total: 0, // Remove the static value here
-    picture: ''
-  };
-
-  // Push the new item to the rows array
-  rows.value.push(newItem);
-};
 
 const offerDate = ref(date.formatDate(Date.now(), 'YYYY-MM-DD'))
 const title = ref('')
@@ -99,6 +89,28 @@ watchEffect(() => {
   });
 });
 
+const onSubmit = () => {
+  console.log('submit')
+}
+
+const addItem = () => {
+  const newItem = {
+    itemId: rows.value.length + 1,
+    sortOrder: rows.value.length * 10 + 10,
+    productName: '',
+    amount: 0,
+    unit: '',
+    unitPrice: 0,
+    total: 0, // Remove the static value here
+    picture: ''
+  };
+  // Push the new item to the rows array
+  rows.value.push(newItem);
+
+  // Scroll to the bottom
+  const bottomAnchor = document.getElementById('bottom');
+  scrollToElement(bottomAnchor);
+}
 </script>
 
 <template>
@@ -303,6 +315,8 @@ watchEffect(() => {
       </q-form>
 
     </q-card>
+
+    <div id="bottom"></div>
   </q-page>
 </template>
 
