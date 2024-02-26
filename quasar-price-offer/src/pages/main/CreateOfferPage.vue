@@ -105,15 +105,14 @@ watchEffect(() => {
   <q-page padding class="justify-evenly">
     <q-card bordered class="q-pa-xl q-ma-md">
 
-      <q-btn glossy class="q-ma-sm" label="Home" color="warning" to="/home" />
-
       <q-form @submit="onSubmit" autocomplete="off" autocapitalize="on">
         <div class="row q-pa-md justify-center">
           <div class="col q-gutter-md" style="max-width: 800px">
-            <div class="text-h6">New Offer</div>
+            <div class="text-h4 q-pa-xs text-weight-bold text-center" style="color: grey; background-color: lightgrey">
+              New Offer</div>
 
-            <div class="row q-gutter-sm">
-              <q-input class="col-3 q-mt-sm" filled v-model="offerDate" label="Offer Date" mask="date">
+            <div class="row q-col-gutter-xs">
+              <q-input class="col-12 col-md-4" filled v-model="offerDate" label="Offer Date" mask="date">
                 <template #prepend><q-icon name="today" size="32px" /></template>
                 <template #label>
                   <div class="text-cyan">Offer Date</div>
@@ -133,7 +132,7 @@ watchEffect(() => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-8" v-model="title" label="Title">
+              <q-input filled class="col-12 col-md-8" v-model="title" label="Title">
                 <template #prepend>
                   <q-icon name="title" />
                 </template>
@@ -141,8 +140,7 @@ watchEffect(() => {
                   <div class="text-cyan">Title</div>
                 </template>
               </q-input>
-
-              <q-input filled class="col-12" v-model="firmName" label="Firm Name">
+              <q-input filled class="col-12 col-md-12" v-model="firmName" label="Firm Name">
                 <template #prepend>
                   <q-icon name="badge" />
                 </template>
@@ -151,7 +149,7 @@ watchEffect(() => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12" type="textarea" v-model="firmAdress" label="Firm Adress">
+              <q-input filled class="col-12 col-md-12" type="textarea" v-model="firmAdress" label="Firm Adress">
                 <template #prepend>
                   <q-icon name="business" />
                 </template>
@@ -160,7 +158,7 @@ watchEffect(() => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-6" v-model="authName" label="Authorised Name">
+              <q-input filled class="col-12 col-md-7" v-model="authName" label="Authorised Name">
                 <template #prepend>
                   <q-icon name="person" />
                 </template>
@@ -169,7 +167,7 @@ watchEffect(() => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-5" v-model="authPhone" label="Authorised Phone" mask="phone">
+              <q-input filled class="col-12 col-md-5" v-model="authPhone" label="Authorised Phone" mask="phone">
                 <template #prepend>
                   <q-icon name="phone" />
                 </template>
@@ -178,7 +176,7 @@ watchEffect(() => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12" v-model="authEmail" label="Authorised Email">
+              <q-input filled class="col-12 col-md-12" v-model="authEmail" label="Authorised Email">
                 <template #prepend>
                   <q-icon name="mail" />
                 </template>
@@ -187,7 +185,7 @@ watchEffect(() => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12" v-model="situation" label="Situation">
+              <q-input filled class="col-12 col-md-12" v-model="situation" label="Situation">
                 <template #prepend>
                   <q-icon name="turned_in" />
                 </template>
@@ -196,7 +194,7 @@ watchEffect(() => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-5" v-model="discount" label="Discount">
+              <q-input filled class="col-12 col-md-4" v-model="discount" label="Discount">
                 <template #prepend>
                   <q-icon name="price_change" />
                 </template>
@@ -205,8 +203,8 @@ watchEffect(() => {
                 </template>
               </q-input>
 
-              <q-select filled class="col-3" v-model="currency" label="Currency" options-cover transition-show="flip-up"
-                transition-hide="flip-down" :options="currencyOptions">
+              <q-select filled class="col-12 col-md-4" v-model="currency" label="Currency" options-cover
+                transition-show="flip-up" transition-hide="flip-down" :options="currencyOptions">
                 <template #prepend>
                   <q-icon name="currency_exchange" />
                 </template>
@@ -215,8 +213,8 @@ watchEffect(() => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-3" v-model="hasPhoto" label="Has Photo" options-cover transition-show="flip-up"
-                transition-hide="flip-down" :options="hasPhotoOptions">
+              <q-select filled class="col-12 col-md-4" v-model="hasPhoto" label="Has Photo" options-cover
+                transition-show="flip-up" transition-hide="flip-down" :options="hasPhotoOptions">
                 <template #prepend>
                   <q-icon name="photo" />
                 </template>
@@ -225,7 +223,7 @@ watchEffect(() => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-5" v-model="tax" label="Tax" options-cover transition-show="flip-up"
+              <q-select filled class="col-12 col-md-5" v-model="tax" label="Tax" options-cover transition-show="flip-up"
                 transition-hide="flip-down" :options="taxOptions">
                 <template #prepend>
                   <q-icon name="request_quote" />
@@ -235,7 +233,7 @@ watchEffect(() => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-6" v-model="transportation" label="Transportation" options-cover
+              <q-select filled class="col-12 col-md-7" v-model="transportation" label="Transportation" options-cover
                 transition-show="flip-up" transition-hide="flip-down" :options="transportationOptions">
                 <template #prepend>
                   <q-icon name="local_shipping" />
@@ -245,8 +243,8 @@ watchEffect(() => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-6" v-model="assembly" label="Assembly" options-cover transition-show="flip-up"
-                transition-hide="flip-down" :options="assemblyOptions">
+              <q-select filled class="col-12 col-md-5" v-model="assembly" label="Assembly" options-cover
+                transition-show="flip-up" transition-hide="flip-down" :options="assemblyOptions">
                 <template #prepend>
                   <q-icon name="download_done" />
                 </template>
@@ -255,8 +253,8 @@ watchEffect(() => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-5" v-model="extra" label="Extra" options-cover transition-show="flip-up"
-                transition-hide="flip-down" :options="extraOptions" multiple>
+              <q-select filled class="col-12 col-md-7" v-model="extra" label="Extra" options-cover
+                transition-show="flip-up" transition-hide="flip-down" :options="extraOptions" multiple>
                 <template #prepend>
                   <q-icon name="expand_circle_down" />
                 </template>
@@ -265,7 +263,7 @@ watchEffect(() => {
                 </template>
               </q-select>
 
-              <q-input filled class="col-12" type="textarea" v-model="notes" label="Notes">
+              <q-input filled class="col-12 col-md-12" type="textarea" v-model="notes" label="Notes">
                 <template #prepend>
                   <q-icon name="note_add" />
                 </template>
@@ -308,4 +306,18 @@ watchEffect(() => {
   </q-page>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="css">
+@media (max-width: 600px) {
+
+  /* Styles for mobile screens */
+  .q-page {
+    padding: 0;
+  }
+
+  .q-card {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+}
+</style>
