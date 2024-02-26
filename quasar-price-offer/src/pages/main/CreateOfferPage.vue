@@ -6,9 +6,9 @@ import { scroll } from 'quasar'
 const { getScrollTarget, setVerticalScrollPosition } = scroll
 
 // takes an element object
-function scrollToElement(el: any) {
+function scrollToElement(el: Element) {
   const target = getScrollTarget(el)
-  const offset = el.offsetTop
+  const offset = (el as HTMLElement).offsetTop
   const duration = 1000
   setVerticalScrollPosition(target, offset, duration)
 }
@@ -46,7 +46,7 @@ function saveDate() {
 }
 
 interface TableColumn {
-  name: string;
+  name: 'picture' | 'unit' | 'total' | string; // Define the specific types for column.name
   required?: boolean;
   label: string;
   align: 'left' | 'center' | 'right';
@@ -109,7 +109,9 @@ const addItem = () => {
 
   // Scroll to the bottom
   const bottomAnchor = document.getElementById('bottom');
-  scrollToElement(bottomAnchor);
+  if (bottomAnchor) {
+    scrollToElement(bottomAnchor);
+  }
 }
 </script>
 
