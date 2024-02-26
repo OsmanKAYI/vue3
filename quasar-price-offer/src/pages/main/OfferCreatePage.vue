@@ -2,6 +2,7 @@
 import { ref, computed, watchEffect } from 'vue'
 import { useQuasar, date } from 'quasar'
 const $q = useQuasar()
+import { TableColumn, RowType } from 'src/types/types'
 import { scroll } from 'quasar'
 const { getScrollTarget, setVerticalScrollPosition } = scroll
 
@@ -45,18 +46,6 @@ function saveDate() {
   offerDate.value = tempDate.value
 }
 
-interface TableColumn {
-  name: 'picture' | 'unit' | 'total' | string; // Define the specific types for column.name
-  required?: boolean;
-  label: string;
-  align: 'left' | 'center' | 'right';
-  field: (row: RowType) => string | number;
-  format?: (val: string) => string;
-  sortable?: boolean;
-  style?: string;
-  sort?: (a: string, b: string, rowA: RowType, rowB: RowType) => number;
-}
-
 const columns: TableColumn[] = [
   { name: 'itemId', required: true, label: 'Item Id', align: 'left', field: (row: RowType) => row.itemId, format: (val: string) => `${val}`, sortable: true },
   { name: 'sortOrder', required: true, label: 'Sort Order', align: 'left', field: (row: RowType) => row.sortOrder, format: (val: string) => `${val}`, sortable: true },
@@ -67,17 +56,6 @@ const columns: TableColumn[] = [
   { name: 'total', required: true, label: 'Total ', align: 'left', field: (row: RowType) => row.total, format: (val: string) => `${val}`, sortable: true },
   { name: 'picture', required: true, label: 'Picture ', align: 'left', field: (row: RowType) => row.picture, format: (val: string) => `${val}`, sortable: true },
 ];
-
-interface RowType {
-  itemId: number;
-  sortOrder: number;
-  productName: string;
-  amount: number;
-  unit: string;
-  unitPrice: number;
-  total: number;
-  picture: string;
-}
 
 const rows = ref([
   { itemId: 1, sortOrder: 10, productName: '', amount: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
