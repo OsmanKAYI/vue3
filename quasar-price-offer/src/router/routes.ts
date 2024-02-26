@@ -31,7 +31,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'offer/create',
-        component: () => import('pages/main/CreateOfferPage.vue'),
+        component: () => import('pages/main/OfferCreatePage.vue'),
       },
       {
         path: 'pictures',
