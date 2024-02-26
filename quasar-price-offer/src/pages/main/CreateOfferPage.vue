@@ -107,8 +107,9 @@ watchEffect(() => {
 
       <q-form @submit="onSubmit" autocomplete="off" autocapitalize="on">
         <div class="row q-pa-md justify-center">
-          <div class="col q-gutter-md" style="max-width: 800px">
-            <div class="text-h4 q-pa-xs text-weight-bold text-center" style="color: grey; background-color: lightgrey">
+          <div class="col" style="max-width: 800px">
+            <div class="text-h4 q-pa-sm q-mb-sm text-weight-bold text-center"
+              style="color: grey; background-color: lightgrey">
               New Offer</div>
 
             <div class="row q-col-gutter-xs">
