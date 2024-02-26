@@ -2,6 +2,8 @@
 import { computed, ref } from 'vue'
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const btnTheme = computed(() => {
   return $q.dark.isActive ? 'bg-purple-5 text-black' : 'bg-purple-9 text-white';
@@ -53,6 +55,12 @@ const items = [
   { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
   { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
 ];
+
+// Function to show the offer details
+const showOffer = (offer: any) => {
+  router.push({ path: `/home/offer/show/${offer.id}`, query: { offerDetails: JSON.stringify(offer) } });
+};
+
 </script>
 
 <template>
@@ -72,7 +80,7 @@ const items = [
                   <q-img :style="picWidth" :ratio="1" class="rounded-borders"
                     src="https://0.gravatar.com/avatar/834de371b1d5dd047e85bb3c7470d703e407cb7b73e2794ad549a6ee2a2e969b?size=256" />
                 </div>
-                <div class="col-11 q-ml-xl">
+                <div class="col-10 q-ml-xl">
                   <div :class="headingTheme" class="row text-h4 q-mb-xl q-ml-md text-weight-bold text-center"> Offers List
                   </div>
                   <div class="row q-ml-md">
@@ -88,22 +96,24 @@ const items = [
             </th>
           </tr>
           <tr>
-            <th class="text-left">Details</th>
-            <th class="text-center">#</th>
-            <th class="text-right">Offer Date</th>
-            <th class="text-right">Firm Name</th>
-            <th class="text-right"># of Items</th>
-            <th class="text-right">Total</th>
+            <th class="col-3 text-left">Operation</th>
+            <th class="col-1 text-left">#</th>
+            <th class="col-2 text-center">Offer Date</th>
+            <th class="col-2 text-center">Firm Name</th>
+            <th class="col-1 text-center"># of Items</th>
+            <th class="col-1 text-center">Total</th>
           </tr>
         </thead>
         <tbody :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
           <tr v-for="(item, index) in filteredItems" :key="index">
-            <td class="text-left">{{ item.name }}</td>
-            <td class="text-right">{{ item.number }}</td>
-            <td class="text-right">{{ item.date }}</td>
-            <td class="text-right">{{ item.firm }}</td>
-            <td class="text-right">{{ item.itemCount }}</td>
-            <td class="text-right">{{ item.total }}</td>
+            <td class="text-left">
+              <q-btn @click="showOffer(item)" color="primary" icon="visibility" class="q-mr-sm" flat round dense />
+            </td>
+            <td class="text-left">{{ item.number }}</td>
+            <td class="text-center">{{ item.date }}</td>
+            <td class="text-center">{{ item.firm }}</td>
+            <td class="text-center">{{ item.itemCount }}</td>
+            <td class="text-center">{{ item.total }}</td>
           </tr>
         </tbody>
       </q-markup-table>
