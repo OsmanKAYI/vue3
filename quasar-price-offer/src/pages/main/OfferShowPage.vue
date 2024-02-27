@@ -1,24 +1,26 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute } from 'vue-router';
+const route = useRoute();
 import type { TableColumn, RowType } from 'src/types/types'
 
-const offerId = ref<number>() // Initialize offerId as a string ref
-const offerDate = ref('')
-const title = ref('')
-const firmName = ref('')
-const firmAdress = ref('')
-const authName = ref('')
-const authPhone = ref('')
-const authEmail = ref('')
-const situation = ref('')
-const discount = ref()
-const currency = ref('')
-const hasPhoto = ref('')
-const tax = ref('')
-const transportation = ref('')
-const assembly = ref('')
+const offerId = ref<string>(route.query.offerId as string ?? '')
+const offerDate = ref<string>(route.query.offerDate as string ?? '')
+const title = ref<string>(route.query.title as string ?? '')
+const firmName = ref<string>(route.query.firmName as string ?? '')
+const firmAdress = ref<string>(route.query.firmAdress as string ?? '')
+const authName = ref<string>(route.query.authName as string ?? '')
+const authPhone = ref<string>(route.query.authPhone as string ?? '')
+const authEmail = ref<string>(route.query.authEmail as string ?? '')
+const situation = ref<string>(route.query.situation as string ?? '')
+const discount = ref<number>(route.query.discount as unknown as number ?? 0)
+const currency = ref<string>(route.query.currency as string ?? '')
+const hasPhoto = ref<string>(route.query.hasPhoto as string ?? '')
+const tax = ref<string>(route.query.tax as string ?? '')
+const transportation = ref<string>(route.query.transportation as string ?? '')
+const assembly = ref<string>(route.query.assembly as string ?? '')
 const extra = ref<string[]>(['']);
-const notes = ref('')
+const notes = ref<string>(route.query.note as string ?? '')
 
 const columns: TableColumn[] = [
   { name: 'itemId', required: true, label: 'Item Id', align: 'left', field: (row: RowType) => row.itemId, format: (val: string) => `${val}`, sortable: true },
@@ -45,7 +47,7 @@ const rows = ref<RowType[]>([
         <div class="col" style="max-width: 800px">
           <div class="text-h4 q-pa-sm q-mb-sm text-weight-bold text-center"
             style="color: grey; background-color: lightgrey">
-            Offer {{ offerId }}</div>
+            Offer {{ $route.query.offerId }}</div>
 
           <div class="row q-col-gutter-xs">
             <q-input :disable="true" class="col-12 col-md-4" filled v-model="offerId" label="Offer ID">
