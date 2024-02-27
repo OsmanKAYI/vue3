@@ -4,6 +4,7 @@ import { useQuasar } from 'quasar'
 const $q = useQuasar()
 import { useRouter } from 'vue-router';
 const router = useRouter();
+import type { Offer } from 'src/types/types';
 
 const btnTheme = computed(() => {
   return $q.dark.isActive ? 'bg-purple-5 text-black' : 'bg-purple-9 text-white';
@@ -17,62 +18,77 @@ const picWidth = computed(() => {
   return $q.platform.is.mobile ? 'width: 100px' : 'width: 150px'
 })
 
-const numItemsToShow = ref(0);
+const numOffersToShow = ref(0);
 
 const listItems = (num: number) => {
-  numItemsToShow.value = num;
+  numOffersToShow.value = num;
 }
 
-const filteredItems = computed(() => {
-  if (numItemsToShow.value === 0) {
-    return items; // Show all items
+const filteredOffers = computed(() => {
+  if (numOffersToShow.value === 0) {
+    return offers; // Show all offers
   } else {
-    return items.slice(0, numItemsToShow.value); // Show selected number of items
+    return offers.slice(0, numOffersToShow.value); // Show selected number of offers
   }
 });
 
-const items = [
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 159, date: 6, firm: 24, itemCount: 24, total: 4 },
+const offers = [
+  { name: 'Frozen Yogurt', number: 159, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 160, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 161, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 162, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 163, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 164, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 165, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 166, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 166, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 167, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 168, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 169, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 170, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 171, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 172, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 173, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 174, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 175, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 176, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 177, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 178, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', number: 179, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
 ];
 
 // Function to show the offer details
-const showOffer = (offer: any) => {
-  router.push({ path: `/home/offer/show/${offer.id}`, query: { offerDetails: JSON.stringify(offer) } });
+const showOffer = (offer: Offer) => {
+  router.push({
+    path: `/home/offer/show/${offer.number}`,
+    query: {
+      offerDetails: JSON.stringify(offer),
+      offerId: offer.number,
+      offerDate: offer.date,
+      firmName: offer.firm,
+      itemCount: offer.itemCount,
+      total: offer.total
+    }
+  });
 };
-// Function to show the offer details
-const editOffer = (offer: any) => {
-  router.push({ path: `/home/offer/edit/${offer.id}`, query: { offerDetails: JSON.stringify(offer) } });
+// Function to edit the offer
+const editOffer = (offer: Offer) => {
+  router.push({
+    path: `/home/offer/edit/${offer.number}`,
+    query: {
+      offerDetails: JSON.stringify(offer),
+      offerId: offer.number,
+      offerDate: offer.date,
+      firmName: offer.firm,
+      itemCount: offer.itemCount,
+      total: offer.total
+    }
+  });
 };
 </script>
 
 <template>
   <q-page padding>
-    <div class="text-h6">MAIN</div>
-    <div class="text-subtitle1">Index Page</div>
-    <q-btn :class="btnTheme" class="q-ma-sm" label="Show All Offers" color="primary"
-      @click="$router.push('/home/offers')" />
-
     <div class="q-pa-md">
       <q-markup-table bordered binary-state-sort>
         <thead :class="$q.dark.isActive ? 'bg-green-9' : 'bg-green-6'">
@@ -108,16 +124,16 @@ const editOffer = (offer: any) => {
           </tr>
         </thead>
         <tbody :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
-          <tr v-for="(item, index) in filteredItems" :key="index">
+          <tr v-for="(offer, index) in filteredOffers" :key="index">
             <td class="text-left">
-              <q-btn @click="showOffer(item)" color="primary" icon="visibility" class="q-mr-sm" flat round dense />
-              <q-btn @click="editOffer(item)" color="primary" icon="edit" flat round dense />
+              <q-btn @click="showOffer(offer)" color="primary" icon="visibility" class="q-mr-sm" flat round dense />
+              <q-btn @click="editOffer(offer)" color="primary" icon="edit" flat round dense />
             </td>
-            <td class="text-left">{{ item.number }}</td>
-            <td class="text-center">{{ item.date }}</td>
-            <td class="text-center">{{ item.firm }}</td>
-            <td class="text-center">{{ item.itemCount }}</td>
-            <td class="text-center">{{ item.total }}</td>
+            <td class="text-left">{{ offer.number }}</td>
+            <td class="text-center">{{ offer.date }}</td>
+            <td class="text-center">{{ offer.firm }}</td>
+            <td class="text-center">{{ offer.itemCount }}</td>
+            <td class="text-center">{{ offer.total }}</td>
           </tr>
         </tbody>
       </q-markup-table>
