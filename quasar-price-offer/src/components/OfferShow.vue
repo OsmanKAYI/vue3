@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-const offerId = ref<string>('') // Initialize offerId as a string ref
 import type { TableColumn, RowType } from 'src/types/types'
 
+const offerId = ref<string>('') // Initialize offerId as a string ref
 const offerDate = ref('')
 const title = ref('')
 const firmName = ref('')
