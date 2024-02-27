@@ -34,7 +34,7 @@ const transportation = ref<string>(route.query.transportation as string ?? '')
 const transportationOptions = [{ label: 'Transportation', value: '', disable: true }, 'Transportation Included', 'Transportation is NOT Included']
 const assembly = ref<string>(route.query.assembly as string ?? '')
 const assemblyOptions = [{ label: 'Assembly', value: '', disable: true }, 'Assembly Included', 'Assembly is NOT Included']
-const extra = ref<string[]>(['']);
+const extra = ref<Array<string>>([]);
 const extraOptions = [{ label: 'Extras', value: '', disable: true }, 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
 const notes = ref<string>(route.query.note as string ?? '')
 
