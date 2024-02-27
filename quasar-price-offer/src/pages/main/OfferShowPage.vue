@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router';
 const route = useRoute();
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 import type { TableColumn, RowType } from 'src/types/types'
+
+let generalTheme = computed(() => {
+  return $q.dark.isActive ? 'glossy bg-grey-7 text-white' : 'glossy bg-grey-5 text-black';
+})
 
 const offerId = ref<string>(route.query.offerId as string ?? '')
 const offerDate = ref<string>(route.query.offerDate as string ?? '')
@@ -45,8 +51,7 @@ const rows = ref<RowType[]>([
 
       <div class="row q-pa-md justify-center">
         <div class="col" style="max-width: 800px">
-          <div class="text-h4 q-pa-sm q-mb-sm text-weight-bold text-center"
-            style="color: grey; background-color: lightgrey">
+          <div class="text-h4 q-pa-sm q-mb-sm text-weight-bold text-center" :class="generalTheme">
             Offer {{ $route.query.offerId }}</div>
 
           <div class="row q-col-gutter-xs">
@@ -204,8 +209,9 @@ const rows = ref<RowType[]>([
           </div>
 
           <div class="row q-pt-xs">
-            <q-table class="col-12" bordered title="Items" :rows="rows" :columns="columns" row-key="name"
-              binary-state-sort>
+            <div class="col col-md-12 text-h6 q-pa-xs q-mb-xs text-weight-bold text-center" :class="generalTheme">
+              Items</div>
+            <q-table class="col-12" bordered :rows="rows" :columns="columns" row-key="name" binary-state-sort>
               <template #body="props">
                 <q-tr :props="props">
                   <q-td :disable="true" v-for="column in  columns " :key="column.name" :props="props">
