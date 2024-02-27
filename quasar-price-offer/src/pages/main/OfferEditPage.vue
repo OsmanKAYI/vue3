@@ -49,7 +49,11 @@ const columns: TableColumn[] = [
   { name: 'picture', required: true, label: 'Picture ', align: 'left', field: (row: RowType) => row.picture, format: (val: string) => `${val}`, sortable: true },
 ];
 
-const rows = ref<RowType[]>([
+const clearExtras = () => {
+  extra.value = []; // Clear the selection
+};
+
+const rows = ref([
   { itemId: 1, sortOrder: 10, productName: '', amount: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
 
@@ -267,6 +271,12 @@ const addItem = () => {
                 </template>
                 <template #label>
                   <div class="text-cyan">Extra</div>
+                </template>
+                <template #append>
+                  <!-- Clear button added below -->
+                  <q-btn flat v-if="extra.length > 0" class="cursor-pointer" @click="clearExtras" @click.stop>
+                    <q-icon name="delete" />
+                  </q-btn>
                 </template>
               </q-select>
 
