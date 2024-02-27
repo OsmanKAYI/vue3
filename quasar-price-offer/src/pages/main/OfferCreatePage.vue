@@ -307,8 +307,8 @@ const addItem = () => {
                 Items</div>
               <q-table class="col-12" bordered :rows="itemRows" :columns="columns" row-key="name" binary-state-sort>
                 <template #body="props">
-                  <q-tr :props="props">
-                    <q-td v-for="column in  columns " :key="column.name" :props="props"
+                  <q-tr class="cursor-pointer" :props="props">
+                    <q-td v-for="column in columns" :key="column.name" :props="props"
                       :draggable="column.name === 'itemId'" @dragstart="handleDragStart(props.row, $event)"
                       @dragover="handleDragOver" @drop="handleDrop(props.row)">
                       <template v-if="column.name === 'picture' || column.name === 'unit'">
