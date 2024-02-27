@@ -3,7 +3,7 @@ import { ref, reactive, computed } from 'vue'
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
 
-const myBtnTheme = computed(() => {
+const btnTheme = computed(() => {
   return $q.dark.isActive ? 'bg-grey-5 text-black' : 'bg-grey-9 text-white';
 })
 
@@ -64,7 +64,7 @@ function onSubmit() {
           <q-toggle v-model="userForm.rememberMe" label="Remember me!" />
 
           <div class="row q-mt-md">
-            <q-btn :class="myBtnTheme" label="Login" type="submit" to="/home" />
+            <q-btn :class="btnTheme" label="Login" type="submit" to="/home" />
           </div>
         </q-form>
       </q-card>
