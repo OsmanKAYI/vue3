@@ -60,7 +60,10 @@ const items = [
 const showOffer = (offer: any) => {
   router.push({ path: `/home/offer/show/${offer.id}`, query: { offerDetails: JSON.stringify(offer) } });
 };
-
+// Function to show the offer details
+const editOffer = (offer: any) => {
+  router.push({ path: `/home/offer/edit/${offer.id}`, query: { offerDetails: JSON.stringify(offer) } });
+};
 </script>
 
 <template>
@@ -108,6 +111,7 @@ const showOffer = (offer: any) => {
           <tr v-for="(item, index) in filteredItems" :key="index">
             <td class="text-left">
               <q-btn @click="showOffer(item)" color="primary" icon="visibility" class="q-mr-sm" flat round dense />
+              <q-btn @click="editOffer(item)" color="primary" icon="edit" flat round dense />
             </td>
             <td class="text-left">{{ item.number }}</td>
             <td class="text-center">{{ item.date }}</td>
