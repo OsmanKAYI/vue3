@@ -25,11 +25,17 @@ const authEmail = ref<string>(route.query.authEmail as string ?? '')
 const situation = ref<string>(route.query.situation as string ?? '')
 const discount = ref<number>(route.query.discount as unknown as number ?? 0)
 const currency = ref<string>(route.query.currency as string ?? '')
+const currencyOptions = [{ label: 'Currency', value: '', disable: true }, 'TL', 'USD', 'EUR', 'RUB', 'UAH']
 const hasPhoto = ref<string>(route.query.hasPhoto as string ?? '')
+const hasPhotoOptions = [{ label: 'Has Photo', value: '', disable: true }, 'YES', 'NO']
 const tax = ref<string>(route.query.tax as string ?? '')
+const taxOptions = [{ label: 'Tax', value: '', disable: true }, 'VAX Included', 'VAX is NOT Included']
 const transportation = ref<string>(route.query.transportation as string ?? '')
+const transportationOptions = [{ label: 'Transportation', value: '', disable: true }, 'Transportation Included', 'Transportation is NOT Included']
 const assembly = ref<string>(route.query.assembly as string ?? '')
+const assemblyOptions = [{ label: 'Assembly', value: '', disable: true }, 'Assembly Included', 'Assembly is NOT Included']
 const extra = ref<string[]>(['']);
+const extraOptions = [{ label: 'Extras', value: '', disable: true }, 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
 const notes = ref<string>(route.query.note as string ?? '')
 
 const columns: TableColumn[] = [
@@ -46,6 +52,31 @@ const columns: TableColumn[] = [
 const rows = ref<RowType[]>([
   { itemId: 1, sortOrder: 10, productName: '', amount: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
+
+let dragItem: RowType | null = null;
+const handleDragStart = (item: RowType, event: DragEvent) => {
+  dragItem = item;
+  event.dataTransfer?.setData('text/plain', ''); // Required for Firefox
+}
+const handleDragOver = (event: DragEvent) => {
+  event.preventDefault();
+}
+const handleDrop = (targetItem: RowType) => {
+  if (dragItem === null || dragItem === targetItem) {
+    return;
+  }
+  const targetIndex = rows.value.indexOf(targetItem);
+  const dragIndex = rows.value.indexOf(dragItem);
+
+  rows.value.splice(targetIndex, 0, rows.value.splice(dragIndex, 1)[0]);
+
+  // Update the sort order of items after rearranging
+  rows.value.forEach((item, index) => {
+    item.sortOrder = (index + 1) * 10; // Assuming a step of 10 for sort order
+  });
+  dragItem = null;
+}
+const dragMessage = ('* Drag and drop to reorder the items by holding the "Item Id" column in the row.');
 
 watchEffect(() => {
   rows.value.forEach(item => {
@@ -179,59 +210,65 @@ const addItem = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-4" v-model="currency" label="Currency">
+              <q-select filled class="col-12 col-md-4" v-model="currency" label="Currency" options-cover
+                transition-show="flip-up" transition-hide="flip-down" :options="currencyOptions">
                 <template #prepend>
                   <q-icon name="currency_exchange" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Currency</div>
                 </template>
-              </q-input>
+              </q-select>
 
-              <q-input filled class="col-12 col-md-4" v-model="hasPhoto" label="Has Photo">
+              <q-select filled class="col-12 col-md-4" v-model="hasPhoto" label="Has Photo" options-cover
+                transition-show="flip-up" transition-hide="flip-down" :options="hasPhotoOptions">
                 <template #prepend>
                   <q-icon name="photo" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Has Photo</div>
                 </template>
-              </q-input>
+              </q-select>
 
-              <q-input filled class="col-12 col-md-5" v-model="tax" label="Tax">
+              <q-select filled class="col-12 col-md-5" v-model="tax" label="Tax" options-cover transition-show="flip-up"
+                transition-hide="flip-down" :options="taxOptions">
                 <template #prepend>
                   <q-icon name="request_quote" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Tax</div>
                 </template>
-              </q-input>
+              </q-select>
 
-              <q-input filled class="col-12 col-md-7" v-model="transportation" label="Transportation">
+              <q-select filled class="col-12 col-md-7" v-model="transportation" label="Transportation" options-cover
+                transition-show="flip-up" transition-hide="flip-down" :options="transportationOptions">
                 <template #prepend>
                   <q-icon name="local_shipping" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Transportation</div>
                 </template>
-              </q-input>
+              </q-select>
 
-              <q-input filled class="col-12 col-md-5" v-model="assembly" label="Assembly">
+              <q-select filled class="col-12 col-md-5" v-model="assembly" label="Assembly" options-cover
+                transition-show="flip-up" transition-hide="flip-down" :options="assemblyOptions">
                 <template #prepend>
                   <q-icon name="download_done" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Assembly</div>
                 </template>
-              </q-input>
+              </q-select>
 
-              <q-input filled class="col-12 col-md-7" v-model="extra[0]" label="Extra">
+              <q-select filled class="col-12 col-md-7" v-model="extra[0]" label="Extra" options-cover
+                transition-show="flip-up" transition-hide="flip-down" :options="extraOptions" multiple>
                 <template #prepend>
                   <q-icon name="expand_circle_down" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Extra</div>
                 </template>
-              </q-input>
+              </q-select>
 
               <q-input filled class="col-12 col-md-12" type="textarea" v-model="notes" label="Notes">
                 <template #prepend>
@@ -248,14 +285,18 @@ const addItem = () => {
                 binary-state-sort>
                 <template #body="props">
                   <q-tr :props="props">
-                    <q-td v-for="column in columns" :key="column.name" :props="props">
-
+                    <q-td v-for="column in  columns " :key="column.name" :props="props"
+                      :draggable="column.name === 'itemId'" @dragstart="handleDragStart(props.row, $event)"
+                      @dragover="handleDragOver" @drop="handleDrop(props.row)">
                       <template v-if="column.name === 'picture' || column.name === 'unit'">
                         <q-select filled v-model="props.row[column.name]"
                           :options="props.row[column.name as keyof TableColumn]" dense outlined />
                       </template>
                       <template v-else-if="column.name === 'total'">
                         <span style="font-weight: bold;">{{ props.row[column.name] }}</span>
+                      </template>
+                      <template v-else-if="column.name === 'itemId'">
+                        <span class="disabled">{{ props.row[column.name] }}</span>
                       </template>
                       <template v-else>
                         <q-input filled v-model="props.row[column.name]" dense outlined />
@@ -264,9 +305,9 @@ const addItem = () => {
                   </q-tr>
                 </template>
               </q-table>
-            </div>
-
-            <div class="row q-pt-xs">
+              <div class="col-12">
+                <small class="text-green">{{ dragMessage }}</small>
+              </div>
               <q-btn glossy class="q-ma-sm" label="Update" type="submit" color="primary" />
               <q-btn glossy class="q-ma-sm" label="Add Item" @click="addItem" color="positive" />
             </div>
@@ -293,5 +334,14 @@ const addItem = () => {
     margin: 0;
     border: none;
   }
+}
+
+.drag-handle {
+  cursor: grab;
+}
+
+/* Add styles for the draggable handle when being dragged */
+.drag-handle:active {
+  cursor: grabbing;
 }
 </style>
