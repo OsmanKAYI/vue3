@@ -102,7 +102,7 @@ watchEffect(() => {
         src="https://img.freepik.com/free-photo/3d-render-hand-holding-transaction-receipt-bill_107791-16721.jpg?w=826"
         style="height: 150px;">
         <div class="absolute-bottom bg-transparent">
-          <q-avatar size="56px" class="q-mb-sm">
+          <q-avatar size="44px" class="q-mb-sm">
             <img
               src="https://0.gravatar.com/avatar/834de371b1d5dd047e85bb3c7470d703e407cb7b73e2794ad549a6ee2a2e969b?size=256">
           </q-avatar>
