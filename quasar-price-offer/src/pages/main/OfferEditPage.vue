@@ -46,7 +46,7 @@ const columns: TableColumn[] = [
   { name: 'itemId', required: true, label: 'Item Id', align: 'left', field: (row: RowType) => row.itemId, format: (val: string) => `${val}`, sortable: true },
   { name: 'sortOrder', required: true, label: 'Sort Order', align: 'left', field: (row: RowType) => row.sortOrder, format: (val: string) => `${val}`, sortable: true },
   { name: 'productName', required: true, label: 'Product Name', align: 'left', field: (row: RowType) => row.productName, format: (val: string) => `${val}`, sortable: true },
-  { name: 'amount', required: true, label: 'Amount ', align: 'left', field: (row: RowType) => row.amount, format: (val: string) => `${val}`, sortable: false },
+  { name: 'quantity', required: true, label: 'Quantity ', align: 'left', field: (row: RowType) => row.quantity, format: (val: string) => `${val}`, sortable: false },
   { name: 'unit', required: true, label: 'Unit ', align: 'left', field: (row: RowType) => row.unit, format: (val: string) => `${val}`, sortable: true },
   { name: 'unitPrice', required: true, label: 'Unit Price', align: 'left', field: (row: RowType) => row.unitPrice, format: (val: string) => `${val}`, sortable: true },
   { name: 'total', required: true, label: 'Total ', align: 'left', field: (row: RowType) => row.total, format: (val: string) => `${val}`, sortable: true },
@@ -57,9 +57,9 @@ const clearExtras = () => {
   extra.value = []; // Clear the selection
 };
 
-const rows = ref([
-  { itemId: 1, sortOrder: 10, productName: '', amount: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
-]);
+// add default 3 empty items
+const defaultItemRow = { itemId: 1, sortOrder: 10, productName: '', quantity: 0, unit: '', unitPrice: 0, total: 0, picture: '' }
+const itemRows = ref(Array(3).fill({ ...defaultItemRow }).map((row, index) => ({ ...row, sortOrder: row.sortOrder + (index * 10) })));
 
 let dragItem: RowType | null = null;
 const handleDragStart = (item: RowType, event: DragEvent) => {
@@ -73,13 +73,13 @@ const handleDrop = (targetItem: RowType) => {
   if (dragItem === null || dragItem === targetItem) {
     return;
   }
-  const targetIndex = rows.value.indexOf(targetItem);
-  const dragIndex = rows.value.indexOf(dragItem);
+  const targetIndex = itemRows.value.indexOf(targetItem);
+  const dragIndex = itemRows.value.indexOf(dragItem);
 
-  rows.value.splice(targetIndex, 0, rows.value.splice(dragIndex, 1)[0]);
+  itemRows.value.splice(targetIndex, 0, itemRows.value.splice(dragIndex, 1)[0]);
 
   // Update the sort order of items after rearranging
-  rows.value.forEach((item, index) => {
+  itemRows.value.forEach((item, index) => {
     item.sortOrder = (index + 1) * 10; // Assuming a step of 10 for sort order
   });
   dragItem = null;
@@ -87,8 +87,8 @@ const handleDrop = (targetItem: RowType) => {
 const dragMessage = ('* Drag and drop to reorder the items by holding the "Item Id" column in the row.');
 
 watchEffect(() => {
-  rows.value.forEach(item => {
-    item.total = item.amount * item.unitPrice;
+  itemRows.value.forEach(item => {
+    item.total = item.quantity * item.unitPrice;
   });
 });
 
@@ -98,17 +98,17 @@ const onUpdate = () => {
 
 const addItem = () => {
   const newItem = {
-    itemId: rows.value.length + 1,
-    sortOrder: rows.value.length * 10 + 10,
+    itemId: itemRows.value.length + 1,
+    sortOrder: itemRows.value.length * 10 + 10,
     productName: '',
-    amount: 0,
+    quantity: 0,
     unit: '',
     unitPrice: 0,
     total: 0, // Remove the static value here
     picture: ''
   };
-  // Push the new item to the rows array
-  rows.value.push(newItem);
+  // Push the new item to the itemRows array
+  itemRows.value.push(newItem);
 
   // Scroll to the bottom
   const bottomAnchor = document.getElementById('bottom');
@@ -296,7 +296,7 @@ const addItem = () => {
             <div class="row q-pt-xs">
               <div class="col col-md-12 text-h6 q-pa-xs q-mb-xs text-weight-bold text-center" :class="generalTheme">
                 Items</div>
-              <q-table class="col-12" bordered :rows="rows" :columns="columns" row-key="name" binary-state-sort>
+              <q-table class="col-12" bordered :rows="itemRows" :columns="columns" row-key="name" binary-state-sort>
                 <template #body="props">
                   <q-tr :props="props">
                     <q-td v-for="column in  columns " :key="column.name" :props="props"

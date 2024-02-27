@@ -23,7 +23,7 @@ interface RowType {
   itemId: number;
   sortOrder: number;
   productName: string;
-  amount: number;
+  quantity: number;
   unit: string;
   unitPrice: number;
   total: number;
