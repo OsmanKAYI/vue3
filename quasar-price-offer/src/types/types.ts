@@ -1,3 +1,12 @@
+interface Offer {
+  number: number;
+  date: string;
+  firm: string;
+  itemCount: number;
+  total: number;
+  // Add other properties as needed
+}
+
 interface TableColumn {
   name: 'picture' | 'unit' | 'total' | string; // Define the specific types for column.name
   required?: boolean;
@@ -21,4 +30,4 @@ interface RowType {
   picture: string;
 }
 
-export type { TableColumn, RowType };
+export type { Offer, TableColumn, RowType };
