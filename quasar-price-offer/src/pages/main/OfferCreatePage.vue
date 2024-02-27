@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect } from 'vue'
-import { useQuasar, date } from 'quasar'
+import { useQuasar, date, scroll } from 'quasar'
 const $q = useQuasar()
-import { TableColumn, RowType } from 'src/types/types'
-import { scroll } from 'quasar'
 const { getScrollTarget, setVerticalScrollPosition } = scroll
+import { TableColumn, RowType } from 'src/types/types'
 
 // takes an element object
 function scrollToElement(el: Element) {
@@ -67,8 +66,8 @@ watchEffect(() => {
   });
 });
 
-const onSubmit = () => {
-  console.log('submit')
+const onSave = () => {
+  console.log('Offer created !')
 }
 
 const addItem = () => {
@@ -97,7 +96,7 @@ const addItem = () => {
   <q-page padding class="justify-evenly">
     <q-card bordered class="q-pa-xl q-ma-md">
 
-      <q-form @submit="onSubmit" autocomplete="off" autocapitalize="on">
+      <q-form @submit="onSave" autocomplete="off" autocapitalize="on">
         <div class="row q-pa-md justify-center">
           <div class="col" style="max-width: 800px">
             <div class="text-h4 q-pa-sm q-mb-sm text-weight-bold text-center"
@@ -296,7 +295,6 @@ const addItem = () => {
       </q-form>
 
     </q-card>
-
     <div id="bottom" />
   </q-page>
 </template>
