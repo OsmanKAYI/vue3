@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
-import { TableColumn, RowType } from 'src/types/types'
+import { useRoute } from 'vue-router';
+const route = useRoute();
 import { scroll } from 'quasar'
 const { getScrollTarget, setVerticalScrollPosition } = scroll
+import type { TableColumn, RowType } from 'src/types/types'
 
 // takes an element object
 function scrollToElement(el: Element) {
@@ -11,29 +13,24 @@ function scrollToElement(el: Element) {
   const duration = 1000
   setVerticalScrollPosition(target, offset, duration)
 }
-const offerId = ref<number>() // Initialize offerId as a string ref
-const offerDate = ref()
-const title = ref('')
-const firmName = ref('')
-const firmAddress = ref('')
-const authName = ref('')
-const authPhone = ref('')
-const authEmail = ref('')
-const situation = ref('')
-const discount = ref()
-const currency = ref('');
-const currencyOptions = [{ label: 'Currency', value: '', disable: true }, 'TL', 'USD', 'EUR', 'RUB', 'UAH']
-const hasPhoto = ref('')
-const hasPhotoOptions = [{ label: 'Has Photo', value: '', disable: true }, 'YES', 'NO']
-const tax = ref('')
-const taxOptions = [{ label: 'Tax', value: '', disable: true }, 'VAX Included', 'VAX is NOT Included']
-const transportation = ref('')
-const transportationOptions = [{ label: 'Transportation', value: '', disable: true }, 'Transportation Included', 'Transportation is NOT Included']
-const assembly = ref('')
-const assemblyOptions = [{ label: 'Assembly', value: '', disable: true }, 'Assembly Included', 'Assembly is NOT Included']
-const extra = ref<Array<string>>([]);
-const extraOptions = [{ label: 'Extras', value: '', disable: true }, 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
-const notes = ref('')
+
+const offerId = ref<string>(route.query.offerId as string ?? '')
+const offerDate = ref<string>(route.query.offerDate as string ?? '')
+const title = ref<string>(route.query.title as string ?? '')
+const firmName = ref<string>(route.query.firmName as string ?? '')
+const firmAdress = ref<string>(route.query.firmAdress as string ?? '')
+const authName = ref<string>(route.query.authName as string ?? '')
+const authPhone = ref<string>(route.query.authPhone as string ?? '')
+const authEmail = ref<string>(route.query.authEmail as string ?? '')
+const situation = ref<string>(route.query.situation as string ?? '')
+const discount = ref<number>(route.query.discount as unknown as number ?? 0)
+const currency = ref<string>(route.query.currency as string ?? '')
+const hasPhoto = ref<string>(route.query.hasPhoto as string ?? '')
+const tax = ref<string>(route.query.tax as string ?? '')
+const transportation = ref<string>(route.query.transportation as string ?? '')
+const assembly = ref<string>(route.query.assembly as string ?? '')
+const extra = ref<string[]>(['']);
+const notes = ref<string>(route.query.note as string ?? '')
 
 const columns: TableColumn[] = [
   { name: 'itemId', required: true, label: 'Item Id', align: 'left', field: (row: RowType) => row.itemId, format: (val: string) => `${val}`, sortable: true },
@@ -46,7 +43,7 @@ const columns: TableColumn[] = [
   { name: 'picture', required: true, label: 'Picture ', align: 'left', field: (row: RowType) => row.picture, format: (val: string) => `${val}`, sortable: true },
 ];
 
-const rows = ref([
+const rows = ref<RowType[]>([
   { itemId: 1, sortOrder: 10, productName: '', amount: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
 
@@ -56,8 +53,8 @@ watchEffect(() => {
   });
 });
 
-const onSubmit = () => {
-  console.log('submit')
+const onUpdate = () => {
+  console.log('Offer updated !')
 }
 
 const addItem = () => {
@@ -80,28 +77,38 @@ const addItem = () => {
     scrollToElement(bottomAnchor);
   }
 }
+
 </script>
 
 <template>
   <q-page padding class="justify-evenly">
     <q-card bordered class="q-pa-xl q-ma-md">
 
-      <q-form @submit="onSubmit" autocomplete="off" autocapitalize="on">
+      <q-form @submit="onUpdate" autocomplete="off" autocapitalize="on">
         <div class="row q-pa-md justify-center">
           <div class="col" style="max-width: 800px">
             <div class="text-h4 q-pa-sm q-mb-sm text-weight-bold text-center"
               style="color: grey; background-color: lightgrey">
-              Edit Offer {{ offerId }}</div>
+              Offer {{ $route.query.offerId }}</div>
 
             <div class="row q-col-gutter-xs">
-              <q-input :disable="true" class="col-12 col-md-4" filled v-model="offerDate" label="Offer Date" mask="date">
+              <q-input :disable="true" class="col-12 col-md-4" filled v-model="offerId" label="Offer ID">
+                <template v-slot:prepend>
+                  <q-icon name="fingerprint" />
+                </template>
+                <template #label>
+                  <div class="text-cyan">Offer ID</div>
+                </template>
+              </q-input>
+
+              <q-input :disable="true" class="col-12 col-md-8" filled v-model="offerDate" label="Offer Date" mask="date">
                 <template #prepend><q-icon name="today" size="32px" /></template>
                 <template #label>
                   <div class="text-cyan">Offer Date</div>
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-8" v-model="title" label="Title">
+              <q-input filled class="col-12 col-md-12" v-model="title" label="Title">
                 <template #prepend>
                   <q-icon name="title" />
                 </template>
@@ -118,12 +125,12 @@ const addItem = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-12" type="textarea" v-model="firmAddress" label="Firm Address">
+              <q-input filled class="col-12 col-md-12" type="textarea" v-model="firmAdress" label="Firm Adress">
                 <template #prepend>
                   <q-icon name="business" />
                 </template>
                 <template #label>
-                  <div class="text-cyan">Firm Address</div>
+                  <div class="text-cyan">Firm Adress</div>
                 </template>
               </q-input>
 
@@ -172,65 +179,59 @@ const addItem = () => {
                 </template>
               </q-input>
 
-              <q-select filled class="col-12 col-md-4" v-model="currency" label="Currency" options-cover
-                transition-show="flip-up" transition-hide="flip-down" :options="currencyOptions">
+              <q-input filled class="col-12 col-md-4" v-model="currency" label="Currency">
                 <template #prepend>
                   <q-icon name="currency_exchange" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Currency</div>
                 </template>
-              </q-select>
+              </q-input>
 
-              <q-select filled class="col-12 col-md-4" v-model="hasPhoto" label="Has Photo" options-cover
-                transition-show="flip-up" transition-hide="flip-down" :options="hasPhotoOptions">
+              <q-input filled class="col-12 col-md-4" v-model="hasPhoto" label="Has Photo">
                 <template #prepend>
                   <q-icon name="photo" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Has Photo</div>
                 </template>
-              </q-select>
+              </q-input>
 
-              <q-select filled class="col-12 col-md-5" v-model="tax" label="Tax" options-cover transition-show="flip-up"
-                transition-hide="flip-down" :options="taxOptions">
+              <q-input filled class="col-12 col-md-5" v-model="tax" label="Tax">
                 <template #prepend>
                   <q-icon name="request_quote" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Tax</div>
                 </template>
-              </q-select>
+              </q-input>
 
-              <q-select filled class="col-12 col-md-7" v-model="transportation" label="Transportation" options-cover
-                transition-show="flip-up" transition-hide="flip-down" :options="transportationOptions">
+              <q-input filled class="col-12 col-md-7" v-model="transportation" label="Transportation">
                 <template #prepend>
                   <q-icon name="local_shipping" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Transportation</div>
                 </template>
-              </q-select>
+              </q-input>
 
-              <q-select filled class="col-12 col-md-5" v-model="assembly" label="Assembly" options-cover
-                transition-show="flip-up" transition-hide="flip-down" :options="assemblyOptions">
+              <q-input filled class="col-12 col-md-5" v-model="assembly" label="Assembly">
                 <template #prepend>
                   <q-icon name="download_done" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Assembly</div>
                 </template>
-              </q-select>
+              </q-input>
 
-              <q-select filled class="col-12 col-md-7" v-model="extra" label="Extra" options-cover
-                transition-show="flip-up" transition-hide="flip-down" :options="extraOptions" multiple>
+              <q-input filled class="col-12 col-md-7" v-model="extra[0]" label="Extra">
                 <template #prepend>
                   <q-icon name="expand_circle_down" />
                 </template>
                 <template #label>
                   <div class="text-cyan">Extra</div>
                 </template>
-              </q-select>
+              </q-input>
 
               <q-input filled class="col-12 col-md-12" type="textarea" v-model="notes" label="Notes">
                 <template #prepend>
@@ -247,7 +248,8 @@ const addItem = () => {
                 binary-state-sort>
                 <template #body="props">
                   <q-tr :props="props">
-                    <q-td v-for="column in  columns " :key="column.name" :props="props">
+                    <q-td v-for="column in columns" :key="column.name" :props="props">
+
                       <template v-if="column.name === 'picture' || column.name === 'unit'">
                         <q-select filled v-model="props.row[column.name]"
                           :options="props.row[column.name as keyof TableColumn]" dense outlined />
@@ -262,8 +264,10 @@ const addItem = () => {
                   </q-tr>
                 </template>
               </q-table>
+            </div>
 
-              <q-btn glossy class=" q-ma-sm" label="Save" type="submit" color="primary" />
+            <div class="row q-pt-xs">
+              <q-btn glossy class="q-ma-sm" label="Update" type="submit" color="primary" />
               <q-btn glossy class="q-ma-sm" label="Add Item" @click="addItem" color="positive" />
             </div>
 
@@ -272,7 +276,6 @@ const addItem = () => {
       </q-form>
 
     </q-card>
-
     <div id="bottom" />
   </q-page>
 </template>
