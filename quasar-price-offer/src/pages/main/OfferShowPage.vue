@@ -34,7 +34,7 @@ const columns: TableColumn[] = [
 ];
 
 const rows = ref<RowType[]>([
-  { itemId: 1, sortOrder: 10, productName: 'deneme', amount: 0, unit: 'deneme', unitPrice: 0, total: 0, picture: 'yes' },
+  { itemId: 1, sortOrder: 10, productName: '', amount: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
 
 </script>
