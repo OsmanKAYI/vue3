@@ -315,9 +315,9 @@ const addItem = () => {
                       <template v-else-if="column.name === 'total'">
                         <span style="font-weight: bold;">{{ props.row[column.name] }}</span>
                       </template>
-                      <template v-else-if="column.name === 'itemId'">
-                        <span class="disabled">{{ props.row[column.name] }}</span>
-                      </template>
+                      <q-item-section v-else-if="column.name === 'itemId'" style=" cursor: move;">
+                        <q-icon class="q-ma-sm q-pa-sm" size="xs" name="drag_indicator" />
+                      </q-item-section>
                       <template v-else>
                         <q-input filled v-model="props.row[column.name]" dense outlined />
                       </template>
