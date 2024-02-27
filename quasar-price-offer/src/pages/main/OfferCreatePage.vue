@@ -60,6 +60,31 @@ const rows = ref([
   { itemId: 1, sortOrder: 10, productName: '', amount: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
 
+let dragItem: RowType | null = null;
+const handleDragStart = (item: RowType, event: DragEvent) => {
+  dragItem = item;
+  event.dataTransfer?.setData('text/plain', ''); // Required for Firefox
+}
+const handleDragOver = (event: DragEvent) => {
+  event.preventDefault();
+}
+const handleDrop = (targetItem: RowType) => {
+  if (dragItem === null || dragItem === targetItem) {
+    return;
+  }
+  const targetIndex = rows.value.indexOf(targetItem);
+  const dragIndex = rows.value.indexOf(dragItem);
+
+  rows.value.splice(targetIndex, 0, rows.value.splice(dragIndex, 1)[0]);
+
+  // Update the sort order of items after rearranging
+  rows.value.forEach((item, index) => {
+    item.sortOrder = (index + 1) * 10; // Assuming a step of 10 for sort order
+  });
+  dragItem = null;
+}
+const dragMessage = ('* Drag and drop to reorder the items by holding the "Item Id" column in the row.');
+
 watchEffect(() => {
   rows.value.forEach(item => {
     item.total = item.amount * item.unitPrice;
@@ -78,7 +103,7 @@ const addItem = () => {
     amount: 0,
     unit: '',
     unitPrice: 0,
-    total: 0, // Remove the static value here
+    total: 0,
     picture: ''
   };
   // Push the new item to the rows array
@@ -270,13 +295,18 @@ const addItem = () => {
                 binary-state-sort>
                 <template #body="props">
                   <q-tr :props="props">
-                    <q-td v-for="column in  columns " :key="column.name" :props="props">
+                    <q-td v-for="column in  columns " :key="column.name" :props="props"
+                      :draggable="column.name === 'itemId'" @dragstart="handleDragStart(props.row, $event)"
+                      @dragover="handleDragOver" @drop="handleDrop(props.row)">
                       <template v-if="column.name === 'picture' || column.name === 'unit'">
                         <q-select filled v-model="props.row[column.name]"
                           :options="props.row[column.name as keyof TableColumn]" dense outlined />
                       </template>
                       <template v-else-if="column.name === 'total'">
                         <span style="font-weight: bold;">{{ props.row[column.name] }}</span>
+                      </template>
+                      <template v-else-if="column.name === 'itemId'">
+                        <span class="disabled">{{ props.row[column.name] }}</span>
                       </template>
                       <template v-else>
                         <q-input filled v-model="props.row[column.name]" dense outlined />
@@ -285,7 +315,9 @@ const addItem = () => {
                   </q-tr>
                 </template>
               </q-table>
-
+              <div class="col-12">
+                <small class="text-green">{{ dragMessage }}</small>
+              </div>
               <q-btn glossy class=" q-ma-sm" label="Save" type="submit" color="primary" />
               <q-btn glossy class="q-ma-sm" label="Add Item" @click="addItem" color="positive" />
             </div>
@@ -312,5 +344,14 @@ const addItem = () => {
     margin: 0;
     border: none;
   }
+}
+
+.drag-handle {
+  cursor: grab;
+}
+
+/* Add styles for the draggable handle when being dragged */
+.drag-handle:active {
+  cursor: grabbing;
 }
 </style>
