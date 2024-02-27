@@ -30,12 +30,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/main/OfferCreatePage.vue'),
       },
       {
-        path: 'offer/show/:id',
-        component: () => import('components/OfferShow.vue'),
+        path: 'offer/show/:offerId',
+        name: 'OfferShow',
+        component: () => import('pages/main/OfferShowPage.vue'),
+        props: true,
       },
       {
-        path: 'offer/edit/:id',
-        component: () => import('components/OfferEdit.vue'),
+        path: 'offer/edit/:offerId',
+        name: 'OfferEdit',
+        component: () => import('pages/main/OfferEditPage.vue'),
+        props: true,
       },
       {
         path: 'pictures',
