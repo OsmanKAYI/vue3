@@ -98,14 +98,16 @@ watchEffect(() => {
         </q-list>
       </q-scroll-area>
 
-      <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
+      <q-img :class="generalTheme" class="absolute-top"
+        src="https://img.freepik.com/free-photo/3d-render-hand-holding-transaction-receipt-bill_107791-16721.jpg?w=826"
+        style="height: 150px;">
         <div class="absolute-bottom bg-transparent">
           <q-avatar size="56px" class="q-mb-sm">
             <img
               src="https://0.gravatar.com/avatar/834de371b1d5dd047e85bb3c7470d703e407cb7b73e2794ad549a6ee2a2e969b?size=256">
           </q-avatar>
-          <div class="text-weight-bold">Osman KAYI</div>
-          <div>@osmankayi</div>
+          <div class="text-weight-bold text-black">Osman KAYI</div>
+          <div class="text-weight-bold text-black">@osmankayi</div>
         </div>
       </q-img>
     </q-drawer>
