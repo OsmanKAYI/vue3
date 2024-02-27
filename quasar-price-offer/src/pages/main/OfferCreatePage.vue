@@ -284,7 +284,7 @@ const addItem = () => {
                 </template>
                 <template #append>
                   <!-- Clear button added below -->
-                  <q-btn flat v-if="extra.length > 0" class="cursor-pointer" @click="clearExtras">
+                  <q-btn flat v-if="extra.length > 0" class="cursor-pointer" @click="clearExtras" @click.stop>
                     <q-icon name="delete" />
                   </q-btn>
                 </template>
