@@ -289,7 +289,7 @@ const calculateTotalPrice = () => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-12 col-md-7" v-model="extra" label="Extra" options-cover
+              <q-select use-chips filled class="col-12 col-md-7" v-model="extra" label="Extra" options-cover
                 transition-show="flip-up" transition-hide="flip-down" :options="extraOptions" multiple>
                 <template #prepend>
                   <q-icon name="expand_circle_down" />
