@@ -84,26 +84,47 @@ const getWhatsAppLink = () => {
 
 const copyLink = () => {
   const currentUrl = window.location.href;
-  navigator.clipboard.writeText(currentUrl)
-    .then(() => {
-      // Show success message or perform other actions if needed
-      $q.notify({
-        type: 'positive',
-        message: 'Link copied to clipboard !!!',
-        position: 'top',
-        timeout: 1000
+
+  // Check if the browser supports clipboard writeText method
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(currentUrl)
+      .then(() => {
+        // Show success message or perform other actions if needed
+        $q.notify({
+          type: 'positive',
+          message: 'Link copied to clipboard !!!',
+          position: 'top',
+          timeout: 1000
+        })
       })
-    })
-    .catch((error) => {
-      // Handle any errors that may occur during the copy process
-      $q.notify({
-        type: 'negative',
-        message: 'Failed to copy link to clipboard:',
-        caption: error,
-        position: 'top',
-        timeout: 1000
-      })
+      .catch((error) => {
+        // Handle any errors that may occur during the copy process
+        $q.notify({
+          type: 'negative',
+          message: 'Failed to copy link to clipboard:',
+          caption: error,
+          position: 'top',
+          timeout: 1000
+        })
+      });
+  } else {
+    // Fallback for browsers that do not support clipboard writeText method
+    // Display a prompt with the link for manual copying
+    const copyPrompt = document.createElement('textarea');
+    copyPrompt.value = currentUrl;
+    document.body.appendChild(copyPrompt);
+    copyPrompt.select();
+    document.execCommand('copy');
+    document.body.removeChild(copyPrompt);
+
+    // Notify the user that the link has been copied
+    $q.notify({
+      type: 'positive',
+      message: 'Link copied to clipboard !!!',
+      position: 'top',
+      timeout: 1000
     });
+  }
 }
 </script>
 
