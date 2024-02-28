@@ -114,7 +114,7 @@ const copyLink = () => {
         <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" @click="navigateToEditPage" label="Edit" icon="edit" />
         <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" @click="printCardContents" label="Print" icon="print" />
         <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" tag="a" :href="getWhatsAppLink()" target="_blank"
-          label="WhatsApp" icon="forward" />
+          label="WhatsApp" icon="share" />
         <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" @click="copyLink" label="Copy" icon="content_copy" />
       </div>
     </div>
