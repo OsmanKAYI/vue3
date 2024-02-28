@@ -42,6 +42,7 @@ const assembly = ref('')
 const assemblyOptions = ['Assembly Included', 'Assembly is NOT Included']
 const extra = ref<Array<string>>([]);
 const extraOptions = ['Extra 1', 'Extra 2', 'Extra 3', 'Extra 4', 'OK']
+//TODO: OK button is not working on iOS
 const notes = ref('')
 
 const tempDate = ref()
