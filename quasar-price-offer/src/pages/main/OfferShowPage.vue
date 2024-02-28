@@ -126,7 +126,6 @@ const copyLink = () => {
     });
   }
 }
-
 </script>
 
 <template>
