@@ -109,14 +109,12 @@ const copyLink = () => {
 
 <template>
   <q-page padding class="justify-evenly">
-    <div class="row q-pa-md justify-between">
-      <div class="col">
-        <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" @click="navigateToEditPage" label="Edit" icon="edit" />
-        <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" @click="printCardContents" label="Print" icon="print" />
-        <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" tag="a" :href="getWhatsAppLink()" target="_blank"
-          label="WhatsApp" icon="share" />
-        <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" @click="copyLink" label="Copy" icon="content_copy" />
-      </div>
+    <div class="row q-pa-sm justify-left">
+      <q-btn :class="btnTheme" class="q-pa-xs q-mr-sm" @click="navigateToEditPage" label="Edit" icon="edit" />
+      <q-btn :class="btnTheme" class="q-pa-xs q-mr-sm" @click="printCardContents" label="Print" icon="print" />
+      <q-btn :class="btnTheme" class="q-pa-xs q-mr-sm" tag="a" :href="getWhatsAppLink()" target="_blank" label="WhatsApp"
+        icon="share" />
+      <q-btn :class="btnTheme" class="q-pa-xs q-mr-sm" @click="copyLink" label="Copy" icon="content_copy" />
     </div>
 
     <q-card bordered class="q-pa-xl q-ma-md">
