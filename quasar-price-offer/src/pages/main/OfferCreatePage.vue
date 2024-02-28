@@ -370,6 +370,7 @@ const addItem = () => {
               <q-btn glossy class=" q-ma-sm" label="Save" type="submit" color="primary" />
               <q-btn glossy class="q-ma-sm" label="Add Item" @click="addItem" color="positive" />
             </div>
+            //TODO: Add some money related operations in any logic after table
 
           </div>
         </div>
