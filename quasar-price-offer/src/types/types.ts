@@ -1,5 +1,5 @@
 interface Offer {
-  number: number;
+  id: number;
   date: string;
   firm: string;
   itemCount: number;

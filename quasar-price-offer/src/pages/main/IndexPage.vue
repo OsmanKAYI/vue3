@@ -33,56 +33,40 @@ const filteredOffers = computed(() => {
 });
 
 const offers = [
-  { name: 'Frozen Yogurt', number: 159, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 160, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 161, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 162, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 163, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 164, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 165, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 166, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 166, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 167, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 168, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 169, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 170, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 171, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 172, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 173, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 174, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 175, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 176, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 177, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 178, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
-  { name: 'Frozen Yogurt', number: 179, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 159, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 160, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 161, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 162, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 163, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 164, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 165, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 166, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 166, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 167, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 168, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 169, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 170, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 171, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 172, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 173, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 174, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 175, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 176, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 177, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 178, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
+  { name: 'Frozen Yogurt', id: 179, date: '2024/02/07', firm: 'KAYI EMLAK', itemCount: 24, total: 4 },
 ];
 
 // Function to show the offer details
 const showOffer = (offer: Offer) => {
   router.push({
-    path: `/home/offer/show/${offer.number}`,
-    query: {
-      offerDetails: JSON.stringify(offer),
-      offerId: offer.number,
-      offerDate: offer.date,
-      firmName: offer.firm,
-      itemCount: offer.itemCount,
-      total: offer.total
-    }
+    path: `/home/offer/show/${offer.id}`,
   });
 };
 // Function to edit the offer
 const editOffer = (offer: Offer) => {
   router.push({
-    path: `/home/offer/edit/${offer.number}`,
-    query: {
-      offerDetails: JSON.stringify(offer),
-      offerId: offer.number,
-      offerDate: offer.date,
-      firmName: offer.firm,
-      itemCount: offer.itemCount,
-      total: offer.total
-    }
+    path: `/home/offer/edit/${offer.id}`,
   });
 };
 </script>
@@ -129,7 +113,7 @@ const editOffer = (offer: Offer) => {
               <q-btn @click="showOffer(offer)" color="primary" icon="visibility" class="q-mr-sm" flat round dense />
               <q-btn @click="editOffer(offer)" color="primary" icon="edit" flat round dense />
             </td>
-            <td class="text-left">{{ offer.number }}</td>
+            <td class="text-left">{{ offer.id }}</td>
             <td class="text-center">{{ offer.date }}</td>
             <td class="text-center">{{ offer.firm }}</td>
             <td class="text-center">{{ offer.itemCount }}</td>
