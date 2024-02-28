@@ -115,6 +115,13 @@ const addItem = () => {
   }
 }
 
+const calculateTotalPrice = () => {
+  let sum = 0;
+  for (const row of itemRows.value) {
+    sum += parseFloat(row.total);
+  }
+  return sum.toFixed(2); // Adjust precision as needed
+}
 </script>
 
 <template>
@@ -317,6 +324,12 @@ const addItem = () => {
                   </q-tr>
                 </template>
               </q-table>
+              <!-- Add a div for the general sum -->
+              <div class="col-12 q-pa-xs" style="max-width: 800px">
+                <div class="text-h6 q-pr-lg text-weight-bold text-right" :class="generalTheme">
+                  Total Price: {{ calculateTotalPrice() }} {{ currency }}
+                </div>
+              </div>
               <div class="col-12">
                 <small class="text-green">{{ dragMessage }}</small>
               </div>

@@ -44,7 +44,7 @@ const columns: TableColumn[] = [
   { name: 'picture', required: true, label: 'Picture ', align: 'left', field: (row: RowType) => row.picture, format: (val: string) => `${val}`, sortable: true },
 ];
 
-const rows = ref<RowType[]>([
+const itemRows = ref<RowType[]>([
   { itemId: 1, sortOrder: 10, productName: '', quantity: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
 
@@ -126,6 +126,7 @@ const copyLink = () => {
     });
   }
 }
+
 </script>
 
 <template>
@@ -302,7 +303,7 @@ const copyLink = () => {
           <div class="row q-pt-xs">
             <div class="col col-md-12 text-h6 q-pa-xs q-mb-xs text-weight-bold text-center" :class="generalTheme">
               Items</div>
-            <q-table class="col-12" bordered :rows="rows" :columns="columns" row-key="name" binary-state-sort>
+            <q-table class="col-12" bordered :rows="itemRows" :columns="columns" row-key="name" binary-state-sort>
               <template #body="props">
                 <q-tr :props="props">
                   <q-td :disable="true" v-for="column in  columns " :key="column.name" :props="props">
@@ -311,6 +312,12 @@ const copyLink = () => {
                 </q-tr>
               </template>
             </q-table>
+            <!-- Add a div for the general sum -->
+            <div class="col-12 q-pa-xs" style="max-width: 800px">
+              <div class="text-h6 q-pr-lg text-weight-bold text-right" :class="generalTheme">
+                Total Price: 'items.total' {{ currency }}
+              </div>
+            </div>
           </div>
 
         </div>
