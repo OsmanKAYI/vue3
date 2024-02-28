@@ -11,6 +11,10 @@ let generalTheme = computed(() => {
   return $q.dark.isActive ? 'glossy bg-grey-7 text-white' : 'glossy bg-grey-5 text-black';
 })
 
+const btnTheme = computed(() => {
+  return $q.dark.isActive ? 'bg-purple-5 text-black' : 'bg-purple-9 text-white';
+})
+
 const offerId = ref<string>('')
 const offerDate = ref<string>('')
 const title = ref<string>('')
@@ -107,10 +111,11 @@ const copyLink = () => {
   <q-page padding class="justify-evenly">
     <div class="row q-pa-md justify-between">
       <div class="col">
-        <q-btn class="q-px-md" @click="navigateToEditPage" label="Edit" />
-        <q-btn class="q-px-md" @click="printCardContents" label="Print" icon-right="print" />
-        <q-btn class="q-px-md" tag="a" :href="getWhatsAppLink()" target="_blank" label="WhatsApp" icon-right="forward" />
-        <q-btn class="q-px-md" @click="copyLink" label="Copy" icon-right="content_copy" />
+        <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" @click="navigateToEditPage" label="Edit" icon="edit" />
+        <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" @click="printCardContents" label="Print" icon="print" />
+        <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" tag="a" :href="getWhatsAppLink()" target="_blank"
+          label="WhatsApp" icon="forward" />
+        <q-btn :class="btnTheme" class="q-px-sm q-mr-xs" @click="copyLink" label="Copy" icon="content_copy" />
       </div>
     </div>
 
