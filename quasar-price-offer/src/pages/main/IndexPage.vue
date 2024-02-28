@@ -4,7 +4,7 @@ import { useQuasar } from 'quasar'
 const $q = useQuasar()
 import { useRouter } from 'vue-router';
 const router = useRouter();
-import type { Offer } from 'src/types/types';
+import type { OfferType } from 'src/types/types';
 
 const btnTheme = computed(() => {
   return $q.dark.isActive ? 'bg-cyan-5 text-black' : 'bg-cyan-9 text-white';
@@ -58,13 +58,13 @@ const offers = [
 ];
 
 // Function to show the offer details
-const showOffer = (offer: Offer) => {
+const showOffer = (offer: OfferType) => {
   router.push({
     path: `/home/offer/show/${offer.id}`,
   });
 };
 // Function to edit the offer
-const editOffer = (offer: Offer) => {
+const editOffer = (offer: OfferType) => {
   router.push({
     path: `/home/offer/edit/${offer.id}`,
   });
@@ -101,7 +101,7 @@ const editOffer = (offer: Offer) => {
           <tr>
             <th class="col-3 text-left">Operation</th>
             <th class="col-1 text-left">#</th>
-            <th class="col-2 text-center">Offer Date</th>
+            <th class="col-2 text-center">OfferType Date</th>
             <th class="col-2 text-center">Firm Name</th>
             <th class="col-1 text-center"># of Items</th>
             <th class="col-1 text-center">Total</th>

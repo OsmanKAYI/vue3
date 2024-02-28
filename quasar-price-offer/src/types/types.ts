@@ -1,4 +1,4 @@
-interface Offer {
+interface OfferType {
   id: number;
   date: string;
   firm: string;
@@ -7,19 +7,24 @@ interface Offer {
   // Add other properties as needed
 }
 
-interface TableColumn {
+interface ItemColumnsType {
   name: 'picture' | 'unit' | 'total' | string; // Define the specific types for column.name
   required?: boolean;
   label: string;
   align: 'left' | 'center' | 'right';
-  field: (row: RowType) => string | number;
+  field: (row: itemRowsType) => string | number;
   format?: (val: string) => string;
   sortable?: boolean;
   style?: string;
-  sort?: (a: string, b: string, rowA: RowType, rowB: RowType) => number;
+  sort?: (
+    a: string,
+    b: string,
+    rowA: itemRowsType,
+    rowB: itemRowsType
+  ) => number;
 }
 
-interface RowType {
+interface itemRowsType {
   itemId: number;
   sortOrder: number;
   productName: string;
@@ -30,4 +35,4 @@ interface RowType {
   picture: string;
 }
 
-export type { Offer, TableColumn, RowType };
+export type { OfferType, ItemColumnsType, itemRowsType };

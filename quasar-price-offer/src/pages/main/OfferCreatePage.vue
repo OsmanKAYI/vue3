@@ -3,7 +3,7 @@ import { ref, computed, watch, watchEffect } from 'vue'
 import { useQuasar, date, scroll } from 'quasar'
 const $q = useQuasar()
 const { getScrollTarget, setVerticalScrollPosition } = scroll
-import { TableColumn, RowType } from 'src/types/types'
+import { ItemColumnsType, itemRowsType } from 'src/types/types'
 
 const generalTheme = computed(() => {
   return $q.dark.isActive ? 'glossy bg-grey-7 text-white' : 'glossy bg-grey-5 text-black';
@@ -64,15 +64,15 @@ watch(extra, () => {
   }
 })
 
-const columns: TableColumn[] = [
-  { name: 'itemId', required: true, label: 'Item Id', align: 'left', field: (row: RowType) => row.itemId, format: (val: string) => `${val}`, sortable: true },
-  { name: 'sortOrder', required: true, label: 'Sort Order', align: 'left', field: (row: RowType) => row.sortOrder, format: (val: string) => `${val}`, sortable: true },
-  { name: 'productName', required: true, label: 'Product Name', align: 'left', field: (row: RowType) => row.productName, format: (val: string) => `${val}`, sortable: true },
-  { name: 'quantity', required: true, label: 'Quantity ', align: 'left', field: (row: RowType) => row.quantity, format: (val: string) => `${val}`, sortable: false },
-  { name: 'unit', required: true, label: 'Unit ', align: 'left', field: (row: RowType) => row.unit, format: (val: string) => `${val}`, sortable: true },
-  { name: 'unitPrice', required: true, label: 'Unit Price', align: 'left', field: (row: RowType) => row.unitPrice, format: (val: string) => `${val}`, sortable: true },
-  { name: 'total', required: true, label: 'Total ', align: 'left', field: (row: RowType) => row.total, format: (val: string) => `${val}`, sortable: true },
-  { name: 'picture', required: true, label: 'Picture ', align: 'left', field: (row: RowType) => row.picture, format: (val: string) => `${val}`, sortable: true },
+const columns: ItemColumnsType[] = [
+  { name: 'itemId', required: true, label: 'Item Id', align: 'left', field: (row: itemRowsType) => row.itemId, format: (val: string) => `${val}`, sortable: true },
+  { name: 'sortOrder', required: true, label: 'Sort Order', align: 'left', field: (row: itemRowsType) => row.sortOrder, format: (val: string) => `${val}`, sortable: true },
+  { name: 'productName', required: true, label: 'Product Name', align: 'left', field: (row: itemRowsType) => row.productName, format: (val: string) => `${val}`, sortable: true },
+  { name: 'quantity', required: true, label: 'Quantity ', align: 'left', field: (row: itemRowsType) => row.quantity, format: (val: string) => `${val}`, sortable: false },
+  { name: 'unit', required: true, label: 'Unit ', align: 'left', field: (row: itemRowsType) => row.unit, format: (val: string) => `${val}`, sortable: true },
+  { name: 'unitPrice', required: true, label: 'Unit Price', align: 'left', field: (row: itemRowsType) => row.unitPrice, format: (val: string) => `${val}`, sortable: true },
+  { name: 'total', required: true, label: 'Total ', align: 'left', field: (row: itemRowsType) => row.total, format: (val: string) => `${val}`, sortable: true },
+  { name: 'picture', required: true, label: 'Picture ', align: 'left', field: (row: itemRowsType) => row.picture, format: (val: string) => `${val}`, sortable: true },
 ];
 
 const clearExtras = () => {
@@ -83,15 +83,15 @@ const clearExtras = () => {
 const defaultItemRow = { itemId: 1, sortOrder: 10, productName: '', quantity: 0, unit: '', unitPrice: 0, total: 0, picture: '' }
 const itemRows = ref(Array(3).fill({ ...defaultItemRow }).map((row, index) => ({ ...row, sortOrder: row.sortOrder + (index * 10) })));
 
-let dragItem: RowType | null = null;
-const handleDragStart = (item: RowType, event: DragEvent) => {
+let dragItem: itemRowsType | null = null;
+const handleDragStart = (item: itemRowsType, event: DragEvent) => {
   dragItem = item;
   event.dataTransfer?.setData('text/plain', ''); // Required for Firefox
 }
 const handleDragOver = (event: DragEvent) => {
   event.preventDefault();
 }
-const handleDrop = (targetItem: RowType) => {
+const handleDrop = (targetItem: itemRowsType) => {
   if (dragItem === null || dragItem === targetItem) {
     return;
   }
@@ -341,7 +341,7 @@ const addItem = () => {
                       @dragover="handleDragOver" @drop="handleDrop(props.row)">
                       <template v-if="column.name === 'picture' || column.name === 'unit'">
                         <q-select filled v-model="props.row[column.name]"
-                          :options="props.row[column.name as keyof TableColumn]" dense outlined />
+                          :options="props.row[column.name as keyof ItemColumnsType]" dense outlined />
                       </template>
                       <template v-else-if="column.name === 'total'">
                         <span style="font-weight: bold;">{{ props.row[column.name] }}</span>
