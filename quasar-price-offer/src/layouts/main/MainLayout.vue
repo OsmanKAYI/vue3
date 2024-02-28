@@ -21,7 +21,7 @@ const menuList = [
     separator: true
   },
   {
-    icon: 'create',
+    icon: 'note_add',
     label: 'Create Offer',
     to: '/home/offer/create',
     separator: false
