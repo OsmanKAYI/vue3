@@ -144,6 +144,7 @@ const addItem = () => {
   <q-page padding class="justify-evenly">
     <q-card bordered class="q-pa-xl q-ma-md">
 
+      //TODO: Tab-like behavior for mobile
       <q-form @submit="onUpdate" autocomplete="off" autocapitalize="on">
         <div class="row q-pa-md justify-center">
           <div class="col" style="max-width: 800px">
