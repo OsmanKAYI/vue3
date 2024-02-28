@@ -5,7 +5,7 @@ const $q = useQuasar()
 const { getScrollTarget, setVerticalScrollPosition } = scroll
 import { TableColumn, RowType } from 'src/types/types'
 
-let generalTheme = computed(() => {
+const generalTheme = computed(() => {
   return $q.dark.isActive ? 'glossy bg-grey-7 text-white' : 'glossy bg-grey-5 text-black';
 })
 
