@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
+const router = useRouter();
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
 import type { TableColumn, RowType } from 'src/types/types'
@@ -10,23 +11,23 @@ let generalTheme = computed(() => {
   return $q.dark.isActive ? 'glossy bg-grey-7 text-white' : 'glossy bg-grey-5 text-black';
 })
 
-const offerId = ref<string>(route.query.offerId as string ?? '')
-const offerDate = ref<string>(route.query.offerDate as string ?? '')
-const title = ref<string>(route.query.title as string ?? '')
-const firmName = ref<string>(route.query.firmName as string ?? '')
-const firmAdress = ref<string>(route.query.firmAdress as string ?? '')
-const authName = ref<string>(route.query.authName as string ?? '')
-const authPhone = ref<string>(route.query.authPhone as string ?? '')
-const authEmail = ref<string>(route.query.authEmail as string ?? '')
-const situation = ref<string>(route.query.situation as string ?? '')
-const discount = ref<number>(route.query.discount as unknown as number ?? 0)
-const currency = ref<string>(route.query.currency as string ?? '')
-const hasPhoto = ref<string>(route.query.hasPhoto as string ?? '')
-const tax = ref<string>(route.query.tax as string ?? '')
-const transportation = ref<string>(route.query.transportation as string ?? '')
-const assembly = ref<string>(route.query.assembly as string ?? '')
+const offerId = ref<string>('')
+const offerDate = ref<string>('')
+const title = ref<string>('')
+const firmName = ref<string>('')
+const firmAdress = ref<string>('')
+const authName = ref<string>('')
+const authPhone = ref<string>('')
+const authEmail = ref<string>('')
+const situation = ref<string>('')
+const discount = ref<number>()
+const currency = ref<string>('')
+const hasPhoto = ref<string>('')
+const tax = ref<string>('')
+const transportation = ref<string>('')
+const assembly = ref<string>('')
 const extra = ref<string[]>(['']);
-const notes = ref<string>(route.query.note as string ?? '')
+const notes = ref<string>('')
 
 const columns: TableColumn[] = [
   { name: 'itemId', required: true, label: 'Item Id', align: 'left', field: (row: RowType) => row.itemId, format: (val: string) => `${val}`, sortable: true },
@@ -42,6 +43,20 @@ const columns: TableColumn[] = [
 const rows = ref<RowType[]>([
   { itemId: 1, sortOrder: 10, productName: '', quantity: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
+
+const navigateToEditPage = () => {
+  console.log('Offer ID:', offerId.value); // Log the offerId.value
+  if (offerId.value) {
+    router.push(`/home/offer/edit/${offerId.value}`);
+  } else {
+    $q.notify({
+      type: 'negative',
+      message: 'Offer ID not found in route query parameters',
+      position: 'top',
+      timeout: 1000
+    })
+  }
+}
 
 const printCardContents = () => {
   // Clone the content of the q-card
@@ -92,9 +107,10 @@ const copyLink = () => {
   <q-page padding class="justify-evenly">
     <div class="row q-pa-md justify-between">
       <div class="col">
+        <q-btn class="q-px-md" @click="navigateToEditPage()" label="Edit" />
         <q-btn class="q-px-md" @click="printCardContents" label="Print" icon-right="print" />
-        <q-btn tag="a" :href="getWhatsAppLink()" class="q-px-md" target="_blank" label="WhatsApp" icon-right="forward" />
-        <q-btn class="q-px-md" @click="copyLink()" label="Copy" icon-right="content_copy" />
+        <q-btn class="q-px-md" tag="a" :href="getWhatsAppLink()" target="_blank" label="WhatsApp" icon-right="forward" />
+        <q-btn class="q-px-md" @click="copyLink" label="Copy" icon-right="content_copy" />
       </div>
     </div>
 
