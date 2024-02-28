@@ -31,17 +31,17 @@ const authEmail = ref('')
 const situation = ref('')
 const discount = ref()
 const currency = ref('');
-const currencyOptions = [{ label: 'Currency', value: '', disable: true }, 'TL', 'USD', 'EUR', 'RUB', 'UAH']
+const currencyOptions = ['TL', 'USD', 'EUR', 'RUB', 'UAH']
 const hasPhoto = ref('')
-const hasPhotoOptions = [{ label: 'Has Photo', value: '', disable: true }, 'YES', 'NO']
+const hasPhotoOptions = ['YES', 'NO']
 const tax = ref('')
-const taxOptions = [{ label: 'Tax', value: '', disable: true }, 'VAX Included', 'VAX is NOT Included']
+const taxOptions = ['VAX Included', 'VAX is NOT Included']
 const transportation = ref('')
-const transportationOptions = [{ label: 'Transportation', value: '', disable: true }, 'Transportation Included', 'Transportation is NOT Included']
+const transportationOptions = ['Transportation Included', 'Transportation is NOT Included']
 const assembly = ref('')
-const assemblyOptions = [{ label: 'Assembly', value: '', disable: true }, 'Assembly Included', 'Assembly is NOT Included']
+const assemblyOptions = ['Assembly Included', 'Assembly is NOT Included']
 const extra = ref<Array<string>>([]);
-const extraOptions = [{ label: 'Extras', value: '', disable: true }, 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
+const extraOptions = ['Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
 const notes = ref('')
 
 const tempDate = ref()
@@ -239,8 +239,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-input>
 
-              <q-select filled class="col-12 col-md-4" v-model="currency" label="Currency" options-cover
-                transition-show="flip-up" transition-hide="flip-down" :options="currencyOptions">
+              <q-select filled class="col-12 col-md-4" v-model="currency" label="Currency" transition-show="flip-up"
+                transition-hide="flip-down" :options="currencyOptions">
                 <template #prepend>
                   <q-icon name="currency_exchange" />
                 </template>
@@ -249,8 +249,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-12 col-md-4" v-model="hasPhoto" label="Has Photo" options-cover
-                transition-show="flip-up" transition-hide="flip-down" :options="hasPhotoOptions">
+              <q-select filled class="col-12 col-md-4" v-model="hasPhoto" label="Has Photo" transition-show="flip-up"
+                transition-hide="flip-down" :options="hasPhotoOptions">
                 <template #prepend>
                   <q-icon name="photo" />
                 </template>
@@ -259,7 +259,7 @@ const calculateTotalPrice = () => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-12 col-md-5" v-model="tax" label="Tax" options-cover transition-show="flip-up"
+              <q-select filled class="col-12 col-md-5" v-model="tax" label="Tax" transition-show="flip-up"
                 transition-hide="flip-down" :options="taxOptions">
                 <template #prepend>
                   <q-icon name="request_quote" />
@@ -269,7 +269,7 @@ const calculateTotalPrice = () => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-12 col-md-7" v-model="transportation" label="Transportation" options-cover
+              <q-select filled class="col-12 col-md-7" v-model="transportation" label="Transportation"
                 transition-show="flip-up" transition-hide="flip-down" :options="transportationOptions">
                 <template #prepend>
                   <q-icon name="local_shipping" />
@@ -279,8 +279,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-select>
 
-              <q-select filled class="col-12 col-md-5" v-model="assembly" label="Assembly" options-cover
-                transition-show="flip-up" transition-hide="flip-down" :options="assemblyOptions">
+              <q-select filled class="col-12 col-md-5" v-model="assembly" label="Assembly" transition-show="flip-up"
+                transition-hide="flip-down" :options="assemblyOptions">
                 <template #prepend>
                   <q-icon name="download_done" />
                 </template>
@@ -289,13 +289,13 @@ const calculateTotalPrice = () => {
                 </template>
               </q-select>
 
-              <q-select use-chips filled class="col-12 col-md-7" v-model="extra" label="Extra" options-cover
-                transition-show="flip-up" transition-hide="flip-down" :options="extraOptions" multiple>
+              <q-select use-chips filled class="col-12 col-md-7" v-model="extra" label="Extra" transition-show="flip-up"
+                transition-hide="flip-down" :options="extraOptions" multiple>
                 <template #prepend>
                   <q-icon name="expand_circle_down" />
                 </template>
                 <template #label>
-                  <div class="text-cyan">Extra</div>
+                  <div class="text-cyan">Extra Options</div>
                 </template>
                 <template #append>
                   <!-- Clear button added below -->
