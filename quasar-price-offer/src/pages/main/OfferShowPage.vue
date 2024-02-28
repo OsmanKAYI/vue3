@@ -43,6 +43,15 @@ const rows = ref<RowType[]>([
   { itemId: 1, sortOrder: 10, productName: '', quantity: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
 
+const getWhatsAppLink = () => {
+  const baseUrl = window.location.origin; // Get the base URL of the current page
+  console.log(baseUrl)
+  const offerId = route.query.offerId;
+  const offerLink = `${baseUrl}/home/offer/show/${offerId}`; // Construct the offer link
+  const message = encodeURIComponent(`Check out this offer: ${offerLink}`);
+  return `https://api.whatsapp.com/send?text=${message}`;
+}
+
 const copyLink = () => {
   const currentUrl = window.location.href;
   navigator.clipboard.writeText(currentUrl)
@@ -72,6 +81,7 @@ const copyLink = () => {
   <q-page padding class="justify-evenly">
     <div class="row q-pa-md justify-between">
       <div class="col">
+        <q-btn tag="a" :href="getWhatsAppLink()" class="q-px-md" target="_blank" label="WhatsApp" icon-right="forward" />
         <q-btn class="q-px-md" @click="copyLink()" label="Copy" icon-right="content_copy" />
       </div>
     </div>
