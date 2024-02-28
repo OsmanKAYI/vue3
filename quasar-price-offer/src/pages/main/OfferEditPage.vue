@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect, computed } from 'vue'
+import { ref, computed, watch, watchEffect } from 'vue'
 import { useQuasar, scroll } from 'quasar'
 const $q = useQuasar()
 const { getScrollTarget, setVerticalScrollPosition } = scroll
@@ -37,8 +37,23 @@ const transportationOptions = ['Transportation Included', 'Transportation is NOT
 const assembly = ref<string>('')
 const assemblyOptions = ['Assembly Included', 'Assembly is NOT Included']
 const extra = ref<Array<string>>([]);
-const extraOptions = ['Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
+const extraOptions = ['Extra 1', 'Extra 2', 'Extra 3', 'Extra 4', 'OK']
 const notes = ref<string>('')
+
+watch(extra, () => {
+  if (extra.value.includes('OK')) {
+    // Implement click event
+    const popup = document.getElementById('popupBtn');
+    if (popup) {
+      popup.click();
+    }
+    // Remove the 'OK' value from the extra array
+    const index = extra.value.indexOf('OK');
+    if (index !== -1) {
+      extra.value.splice(index, 1);
+    }
+  }
+})
 
 const columns: TableColumn[] = [
   { name: 'itemId', required: true, label: 'Item Id', align: 'left', field: (row: RowType) => row.itemId, format: (val: string) => `${val}`, sortable: true },
@@ -94,6 +109,14 @@ const onUpdate = () => {
   console.log('Offer updated !')
 }
 
+const calculateTotalPrice = () => {
+  let sum = 0;
+  for (const row of itemRows.value) {
+    sum += parseFloat(row.total);
+  }
+  return sum.toFixed(2); // Adjust precision as needed
+}
+
 const addItem = () => {
   const newItem = {
     itemId: itemRows.value.length + 1,
@@ -113,14 +136,6 @@ const addItem = () => {
   if (bottomAnchor) {
     scrollToElement(bottomAnchor);
   }
-}
-
-const calculateTotalPrice = () => {
-  let sum = 0;
-  for (const row of itemRows.value) {
-    sum += parseFloat(row.total);
-  }
-  return sum.toFixed(2); // Adjust precision as needed
 }
 </script>
 
@@ -277,8 +292,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-select>
 
-              <q-select use-chips filled class="col-12 col-md-7" v-model="extra[0]" label="Extra"
-                transition-show="flip-up" transition-hide="flip-down" :options="extraOptions" multiple>
+              <q-select use-chips filled class="col-12 col-md-7" v-model="extra" label="Extra" transition-show="flip-up"
+                transition-hide="flip-down" :options="extraOptions" multiple>
                 <template #prepend>
                   <q-icon name="expand_circle_down" />
                 </template>
@@ -287,9 +302,8 @@ const calculateTotalPrice = () => {
                 </template>
                 <template #append>
                   <!-- Clear button added below -->
-                  <q-btn flat v-if="extra.length > 0" class="cursor-pointer" @click="clearExtras" @click.stop>
-                    <q-icon name="delete" />
-                  </q-btn>
+                  <q-btn flat v-if="extra.length > 0" class="cursor-pointer" @click="clearExtras" icon="delete" />
+                  <q-btn id="popupBtn" v-show="false" v-close-popup />
                 </template>
               </q-select>
 
