@@ -43,10 +43,39 @@ const rows = ref<RowType[]>([
   { itemId: 1, sortOrder: 10, productName: '', quantity: 0, unit: '', unitPrice: 0, total: 0, picture: '' },
 ]);
 
+const copyLink = () => {
+  const currentUrl = window.location.href;
+  navigator.clipboard.writeText(currentUrl)
+    .then(() => {
+      // Show success message or perform other actions if needed
+      $q.notify({
+        type: 'positive',
+        message: 'Link copied to clipboard !!!',
+        position: 'top',
+        timeout: 1000
+      })
+    })
+    .catch((error) => {
+      // Handle any errors that may occur during the copy process
+      $q.notify({
+        type: 'negative',
+        message: 'Failed to copy link to clipboard:',
+        caption: error,
+        position: 'top',
+        timeout: 1000
+      })
+    });
+}
 </script>
 
 <template>
   <q-page padding class="justify-evenly">
+    <div class="row q-pa-md justify-between">
+      <div class="col">
+        <q-btn class="q-px-md" @click="copyLink()" label="Copy" icon-right="content_copy" />
+      </div>
+    </div>
+
     <q-card bordered class="q-pa-xl q-ma-md">
 
       <div class="row q-pa-md justify-center">
