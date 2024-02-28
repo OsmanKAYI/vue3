@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, watchEffect, computed } from 'vue'
-import { useRoute } from 'vue-router';
-const route = useRoute();
 import { useQuasar, scroll } from 'quasar'
 const $q = useQuasar()
 const { getScrollTarget, setVerticalScrollPosition } = scroll
@@ -18,29 +16,29 @@ function scrollToElement(el: Element) {
   setVerticalScrollPosition(target, offset, duration)
 }
 
-const offerId = ref<string>(route.query.offerId as string ?? '')
-const offerDate = ref<string>(route.query.offerDate as string ?? '')
-const title = ref<string>(route.query.title as string ?? '')
-const firmName = ref<string>(route.query.firmName as string ?? '')
-const firmAdress = ref<string>(route.query.firmAdress as string ?? '')
-const authName = ref<string>(route.query.authName as string ?? '')
-const authPhone = ref<string>(route.query.authPhone as string ?? '')
-const authEmail = ref<string>(route.query.authEmail as string ?? '')
-const situation = ref<string>(route.query.situation as string ?? '')
-const discount = ref<number>(route.query.discount as unknown as number ?? 0)
-const currency = ref<string>(route.query.currency as string ?? '')
+const offerId = ref<string>('')
+const offerDate = ref<string>('')
+const title = ref<string>('')
+const firmName = ref<string>('')
+const firmAdress = ref<string>('')
+const authName = ref<string>('')
+const authPhone = ref<string>('')
+const authEmail = ref<string>('')
+const situation = ref<string>('')
+const discount = ref<number>()
+const currency = ref<string>('')
 const currencyOptions = [{ label: 'Currency', value: '', disable: true }, 'TL', 'USD', 'EUR', 'RUB', 'UAH']
-const hasPhoto = ref<string>(route.query.hasPhoto as string ?? '')
+const hasPhoto = ref<string>('')
 const hasPhotoOptions = [{ label: 'Has Photo', value: '', disable: true }, 'YES', 'NO']
-const tax = ref<string>(route.query.tax as string ?? '')
+const tax = ref<string>('')
 const taxOptions = [{ label: 'Tax', value: '', disable: true }, 'VAX Included', 'VAX is NOT Included']
-const transportation = ref<string>(route.query.transportation as string ?? '')
+const transportation = ref<string>('')
 const transportationOptions = [{ label: 'Transportation', value: '', disable: true }, 'Transportation Included', 'Transportation is NOT Included']
-const assembly = ref<string>(route.query.assembly as string ?? '')
+const assembly = ref<string>('')
 const assemblyOptions = [{ label: 'Assembly', value: '', disable: true }, 'Assembly Included', 'Assembly is NOT Included']
 const extra = ref<Array<string>>([]);
 const extraOptions = [{ label: 'Extras', value: '', disable: true }, 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 4']
-const notes = ref<string>(route.query.note as string ?? '')
+const notes = ref<string>('')
 
 const columns: TableColumn[] = [
   { name: 'itemId', required: true, label: 'Item Id', align: 'left', field: (row: RowType) => row.itemId, format: (val: string) => `${val}`, sortable: true },
