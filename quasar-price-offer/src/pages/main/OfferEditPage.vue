@@ -144,7 +144,7 @@ const addItem = () => {
   <q-page padding class="justify-evenly">
     <q-card bordered class="q-pa-xl q-ma-md">
 
-      //TODO: Tab-like behavior for mobile
+      <!--TODO: Tab-like behavior for mobile-->
       <q-form @submit="onUpdate" autocomplete="off" autocapitalize="on">
         <div class="row q-pa-md justify-center">
           <div class="col" style="max-width: 800px">
@@ -323,7 +323,7 @@ const addItem = () => {
             <div class="row q-pt-xs">
               <div class="col col-md-12 text-h6 q-pa-xs q-mb-xs text-weight-bold text-center" :class="generalTheme">
                 Items</div>
-              //TODO: Make columns narrower
+              <!--TODO: Make columns narrower-->
               <q-table class="col-12" bordered :rows="itemRows" :columns="columns" row-key="name" binary-state-sort>
                 <template #body="props">
                   <q-tr class="cursor-pointer" :props="props">
@@ -359,7 +359,7 @@ const addItem = () => {
               <q-btn glossy class="q-ma-sm" label="Update" type="submit" color="primary" />
               <q-btn glossy class="q-ma-sm" label="Add Item" @click="addItem" color="positive" />
             </div>
-            //TODO: Add some money related operations in any logic after table
+            <!--TODO: Add some money related operations in any logic after table-->
           </div>
         </div>
       </q-form>

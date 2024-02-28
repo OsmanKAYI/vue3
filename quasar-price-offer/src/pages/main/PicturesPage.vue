@@ -1,7 +1,7 @@
 <script setup lang="ts">
+//TODO: Pictures page should be completed
 </script>
 
-//TODO: Pictures page should be completed
 
 <template>
   <q-page padding class=" justify-evenly">
