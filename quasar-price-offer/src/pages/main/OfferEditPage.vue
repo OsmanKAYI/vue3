@@ -151,7 +151,7 @@ const calculateTotalPrice = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-12" v-model="title" label="Title">
+              <q-input clearable clear-icon="delete" filled class="col-12 col-md-12" v-model="title" label="Title">
                 <template #prepend>
                   <q-icon name="title" />
                 </template>
@@ -159,7 +159,7 @@ const calculateTotalPrice = () => {
                   <div class="text-cyan">Title</div>
                 </template>
               </q-input>
-              <q-input filled class="col-12 col-md-12" v-model="firmName" label="Firm Name">
+              <q-input clearable clear-icon="delete" filled class="col-12 col-md-12" v-model="firmName" label="Firm Name">
                 <template #prepend>
                   <q-icon name="badge" />
                 </template>
@@ -168,7 +168,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-12" type="textarea" v-model="firmAdress" label="Firm Adress">
+              <q-input clearable clear-icon="delete" filled class="col-12 col-md-12" type="textarea" v-model="firmAdress"
+                label="Firm Adress">
                 <template #prepend>
                   <q-icon name="business" />
                 </template>
@@ -177,7 +178,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-7" v-model="authName" label="Authorised Name">
+              <q-input clearable clear-icon="delete" filled class="col-12 col-md-7" v-model="authName"
+                label="Authorised Name">
                 <template #prepend>
                   <q-icon name="person" />
                 </template>
@@ -186,7 +188,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-5" v-model="authPhone" label="Authorised Phone" mask="phone">
+              <q-input clearable clear-icon="delete" filled class="col-12 col-md-5" v-model="authPhone"
+                label="Authorised Phone" mask="phone">
                 <template #prepend>
                   <q-icon name="phone" />
                 </template>
@@ -195,7 +198,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-12" v-model="authEmail" label="Authorised Email">
+              <q-input clearable clear-icon="delete" filled class="col-12 col-md-12" v-model="authEmail"
+                label="Authorised Email">
                 <template #prepend>
                   <q-icon name="mail" />
                 </template>
@@ -204,7 +208,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-12" v-model="situation" label="Situation">
+              <q-input clearable clear-icon="delete" filled class="col-12 col-md-12" v-model="situation"
+                label="Situation">
                 <template #prepend>
                   <q-icon name="turned_in" />
                 </template>
@@ -213,7 +218,7 @@ const calculateTotalPrice = () => {
                 </template>
               </q-input>
 
-              <q-input filled class="col-12 col-md-4" v-model="discount" label="Discount">
+              <q-input clearable clear-icon="delete" filled class="col-12 col-md-4" v-model="discount" label="Discount">
                 <template #prepend>
                   <q-icon name="price_change" />
                 </template>
@@ -288,7 +293,8 @@ const calculateTotalPrice = () => {
                 </template>
               </q-select>
 
-              <q-input filled class="col-12 col-md-12" type="textarea" v-model="notes" label="Notes">
+              <q-input clearable clear-icon="delete" filled class="col-12 col-md-12" type="textarea" v-model="notes"
+                label="Notes">
                 <template #prepend>
                   <q-icon name="note_add" />
                 </template>
@@ -368,5 +374,4 @@ const calculateTotalPrice = () => {
 /* Add styles for the draggable handle when being dragged */
 .drag-handle:active {
   cursor: grabbing;
-}
-</style>
+}</style>
