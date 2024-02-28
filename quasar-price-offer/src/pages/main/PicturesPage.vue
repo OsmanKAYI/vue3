@@ -1,6 +1,8 @@
 <script setup lang="ts">
 </script>
 
+//TODO: Pictures page should be completed
+
 <template>
   <q-page padding class=" justify-evenly">
     <q-card class="q-pa-xl q-ma-md" bordered>
