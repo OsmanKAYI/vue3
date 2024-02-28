@@ -78,6 +78,7 @@ watchEffect(() => {
 
     </q-header>
 
+    //TODO: Drawer must be under navbar on mobile
     <q-drawer v-model="drawer" :width="drawerWidth" :breakpoint="drawerBreakpoint" side="right" overlay bordered
       :class="generalTheme">
       <q-scroll-area class="fit" style=" height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
