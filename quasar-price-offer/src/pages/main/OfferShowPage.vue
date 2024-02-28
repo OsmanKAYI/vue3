@@ -12,7 +12,7 @@ let generalTheme = computed(() => {
 })
 
 const btnTheme = computed(() => {
-  return $q.dark.isActive ? 'bg-purple-5 text-black' : 'bg-purple-9 text-white';
+  return $q.dark.isActive ? 'bg-cyan-5 text-black' : 'bg-cyan-9 text-white';
 })
 
 const offerId = ref<string>('')

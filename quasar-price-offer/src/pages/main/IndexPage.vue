@@ -7,7 +7,7 @@ const router = useRouter();
 import type { Offer } from 'src/types/types';
 
 const btnTheme = computed(() => {
-  return $q.dark.isActive ? 'bg-purple-5 text-black' : 'bg-purple-9 text-white';
+  return $q.dark.isActive ? 'bg-cyan-5 text-black' : 'bg-cyan-9 text-white';
 })
 
 const headingTheme = computed(() => {
