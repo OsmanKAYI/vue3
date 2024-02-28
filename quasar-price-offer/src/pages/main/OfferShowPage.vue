@@ -107,7 +107,7 @@ const copyLink = () => {
   <q-page padding class="justify-evenly">
     <div class="row q-pa-md justify-between">
       <div class="col">
-        <q-btn class="q-px-md" @click="navigateToEditPage()" label="Edit" />
+        <q-btn class="q-px-md" @click="navigateToEditPage" label="Edit" />
         <q-btn class="q-px-md" @click="printCardContents" label="Print" icon-right="print" />
         <q-btn class="q-px-md" tag="a" :href="getWhatsAppLink()" target="_blank" label="WhatsApp" icon-right="forward" />
         <q-btn class="q-px-md" @click="copyLink" label="Copy" icon-right="content_copy" />
