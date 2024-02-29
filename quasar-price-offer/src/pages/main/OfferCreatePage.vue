@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, watchEffect } from 'vue'
+import { ref, reactive, computed, watch, watchEffect } from 'vue'
 import { useQuasar, date, scroll } from 'quasar'
 const $q = useQuasar()
 const { getScrollTarget, setVerticalScrollPosition } = scroll
@@ -82,7 +82,7 @@ const clearExtras = () => {
 
 // add default 3 empty items
 const defaultItemRow = { itemId: 1, sortOrder: 10, productName: '', quantity: 0, unit: '', unitPrice: 0, total: 0, picture: '' }
-const itemRows = ref(Array(3).fill({ ...defaultItemRow }).map((row, index) => ({ ...row, sortOrder: row.sortOrder + (index * 10) })));
+const itemRows = ref<itemRowsType[]>(Array(3).fill({ ...defaultItemRow }).map((row, index) => ({ ...row, sortOrder: row.sortOrder + (index * 10) })));
 
 let dragItem: itemRowsType | null = null;
 const handleDragStart = (item: itemRowsType, event: DragEvent) => {
@@ -119,10 +119,18 @@ const onSave = () => {
   console.log('Offer created !')
 }
 
+// Pagination
+let rowsPerPageOptions = reactive([10]);
+let paginationHide = ref(true);
+watch(() => itemRows.value.length, (newItemRowsLength) => {
+  rowsPerPageOptions = newItemRowsLength <= 10 ? [10] : [10, 20, 50, 100];
+  paginationHide.value = newItemRowsLength <= 10;
+});
+
 const calculateTotalPrice = () => {
   let sum = 0;
   for (const row of itemRows.value) {
-    sum += parseFloat(row.total);
+    sum += parseFloat(row.total.toString());
   }
   return sum.toFixed(2); // Adjust precision as needed
 }
@@ -336,7 +344,8 @@ const addItem = () => {
               <div class="col col-md-12 text-h6 q-pa-xs q-mb-xs text-weight-bold text-center" :class="generalTheme">
                 Items</div>
               <!--TODO: Make columns narrower-->
-              <q-table class="col-12" bordered :rows="itemRows" :columns="columns" row-key="name" binary-state-sort>
+              <q-table class="col-12" bordered :rows="itemRows" :columns="columns" row-key="name" binary-state-sort
+                :rows-per-page-options="rowsPerPageOptions" :hide-pagination="paginationHide">
                 <template #body="props">
                   <q-tr class="cursor-pointer" :props="props">
                     <q-td v-for="column in columns" :key="column.name" :props="props"
