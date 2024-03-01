@@ -341,6 +341,7 @@ const addItem = () => {
             </div>
 
             <div class="row q-pt-xs">
+              <!-- TODO: Add scrolling operation when padding comes back -->
               <div class="col col-md-12 text-h6 q-pa-xs q-mb-xs text-weight-bold text-center" :class="generalTheme">
                 Items</div>
               <q-table class="col-12" bordered :rows="itemRows" :columns="columns" row-key="name" binary-state-sort
