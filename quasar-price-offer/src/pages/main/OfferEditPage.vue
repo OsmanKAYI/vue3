@@ -147,6 +147,10 @@ const addItem = () => {
     scrollToElement(bottomAnchor);
   }
 }
+
+const deleteOffer = () => {
+  console.log('Offer deleted !!!')
+}
 </script>
 
 <template>
@@ -332,8 +336,8 @@ const addItem = () => {
             <div class="row q-pt-xs">
               <!-- TODO: Add scrolling operation when padding comes back -->
               <div class="col col-md-12 text-h6 q-pa-xs q-mb-xs text-weight-bold text-center" :class="generalTheme">
-                  Items</div>
-                <!-- FIXME: Make table's columns narrower -->
+                Items</div>
+              <!-- FIXME: Make table's columns narrower -->
               <q-table class="col-12" bordered :rows="itemRows" :columns="columns" row-key="name" binary-state-sort
                 :pagination="{ page: lastPage }" :rows-per-page-options="rowsPerPageOptions"
                 :hide-pagination="paginationHide">
@@ -368,8 +372,9 @@ const addItem = () => {
               <div class="col-12">
                 <small class="text-green">{{ dragMessage }}</small>
               </div>
-              <q-btn glossy class="q-ma-sm" label="Update" type="submit" color="primary" />
               <q-btn glossy class="q-ma-sm" label="Add Item" @click="addItem" color="positive" />
+              <q-btn glossy class="q-ma-sm" label="Update Offer" type="submit" color="primary" />
+              <q-btn glossy class="q-ma-sm" label="Delete Offer" @click="deleteOffer" color="negative" />
             </div>
             <!--TODO: Add some money related operations in any logic after table-->
           </div>

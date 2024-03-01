@@ -378,8 +378,8 @@ const addItem = () => {
               <div class="col-12">
                 <small class="text-green">{{ dragMessage }}</small>
               </div>
-              <q-btn glossy class=" q-ma-sm" label="Save" type="submit" color="primary" />
               <q-btn glossy class="q-ma-sm" label="Add Item" @click="addItem" color="positive" />
+              <q-btn glossy class="q-ma-sm" label="Update Offer" type="submit" color="primary" />
             </div>
             <!--TODO: Add some money related operations in any logic after table-->
 
